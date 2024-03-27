@@ -20,6 +20,32 @@ L’arrivée du streaming dans les années 2000 à transformé notre façon de c
 
 ```track_name (chaine de caractère)``` : Nom de la chanson <br><br>
 ```artist(s)name (chaine de caractère)``` : Nom de l'artiste(s) de la chanson <br><br>
+```track_name``` (chaîne de caractères) : Nom de la chanson.<br><br>
+```artist(s)_name``` (chaîne de caractères) : Nom de l'artiste ou des artistes de la chanson.<br><br>
+```artist_count``` (entier) : Nombre d'artistes participants sur le titre.<br><br>
+```released_year``` (entier) : L'année de sortie de la chanson.<br><br>
+```released_month``` (entier) : Le mois de sortie de la chanson.<br><br>
+```released_day``` (entier) : Le jour de sortie de la chanson.<br><br>
+```in_spotify_playlists``` (entier) : Nombre de playlists Spotify dans lesquelles la chanson est présente.<br><br>
+```in_spotify_charts``` (entier) : Nombre de fois où la chanson est apparue dans les classements Spotify.<br><br>
+```streams``` (entier) : Nombre de streams sur Spotify.<br><br>
+```in_apple_playlists``` (entier) : Nombre de playlists Apple Music dans lesquelles la chanson est présente.<br><br>
+```in_apple_charts``` (entier) : Nombre de fois où la chanson est apparue dans les classements Apple Music.<br><br>
+```in_deezer_playlists``` (entier) : Nombre de playlists Deezer dans lesquelles la chanson est présente.<br><br>
+```in_deezer_charts``` (entier) : Nombre de fois où la chanson est apparue dans les classements Deezer.<br><br>
+```in_shazam_charts``` (entier) : Nombre de fois où la chanson est apparue dans les classements Shazam.<br><br>
+```bpm``` (entier) : Le nombre de battements par minute de la chanson, indiquant le tempo.<br><br>
+```key``` (chaîne de caractères) : La clé musicale dans laquelle la chanson est jouée.<br><br>
+```mode``` (chaîne de caractères) : Le mode musical de la chanson, majeur ou mineur.<br><br>
+```danceability_%``` (entier) : Pourcentage indiquant à quel point une chanson est adaptée à la danse.<br><br>
+```valence_%``` (entier) : Pourcentage reflétant la positivité transmise par la chanson.<br><br>
+```energy_%``` (entier) : Pourcentage mesurant l'intensité et l'activité de la chanson.<br><br>
+```acousticness_%``` (entier) : Pourcentage indiquant à quel point une chanson est acoustique.<br><br>
+```instrumentalness_%``` (entier) : Pourcentage estimant la quantité de la chanson qui est instrumentale.<br><br>
+```liveness_%``` (entier) : Pourcentage détectant la présence d'un public dans l'enregistrement.<br><br>
+```speechiness_%``` (entier) : Pourcentage qui identifie la présence de paroles parlées dans une chanson.<br><br>
+
+
 
 
 
