@@ -18,12 +18,16 @@ L’arrivée du streaming dans les années 2000 à transformé notre façon de c
 
 ## Les données manipulées
 
+```track_name (chaine de caractère)``` : Nom de la chanson <br><br>
+```artist(s)name (chaine de caractère)``` : Nom de l'artiste(s) de la chanson <br><br>
+
+
 
 ## Nos problématiques
 
 ## Auteurs
 
 * Anna VALIER
-* Rémy Kinzelin
+* Rémy KINZELIN
 * Jeanne RAYNAUD
 * Antoine SAADA
