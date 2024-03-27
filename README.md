@@ -24,6 +24,10 @@ L’arrivée du streaming dans les années 2000 à transformé notre façon de c
 
 
 ## Nos problématiques
+### To Do :
+- Nos questions et résultats attendus
+- Variables que l'on souhaite comparer et problème qu'on pourrait rencontrer 
+- Critique sur notre jeu de donnée
 
 ## Auteurs
 
