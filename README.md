@@ -14,6 +14,8 @@ Lien de notre dataset :
 
 ## Pourquoi avons-nous choisi ce jeu de données ?
 
+L’arrivée du streaming dans les années 2000 à transformé notre façon de consommer de la musique. L’auditeur d’aujourd’hui à un vaste choix d'artistes, d'albums, de style, de playlist simplement sur son téléphone et peut écouter sa musique partout même lorsqu’il n’a pas de connexion, cela compose une grande partie du marché de la musique. Il est également plus simple de se lancer dans la musique ainsi il y a beaucoup d'artistes. Si on se place du pdv d’une maison de disque, il peut être difficile de savoir qui signer ou non. En analysant les données des musiques les plus populaires peut être pouvons nous essayer d’établir ce qui plait le plus au consommateur sans pour autant s’attendre à une recette miracle, simplement observer les tendances et même peut être tenter de prévoir ce qui fonctionnera à l’avenir.
+
 ## Les données manipulées
 
 
