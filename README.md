@@ -2,7 +2,7 @@
 
 # Analyse des données des sons les plus écoutés sur Spotify, ainsi que leurs statistiques sur toutes les plateformes de streaming.
 
-*Avant toute chose, nous voulons vous informer que ce projet à élaborer un dashboard dynamique qui permet d'analyser les données des musiques les plus écouter et d'élaborer des graphiques*
+*Avant tout, nous tenons à vous informer que ce projet vise à élaborer un tableau de bord dynamique permettant d'analyser les données des musiques les plus écoutées et de créer divers graphiques à l'aide du langage R. Ce tableau de bord inclura également un système de filtrage interactif.*
 
 ## Pourquoi avons-nous choisi ce jeu de données ?
 
