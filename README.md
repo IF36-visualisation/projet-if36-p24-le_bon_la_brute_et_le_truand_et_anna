@@ -4,7 +4,13 @@
 
 *Avant tout, nous tenons à vous informer que ce projet vise à élaborer un tableau de bord dynamique permettant d'analyser les données des musiques les plus écoutées et de créer divers graphiques à l'aide du langage R. Ce tableau de bord inclura également un système de filtrage interactif.*
 
-Lien de notre dataset : <a href="https://www.kaggle.com/datasets/nelgiriyewithana/top-spotify-songs-2023">![FOO](https://cdn.icon-icons.com/icons2/3685/PNG/512/spotify_logo_icon_229290.png)</a>
+
+Lien de notre dataset : 
+<a href="https://www.kaggle.com/datasets/nelgiriyewithana/top-spotify-songs-2023" style="display: inline-block; ">
+  <img src="https://cdn.icon-icons.com/icons2/3685/PNG/512/spotify_logo_icon_229290.png" alt="FOO" style="width: 40px; height: 40px; ">
+</a>
+
+
 
 ## Pourquoi avons-nous choisi ce jeu de données ?
 
