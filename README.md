@@ -18,30 +18,33 @@ L’arrivée du streaming dans les années 2000 à transformé notre façon de c
 
 ## Les données manipulées
 
-```track_name (chaine de caractère)``` : Nom de la chanson <br><br>
-```artist(s)name (chaine de caractère)``` : Nom de l'artiste(s) de la chanson <br><br>
-```artist_count (entier)``` : Nombre d'artistes participants sur le titre.<br><br>
-```released_year (entier)``` : L'année de sortie de la chanson.<br><br>
-```released_month (entier)``` : Le mois de sortie de la chanson.<br><br>
-```released_day (entier)``` : Le jour de sortie de la chanson.<br><br>
-```in_spotify_playlists (entier)``` : Nombre de playlists Spotify dans lesquelles la chanson est présente.<br><br>
-```in_spotify_charts (entier)``` : Nombre de fois où la chanson est apparue dans les classements Spotify.<br><br>
-```streams (entier)``` : Nombre de streams sur Spotify.<br><br>
-```in_apple_playlists (entier)``` : Nombre de playlists Apple Music dans lesquelles la chanson est présente.<br><br>
-```in_apple_charts (entier)``` : Nombre de fois où la chanson est apparue dans les classements Apple Music.<br><br>
-```in_deezer_playlists (entier)``` : Nombre de playlists Deezer dans lesquelles la chanson est présente.<br><br>
-```in_deezer_charts (entier)``` : Nombre de fois où la chanson est apparue dans les classements Deezer.<br><br>
-```in_shazam_charts (entier)``` : Nombre de fois où la chanson est apparue dans les classements Shazam.<br><br>
-```bpm (entier)``` : Le nombre de battements par minute de la chanson, indiquant le tempo.<br><br>
-```key (chaîne de caractères)``` : La clé musicale dans laquelle la chanson est jouée.<br><br>
-```mode (chaîne de caractères)``` : Le mode musical de la chanson, majeur ou mineur.<br><br>
-```danceability_% (entier)``` : Pourcentage indiquant à quel point une chanson est adaptée à la danse.<br><br>
-```valence_% (entier)``` : Pourcentage reflétant la positivité transmise par la chanson.<br><br>
-```energy_% (entier)``` : Pourcentage mesurant l'intensité et l'activité de la chanson.<br><br>
-```acousticness_% (entier)``` : Pourcentage indiquant à quel point une chanson est acoustique.<br><br>
-```instrumentalness_% (entier)``` : Pourcentage estimant la quantité de la chanson qui est instrumentale.<br><br>
-```liveness_% (entier)``` : Pourcentage détectant la présence d'un public dans l'enregistrement.<br><br>
-```speechiness_% (entier)``` : Pourcentage qui identifie la présence de paroles parlées dans une chanson.<br><br>
+| Attribut               | Type de données      | Explication                                            |
+|------------------------|----------------------|--------------------------------------------------------|
+| `track_name`           | chaîne de caractères | Nom de la chanson. Utile pour l'identification et la recherche de la chanson dans les bases de données et les plateformes de streaming. |
+| `artist(s)_name`       | chaîne de caractères | Nom de l'artiste(s) de la chanson. Permet d'analyser la popularité et le style de l'artiste associé à la chanson. |
+| `artist_count`         | entier               | Nombre d'artistes participants sur le titre. Peut indiquer des collaborations et des influences multiples sur la chanson. |
+| `released_year`        | entier               | L'année de sortie de la chanson. Permet d'étudier les tendances musicales au fil du temps et de comparer la performance des chansons dans différentes périodes. |
+| `released_month`       | entier               | Le mois de sortie de la chanson. Peut être utilisé pour analyser les saisonsnalités et les tendances saisonnières dans la musique. |
+| `released_day`         | entier               | Le jour de sortie de la chanson. Peut être pertinent pour étudier les stratégies de lancement de chansons. |
+| `in_spotify_playlists` | entier               | Nombre de playlists Spotify dans lesquelles la chanson est présente. Indique la popularité et la portée de la chanson sur la plateforme Spotify. |
+| `in_spotify_charts`    | entier               | Nombre de fois où la chanson est apparue dans les classements Spotify. Révèle la popularité et la tendance de la chanson sur Spotify. |
+| `streams`              | entier               | Nombre de streams sur Spotify. Mesure la popularité et l'engagement des auditeurs avec la chanson sur Spotify. |
+| `in_apple_playlists`   | entier               | Nombre de playlists Apple Music dans lesquelles la chanson est présente. Indique la popularité de la chanson sur Apple Music. |
+| `in_apple_charts`      | entier               | Nombre de fois où la chanson est apparue dans les classements Apple Music. Révèle la popularité et la tendance de la chanson sur Apple Music. |
+| `in_deezer_playlists`  | entier               | Nombre de playlists Deezer dans lesquelles la chanson est présente. Indique la popularité de la chanson sur Deezer. |
+| `in_deezer_charts`     | entier               | Nombre de fois où la chanson est apparue dans les classements Deezer. Révèle la popularité et la tendance de la chanson sur Deezer. |
+| `in_shazam_charts`     | entier               | Nombre de fois où la chanson est apparue dans les classements Shazam. Peut indiquer la popularité émergente de la chanson. |
+| `bpm`                  | entier               | Le nombre de battements par minute de la chanson, indiquant le tempo. Permet de classifier le style et le genre de la chanson. |
+| `key`                  | chaîne de caractères | La clé musicale dans laquelle la chanson est jouée. Utile pour l'analyse harmonique et la comparaison avec d'autres chansons. |
+| `mode`                 | chaîne de caractères | Le mode musical de la chanson, majeur ou mineur. Influence l'émotion et l'atmosphère perçue de la chanson. |
+| `danceability_%`       | entier               | Pourcentage indiquant à quel point une chanson est adaptée à la danse. Utile pour comprendre l'aspect rythmique et l'attrait pour la danse. |
+| `valence_%`            | entier               | Pourcentage reflétant la positivité transmise par la chanson. Peut être utilisé pour analyser le sentiment et l'humeur de la chanson. |
+| `energy_%`             | entier               | Pourcentage mesurant l'intensité et l'activité de la chanson. Indique le niveau d'énergie perçu de la chanson. |
+| `acousticness_%`       | entier               | Pourcentage indiquant à quel point une chanson est acoustique. Utile pour distinguer les enregistrements acoustiques des enregistrements électroniques. |
+| `instrumentalness_%`   | entier               | Pourcentage estimant la quantité de la chanson qui est instrumentale. Peut aider à identifier les chansons avec peu ou pas de voix. |
+| `liveness_%`           | entier               | Pourcentage détectant la présence d'un public dans l'enregistrement. Indique si la chanson a été enregistrée en direct ou en studio. |
+| `speechiness_%`        | entier               | Pourcentage qui identifie la présence de paroles parlées dans une chanson. Utile pour distinguer les chansons chantées des chansons parlées. |
+
 
 
 
@@ -53,6 +56,16 @@ L’arrivée du streaming dans les années 2000 à transformé notre façon de c
 - Nos questions et résultats attendus
 - Variables que l'on souhaite comparer et problème qu'on pourrait rencontrer 
 - Critique sur notre jeu de donnée
+
+### Problématique : 
+Existe-t-il des différences significatives dans les chansons les plus populaires sur chaque plateforme ?
+
+#### Explication :
+Pour répondre à cette problématique, nous allons utiliser les données suivantes :
+- **Inclusion dans les playlists et les classements** : Nous examinerons le nombre de playlists et les classements sur chaque plateforme (Spotify, Apple Music, Deezer, Shazam) dans lesquels une chanson est présente.
+- **Nombre total de streams** : Nous comparerons le nombre total de streams sur chaque plateforme pour évaluer la popularité relative des chansons.
+- **Caractéristiques audio** : Nous analyserons les caractéristiques audio telles que le tempo, l'énergie, la positivité musicale, etc., pour comprendre les préférences des utilisateurs sur chaque plateforme.
+- **Variations temporelles** : Nous étudierons les tendances temporelles dans les classements et la popularité des chansons pour identifier toute fluctuation significative sur chaque plateforme au fil du temps.
 
 ## Auteurs
 
