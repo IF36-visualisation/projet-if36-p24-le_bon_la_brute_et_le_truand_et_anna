@@ -100,13 +100,32 @@ Ici nous nous demandons simplement si une plage de tempo est particulièrement  
 
 Nous comparerons les bpm de chaque chanson puis nous introniserons les bpm les plus populaires. 
 
-### Les gens valorisent-ils plus les paroles ou l’instrumental d’une musique?
+### Les auditeurs valorisent-ils plus les paroles ou l’instrumental d’une musique?
 Nous comparerons la proportion de paroles dans une musique et verrons ce qui plait le plus en 2023. Pour cela nous utiliserons ces deux données:
 - instrumentalness_%: Amount of instrumental content in the song
 - speechiness_%: Amount of spoken words in the song
   
 Cela nous permettra de savoir si un artiste doit plutôt investir dans l’instrumental ou dans les paroles. Malheureusement dans cette analyse nous ne pouvons pas évaluer la qualité des paroles (qui peut d’ailleurs être subjective), un pourcentage élevé de mots ne signifie pas forcément une richesse dans l’écriture non plus, cela peut simplement être la répétition d’un refrain par exemple, ce que nous ne pouvons établir non plus avec ce jeu de données.
 
+### Pouvons nous évaluer la taille et l’engagement de la fanbase d’un artiste?
+Dans notre jeu de données nous pouvons voir le nom des artistes qui ont sorti les musiques ainsi nous pouvons supposer que si des artistes reviennent souvent dans le classement, c’est qu’ils ont des auditeurs qui sont investis et reviennent souvent les écouter et n’écoutent pas qu’une chanson toute la discographie de l’artiste. Nous utiliserons ces données:
+- artist(s)_name: Name of the artist(s) of the song
+- artist_count: Number of artists contributing to the song
+- in_spotify_playlists: Number of Spotify playlists the song is included in
+- in_spotify_charts: Presence and rank of the song on Spotify charts
+- streams: Total number of streams on Spotify
+- in_apple_playlists: Number of Apple Music playlists the song is included in
+- in_apple_charts: Presence and rank of the song on Apple Music charts
+- in_deezer_playlists: Number of Deezer playlists the song is included in
+- in_deezer_charts: Presence and rank of the song on Deezer charts
+- in_shazam_charts: Presence and rank of the song on Shazam charts
+  
+Nous pouvons pour estimer l’engagement des auditeurs regarder si les featurings sur lesquels l’artiste apparaît sont aussi bcp écoutés. Par exemple, si il y a deux artistes sur une musique et que l’un des deux artistes est présent plusieurs fois dans le classement des musiques les plus populaires, nous pouvons supposer que ce sont ses fans plus que celui de l’autre artiste qui ont permis à cette chanson de se retrouver dans ce classement. 
+
+On peut également supposer que si un artiste n’est présent qu’une seule fois dans ce classement c’est parce qu’une de ses chansons à eu du succès auprès du grand public d’une manière générale, mais qu’il n’a pas forcément une grosse fanbase qui écoute toutes ses musiques dès qu’elles sortent.
+En observant la présence d’une musique en playlist nous pouvons voir si la musique à été poussée vers l’auditeur ou si sans être beaucoup en playlist elle a réussi à être populaire. De plus avec la présence de la musique sur shazam nous pouvons peut être établir si des gens qui n’étaient pas familier avec l’artiste l’ont découvert en écoutant la radio, ou alors en soirée, puisque lorsqu’on shazam une musique c’est souvent qu’on entend cette musique par hasard et qu’elle nous sans que l’on soit des grands connaisseurs de l’artiste, donc cela pourrait être le signe que l’artiste à bbcp ou pas de nouveaux auditeurs.
+
+Seulement si on avait la liste du nombre d’auditeurs mensuels moyens des artistes de spotify nous pourrions avoir une idée plus claire de l’engagement des auditeurs envers un artiste. De plus, il est aussi possible qu’une musique n’ait pas été populaire parce qu’elle était en playliste mais qu’elle ait été en playlist parce qu’elle était déjà populaire. Nous ne savons pas dans quel ordre cela se fait.
 
 
 ## Auteurs
