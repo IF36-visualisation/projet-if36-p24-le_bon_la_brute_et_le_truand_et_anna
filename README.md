@@ -127,6 +127,14 @@ En observant la présence d’une musique en playlist nous pouvons voir si la mu
 
 Seulement si on avait la liste du nombre d’auditeurs mensuels moyens des artistes de spotify nous pourrions avoir une idée plus claire de l’engagement des auditeurs envers un artiste. De plus, il est aussi possible qu’une musique n’ait pas été populaire parce qu’elle était en playliste mais qu’elle ait été en playlist parce qu’elle était déjà populaire. Nous ne savons pas dans quel ordre cela se fait.
 
+### Quelle place l'acoustique a-t-il dans la musique? Est ce populaire de nos jours?
+On sait qu’il y a pleins de façons de faire de la musique et que la plupart des sons sont mixés. On utilise de nombreux outils qui peuvent modifier la voix, compléter les instruments ou parfois même les remplacer. Ce n’est d’ailleurs pas nouveau, la musique électronique date des années 50, ainsi nous voudrions simplement savoir si, et dans quelle proportion, les sons acoustiques ou alors des chansons totalement acoustiques ont une place dans le paysage musicale mainstream. Nous utiliserons pour savoir cela ces données:
+- acousticness_%: Amount of acoustic sound in the song
+- instrumentalness_%: Amount of instrumental content in the song
+  
+Nous supposons qu’il est peu probable que nous trouvions dans ce classement des musiques 100% acoustique, nous ne serions, au contraire, pas surpris de trouver de nombreuses chansons à 0%. Nous pensons qu’une majorité des chansons auront une part acoustique inférieure à 50%.
+
+
 
 ## Auteurs
 
