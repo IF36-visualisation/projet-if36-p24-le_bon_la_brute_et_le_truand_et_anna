@@ -67,18 +67,18 @@ Pour répondre à cette problématique, nous allons utiliser les données suivan
 - **Caractéristiques audio** : Nous analyserons les caractéristiques audio telles que le tempo, l'énergie, la positivité musicale, etc., pour comprendre les préférences des utilisateurs sur chaque plateforme.
 - **Variations temporelles** : Nous étudierons les tendances temporelles dans les classements et la popularité des chansons pour identifier toute fluctuation significative sur chaque plateforme au fil du temps.
 
-- Est ce qu’une application est plus influente que les autres?
+### Est ce qu’une application est plus influente que les autres?
 
 Selon les musiques qu’elle met en playlist et le classement parmi les musiques les plus écoutées sur la plateforme.
 On espère pouvoir observer qu’une plateforme se démarque des autres mais il est possible qu’il n’y ait pas forcément de différence significative qui nous permettent d’établir la supériorité d’une plateforme par rapport aux autres en termes d’influence.
 Les variables que nous souhaitons utiliser sont les suivantes:
-in_spotify_playlists: Number of Spotify playlists the song is included in
-in_spotify_charts: Presence and rank of the song on Spotify charts
-streams: Total number of streams on Spotify
-in_apple_playlists: Number of Apple Music playlists the song is included in
-in_apple_charts: Presence and rank of the song on Apple Music charts
-in_deezer_playlists: Number of Deezer playlists the song is included in
-in_deezer_charts: Presence and rank of the song on Deezer charts
+- in_spotify_playlists: Number of Spotify playlists the song is included in
+- in_spotify_charts: Presence and rank of the song on Spotify charts
+- streams: Total number of streams on Spotify
+- in_apple_playlists: Number of Apple Music playlists the song is included in
+- in_apple_charts: Presence and rank of the song on Apple Music charts
+- in_deezer_playlists: Number of Deezer playlists the song is included in
+- in_deezer_charts: Presence and rank of the song on Deezer charts
 Nous pouvons comparer le nombre de playlists dans lesquelles une ou plusieurs chansons (nous n’allons peut-être pas toutes les comparer), que nous aurons sélectionné au préalable (nous n’avons pas encore établi selon quels critères), sont présentes selon chaque plateforme de streaming. Nous pouvons également comparer la place de la chanson dans le classement des musiques pour chaque plateforme et voir si la présence de cette chanson en playlist a une influence sur son classement et ainsi voir sur quelle plateforme elle est la plus populaire.
 Le manque de données sur le nombre total de streams sur les plateformes Apple Music et Deezer est une vraie limite, puisque nous aurions pu le comparer avec Spotify, De plus si nous avions eu aussi le nombre total d’utilisateurs de chaque plateforme nous aurions pu étayer notre analyse en prenant en considération ces informations.
 
