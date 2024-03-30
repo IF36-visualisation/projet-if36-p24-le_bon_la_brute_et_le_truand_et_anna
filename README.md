@@ -100,6 +100,14 @@ Ici nous nous demandons simplement si une plage de tempo est particulièrement  
 
 Nous comparerons les bpm de chaque chanson puis nous introniserons les bpm les plus populaires. 
 
+### Les gens valorisent-ils plus les paroles ou l’instrumental d’une musique?
+Nous comparerons la proportion de paroles dans une musique et verrons ce qui plait le plus en 2023. Pour cela nous utiliserons ces deux données:
+- instrumentalness_%: Amount of instrumental content in the song
+- speechiness_%: Amount of spoken words in the song
+  
+Cela nous permettra de savoir si un artiste doit plutôt investir dans l’instrumental ou dans les paroles. Malheureusement dans cette analyse nous ne pouvons pas évaluer la qualité des paroles (qui peut d’ailleurs être subjective), un pourcentage élevé de mots ne signifie pas forcément une richesse dans l’écriture non plus, cela peut simplement être la répétition d’un refrain par exemple, ce que nous ne pouvons établir non plus avec ce jeu de données.
+
+
 
 ## Auteurs
 
