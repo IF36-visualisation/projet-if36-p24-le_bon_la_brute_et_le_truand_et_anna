@@ -79,6 +79,7 @@ Les variables que nous souhaitons utiliser sont les suivantes:
 - in_apple_charts: Presence and rank of the song on Apple Music charts
 - in_deezer_playlists: Number of Deezer playlists the song is included in
 - in_deezer_charts: Presence and rank of the song on Deezer charts
+  
 Nous pouvons comparer le nombre de playlists dans lesquelles une ou plusieurs chansons (nous n’allons peut-être pas toutes les comparer), que nous aurons sélectionné au préalable (nous n’avons pas encore établi selon quels critères), sont présentes selon chaque plateforme de streaming. Nous pouvons également comparer la place de la chanson dans le classement des musiques pour chaque plateforme et voir si la présence de cette chanson en playlist a une influence sur son classement et ainsi voir sur quelle plateforme elle est la plus populaire.
 Le manque de données sur le nombre total de streams sur les plateformes Apple Music et Deezer est une vraie limite, puisque nous aurions pu le comparer avec Spotify, De plus si nous avions eu aussi le nombre total d’utilisateurs de chaque plateforme nous aurions pu étayer notre analyse en prenant en considération ces informations.
 
