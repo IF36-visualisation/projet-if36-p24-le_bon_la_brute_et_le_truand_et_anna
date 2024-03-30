@@ -96,7 +96,7 @@ Nous supposons que les musiques festives et joyeuses pourraient être les plus r
 
 ### Le tempo d’une musique joue-t-il un rôle important dans la popularité de celle-ci?
 Ici nous nous demandons simplement si une plage de tempo est particulièrement  représentée dans notre jeu de donné. Nous utiliserons uniquement la donnée du bpm.
--bpm: Beats per minute, a measure of song tempo
+- bpm: Beats per minute, a measure of song tempo
 
 Nous comparerons les bpm de chaque chanson puis nous introniserons les bpm les plus populaires. 
 
