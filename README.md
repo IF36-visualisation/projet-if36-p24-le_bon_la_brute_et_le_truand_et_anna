@@ -94,6 +94,13 @@ Autrement dit: observons nous la présence d’une ambiance en majorité parmi l
 Nous observerons pour chaque catégorie le mode puisqu'en musique le mode mineur est considéré comme plus triste tandis que le mode majeur comme joyeux. Ensuite nous établirons des plages de pourcentages de dansabilité, de positivité et d’énergie pour chaque catégorie. Une fois que nous aurons établies ces ambiances nous pourrons trier les chansons et comparer les nombre de chansons dans chaque catégorie et définir si oui ou non une catégorie est plus représentée.
 Nous supposons que les musiques festives et joyeuses pourraient être les plus représentées dans le classement des musiques les plus populaires de 2023. 
 
+### Le tempo d’une musique joue-t-il un rôle important dans la popularité de celle-ci?
+Ici nous nous demandons simplement si une plage de tempo est particulièrement  représentée dans notre jeu de donné. Nous utiliserons uniquement la donnée du bpm.
+-bpm: Beats per minute, a measure of song tempo
+
+Nous comparerons les bpm de chaque chanson puis nous introniserons les bpm les plus populaires. 
+
+
 ## Auteurs
 
 * Anna VALIER
