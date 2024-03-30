@@ -83,6 +83,16 @@ Les variables que nous souhaitons utiliser sont les suivantes:
 Nous pouvons comparer le nombre de playlists dans lesquelles une ou plusieurs chansons (nous n’allons peut-être pas toutes les comparer), que nous aurons sélectionné au préalable (nous n’avons pas encore établi selon quels critères), sont présentes selon chaque plateforme de streaming. Nous pouvons également comparer la place de la chanson dans le classement des musiques pour chaque plateforme et voir si la présence de cette chanson en playlist a une influence sur son classement et ainsi voir sur quelle plateforme elle est la plus populaire.
 Le manque de données sur le nombre total de streams sur les plateformes Apple Music et Deezer est une vraie limite, puisque nous aurions pu le comparer avec Spotify, De plus si nous avions eu aussi le nombre total d’utilisateurs de chaque plateforme nous aurions pu étayer notre analyse en prenant en considération ces informations.
 
+### L’ambiance de la musique nous dit-elle quelque chose sur la popularité d’une musique? ou Est ce qu’une ambiance de musique est particulièrement populaire?
+
+Autrement dit: observons nous la présence d’une ambiance en majorité parmi les chansons les plus populaires de 2023? Par ambiance nous entendons l’atmosphère qui se dégage de la musique, ce que l’on ressent en l’écoutant. Pour ce faire nous pourrons établir différentes catégories distinctes, différentes ambiances. Chacune sera définie par des critères en utilisant notre jeu de données (pas encore totalement établies). Pour établir ces critères nous utiliserons ces données:
+- mode: Mode of the song (major or minor)
+- danceability_%: Percentage indicating how suitable the song is for dancing
+- valence_%: Positivity of the song's musical content
+- energy_%: Perceived energy level of the song
+  
+Nous observerons pour chaque catégorie le mode puisqu'en musique le mode mineur est considéré comme plus triste tandis que le mode majeur comme joyeux. Ensuite nous établirons des plages de pourcentages de dansabilité, de positivité et d’énergie pour chaque catégorie. Une fois que nous aurons établies ces ambiances nous pourrons trier les chansons et comparer les nombre de chansons dans chaque catégorie et définir si oui ou non une catégorie est plus représentée.
+Nous supposons que les musiques festives et joyeuses pourraient être les plus représentées dans le classement des musiques les plus populaires de 2023. 
 
 ## Auteurs
 
