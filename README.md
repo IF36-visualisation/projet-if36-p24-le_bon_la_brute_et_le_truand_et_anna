@@ -162,8 +162,85 @@ Pour cette étude, nous utiliserions les données suivantes :
 
 - released_month
 - bpm
-- 
+   
 Nous pourrions alors supposer que cette étude pourrait démontrer que les musiques plus rythmées sont une tendance plus marquée pendant les saisons estivales.
+
+### Existe-t’il des caractéristiques audio communes dans les sons populaires en fonction des saisons ? 
+	
+Pour explorer l'existence de caractéristiques audio communes dans les morceaux populaires en fonction des saisons, nous pourrions suivre une approche analytique qui implique l'utilisation des données audio fournies telles que le BPM, la tonalité, le mode, ainsi que les caractéristiques telles que la danceability, la valence, l'énergie, etc. Voici comment nous pourrions procéder :
+
+1. Regroupement des titres par saison :
+   - Nous regrouperont les titres en fonction de leur date de sortie pour chaque saison de l'année.
+
+2. Analyse des caractéristiques audio :
+   - Nous analyserons les caractéristiques audio des titres les plus populaires pour chaque saison. Cela pourrait inclure des mesures telles que le BPM, la tonalité, le mode, ainsi que des caractéristiques plus subjectives comme la danceability, la valence, l'énergie, etc.
+
+3. Comparaison entre les saisons :
+   - Nous comparerons ensuite les caractéristiques audio des titres les plus populaires entre les différentes saisons. Nous chercherons des tendances ou des similarités dans les caractéristiques audio des morceaux qui sont populaires à des moments spécifiques de l'année.
+
+4. Interprétation des résultats :
+Enfin, nous interpréterons les résultats pour déterminer s'il existe des caractéristiques audio communes dans les morceaux populaires en fonction des saisons. Cela pourrait nous aider à identifier des tendances saisonnières dans les préférences d'écoute du public en ce qui concerne le style musical, le rythme et l'ambiance des morceaux.
+
+Pour réaliser cette étude, nous allons avoir besoin des données suivantes : 
+
+- released_year
+- released_month
+- released_day
+- streams
+- bpm
+- key
+- mode
+- danceability_%
+- valence_%
+- energy_%
+- acousticness_%
+- instrumentalness_%
+- liveness_%
+- speechiness_%
+
+En suivant cette méthodologie, nous pourrions obtenir des informations intéressantes sur la relation entre les caractéristiques audio des morceaux de musique et les saisons de l'année, ce qui pourrait être utile en tant que professionnel de l'industrie musicale dans la création et la promotion de musique adaptée à chaque période de l'année.
+
+### Le covid-19 a-t’il eu une influence sur le nombre d’écoutes ? 
+
+Pendant la période de la pandémie de COVID-19, le monde a été soumis à des mesures de confinement, ce qui a conduit à une augmentation significative du temps passé devant des écrans et des appareils connectés. On peut donc légitimement se demander si cette situation a eu une influence sur l'industrie musicale et les habitudes d'écoute. 
+
+Pour répondre à cette question, nous utiliserons les données suivantes :
+
+- released_year
+- released_month
+- released_day
+- in_spotify_playlists
+- in_spotify_charts
+- streams
+- in_apple_playlists
+- in_apple_charts
+- in_deezer_playlists
+- in_deezer_charts
+- in_shazam_charts
+- bpm
+- key
+- mode
+- danceability_%
+- valence_%
+- energy_%
+- acousticness_%
+- instrumentalness_%
+- liveness_%
+- speechiness_%
+
+Pour évaluer l'influence du Covid-19 sur les écoutes de musique, nous pourrions comparer les données de streaming avant et pendant la pandémie. Voici les étapes à suivre :
+
+<strong>1.Segmentation temporelle : </strong> Diviser les données en trois périodes : avant le début de la pandémie, pendant la pandémie et après la pandémie.
+
+2.Comparaison des écoutes : Analyser les données de streaming pour chaque période afin de détecter toute variation significative du nombre d'écoutes pendant la pandémie par rapport à la période antérieure.
+
+3.Analyse des plateformes de streaming : Examiner les données spécifiques à chaque plateforme (Spotify, Apple Music, Deezer, etc.) pour déterminer s'il y a eu des changements dans les écoutes entre les différentes plateformes pendant la pandémie.
+
+4.Analyse mensuelle des écoutes : Examiner la tendance mensuelle des écoutes avant et pendant la pandémie pour identifier d'éventuels changements de comportement d'écoute en fonction de l'évolution de la situation sanitaire.
+
+5.Analyse des tendances par caractéristique musicale : Regrouper les données par caractéristique musicale et examiner s'il y a eu des changements dans les préférences d'écoute pendant la pandémie, notamment une augmentation de l'écoute de certains genres liés aux circonstances de la pandémie. 
+
+Ces analyses nous permettraient de comprendre l'impact du Covid-19 sur les habitudes d'écoute de musique et sur l'industrie musicale dans son ensemble.
 
 
 ## Auteurs
