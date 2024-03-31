@@ -51,11 +51,7 @@ L’arrivée du streaming dans les années 2000 à transformé notre façon de c
 
 
 
-## Nos problématiques
-### To Do :
-- Nos questions et résultats attendus
-- Variables que l'on souhaite comparer et problème qu'on pourrait rencontrer 
-- Critique sur notre jeu de donnée
+## Nos problématiques : 
 
 ### Problématique : 
 Existe-t-il des différences significatives dans les chansons les plus populaires sur chaque plateforme ?
@@ -147,11 +143,11 @@ Pour identifier le titre de musique ayant eu le plus de succès selon sa date de
 
 Pour mettre en avant les titres les plus écoutés selon leur date de sortie, nous pouvons procéder comme suit :
 
-1. Visualiser les meilleurs titres par année : Nous pouvons regrouper les titres par année de sortie et identifier celui ayant reçu le plus grand nombre d'écoutes chaque année.
+<strong>1. Visualiser les meilleurs titres par année :</strong> Nous pouvons regrouper les titres par année de sortie et identifier celui ayant reçu le plus grand nombre d'écoutes chaque année.
 
-2. Visualiser les meilleurs titres par mois : De même, nous pouvons analyser les tendances mensuelles en regroupant les titres par mois de sortie et en identifiant les plus populaires pour chaque mois.
+<strong>2. Visualiser les meilleurs titres par mois :</strong> De même, nous pouvons analyser les tendances mensuelles en regroupant les titres par mois de sortie et en identifiant les plus populaires pour chaque mois.
 
-3. Visualiser les meilleurs titres par jour : Enfin, nous pouvons examiner les performances des titres en fonction des jours de sortie, en identifiant les titres les plus écoutés chaque jour.
+<strong>3. Visualiser les meilleurs titres par jour :</strong> Enfin, nous pouvons examiner les performances des titres en fonction des jours de sortie, en identifiant les titres les plus écoutés chaque jour.
 Ces analyses nous permettront de mettre en lumière les titres les plus populaires selon différents découpages temporels, offrant ainsi un aperçu précieux des préférences d'écoute du public au fil du temps.
 
 ### Existe-t-il une influence entre le rythme et la saison ?
@@ -169,16 +165,16 @@ Nous pourrions alors supposer que cette étude pourrait démontrer que les musiq
 	
 Pour explorer l'existence de caractéristiques audio communes dans les morceaux populaires en fonction des saisons, nous pourrions suivre une approche analytique qui implique l'utilisation des données audio fournies telles que le BPM, la tonalité, le mode, ainsi que les caractéristiques telles que la danceability, la valence, l'énergie, etc. Voici comment nous pourrions procéder :
 
-1. Regroupement des titres par saison :
+<strong>1. Regroupement des titres par saison :</strong>
    - Nous regrouperont les titres en fonction de leur date de sortie pour chaque saison de l'année.
 
-2. Analyse des caractéristiques audio :
+</strong>2. Analyse des caractéristiques audio :</strong>
    - Nous analyserons les caractéristiques audio des titres les plus populaires pour chaque saison. Cela pourrait inclure des mesures telles que le BPM, la tonalité, le mode, ainsi que des caractéristiques plus subjectives comme la danceability, la valence, l'énergie, etc.
 
-3. Comparaison entre les saisons :
+<strong>3. Comparaison entre les saisons :</strong>
    - Nous comparerons ensuite les caractéristiques audio des titres les plus populaires entre les différentes saisons. Nous chercherons des tendances ou des similarités dans les caractéristiques audio des morceaux qui sont populaires à des moments spécifiques de l'année.
 
-4. Interprétation des résultats :
+<strong>4. Interprétation des résultats :</strong>
 Enfin, nous interpréterons les résultats pour déterminer s'il existe des caractéristiques audio communes dans les morceaux populaires en fonction des saisons. Cela pourrait nous aider à identifier des tendances saisonnières dans les préférences d'écoute du public en ce qui concerne le style musical, le rythme et l'ambiance des morceaux.
 
 Pour réaliser cette étude, nous allons avoir besoin des données suivantes : 
@@ -230,18 +226,25 @@ Pour répondre à cette question, nous utiliserons les données suivantes :
 
 Pour évaluer l'influence du Covid-19 sur les écoutes de musique, nous pourrions comparer les données de streaming avant et pendant la pandémie. Voici les étapes à suivre :
 
-<strong>1.Segmentation temporelle : </strong> Diviser les données en trois périodes : avant le début de la pandémie, pendant la pandémie et après la pandémie.
+<strong>1. Segmentation temporelle : </strong> Diviser les données en trois périodes : avant le début de la pandémie, pendant la pandémie et après la pandémie.
 
-2.Comparaison des écoutes : Analyser les données de streaming pour chaque période afin de détecter toute variation significative du nombre d'écoutes pendant la pandémie par rapport à la période antérieure.
+<strong>2. Comparaison des écoutes : </strong> Analyser les données de streaming pour chaque période afin de détecter toute variation significative du nombre d'écoutes pendant la pandémie par rapport à la période antérieure.
 
-3.Analyse des plateformes de streaming : Examiner les données spécifiques à chaque plateforme (Spotify, Apple Music, Deezer, etc.) pour déterminer s'il y a eu des changements dans les écoutes entre les différentes plateformes pendant la pandémie.
+<strong>3. Analyse des plateformes de streaming : </strong>Examiner les données spécifiques à chaque plateforme (Spotify, Apple Music, Deezer, etc.) pour déterminer s'il y a eu des changements dans les écoutes entre les différentes plateformes pendant la pandémie.
 
-4.Analyse mensuelle des écoutes : Examiner la tendance mensuelle des écoutes avant et pendant la pandémie pour identifier d'éventuels changements de comportement d'écoute en fonction de l'évolution de la situation sanitaire.
+<strong>4. Analyse mensuelle des écoutes : </strong>Examiner la tendance mensuelle des écoutes avant et pendant la pandémie pour identifier d'éventuels changements de comportement d'écoute en fonction de l'évolution de la situation sanitaire.
 
-5.Analyse des tendances par caractéristique musicale : Regrouper les données par caractéristique musicale et examiner s'il y a eu des changements dans les préférences d'écoute pendant la pandémie, notamment une augmentation de l'écoute de certains genres liés aux circonstances de la pandémie. 
+<strong>5. Analyse des tendances par caractéristique musicale :</strong> Regrouper les données par caractéristique musicale et examiner s'il y a eu des changements dans les préférences d'écoute pendant la pandémie, notamment une augmentation de l'écoute de certains genres liés aux circonstances de la pandémie. 
 
 Ces analyses nous permettraient de comprendre l'impact du Covid-19 sur les habitudes d'écoute de musique et sur l'industrie musicale dans son ensemble.
 
+## Critiques sur notre jeu de donnée : 
+
+En prenant du recul sur notre jeu de données, nous constatons qu'il offre une base solide pour aborder les questions que nous avons précédemment identifiées. Les informations sur les titres de musique, les artistes et les mesures de popularité nous permettent d'explorer divers aspects des tendances musicales et du succès des morceaux.
+
+Cependant, il est important de reconnaître que notre jeu de données présente certaines limites, notamment en ce qui concerne les aspects géographiques. En raison de l'absence d'informations sur la localisation géographique des auditeurs et des artistes, nous ne pouvons pas explorer les variations régionales dans les préférences musicales ou les habitudes d'écoute. Cette lacune réduit notre capacité à obtenir une image complète et nuancée des tendances musicales à travers différentes régions.
+
+Pour enrichir notre analyse, nous pourrions envisager d'intégrer d'autres jeux de données complémentaires. Par exemple, des données sur les localisations géographiques des utilisateurs ou des informations démographiques qui pourraient être croisées avec notre jeu de données actuel. Cela nous permettrait d'explorer plus en profondeur les variations géographiques dans les préférences musicales, ainsi que les interactions entre la musique et la culture locale.
 
 ## Auteurs
 
