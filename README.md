@@ -241,9 +241,10 @@ Ces analyses nous permettraient de comprendre l'impact du Covid-19 sur les habit
 ## Critiques sur notre jeu de données : 
 En prenant du recul sur notre jeu de données, nous constatons qu'il offre une base solide pour aborder les questions que nous avons précédemment identifiées. Les informations sur les titres de musique, les artistes et les mesures de popularité nous permettent d'explorer divers aspects des tendances musicales et du succès des morceaux.
 
-Cependant, il est important de reconnaître que notre jeu de données présente certaines limites, notamment en ce qui concerne les aspects géographiques. En raison de l'absence d'informations sur la localisation géographique des auditeurs et des artistes, nous ne pouvons pas explorer les variations régionales dans les préférences musicales ou les habitudes d'écoute. Cette lacune réduit notre capacité à obtenir une image complète et nuancée des tendances musicales à travers différentes régions.
+Cependant, il est important de reconnaître que notre jeu de données présente certaines limites, notamment en ce qui concerne les aspects géographiques. En raison de l'absence d'informations sur la localisation géographique des auditeurs et des artistes, nous ne pouvons pas explorer les variations régionales dans les préférences musicales ou les habitudes d'écoute. Cette lacune réduit notre capacité à obtenir une image complète et nuancée des tendances musicales à travers différentes régions. 
 
 Pour enrichir notre analyse, nous pourrions envisager d'intégrer d'autres jeux de données complémentaires. Par exemple, des données sur les localisations géographiques des utilisateurs ou des informations démographiques qui pourraient être croisées avec notre jeu de données actuel. Cela nous permettrait d'explorer plus en profondeur les variations géographiques dans les préférences musicales, ainsi que les interactions entre la musique et la culture locale.
+D'un autre point de vue, il est important de reconnaître que nous n'aurions pas été en mesure de recueillir toutes les données mondiales, étant donné que la politique de certains pays restreint l'accès à ces informations.
 
 ## Auteurs
 
