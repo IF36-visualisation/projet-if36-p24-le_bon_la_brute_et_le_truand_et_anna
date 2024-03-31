@@ -154,6 +154,16 @@ Pour mettre en avant les titres les plus écoutés selon leur date de sortie, no
 3. Visualiser les meilleurs titres par jour : Enfin, nous pouvons examiner les performances des titres en fonction des jours de sortie, en identifiant les titres les plus écoutés chaque jour.
 Ces analyses nous permettront de mettre en lumière les titres les plus populaires selon différents découpages temporels, offrant ainsi un aperçu précieux des préférences d'écoute du public au fil du temps.
 
+### Existe-t-il une influence entre le rythme et la saison ?
+
+En utilisant les données de BPM (battements par minute) fournies, nous pourrions examiner comment le rythme des musiques varie selon les saisons de l'année. Par exemple, nous pourrions regrouper les musiques selon leur saison de sortie et calculer la moyenne du BPM pour chaque saison. Cela nous permettrait de déterminer s'il existe des variations significatives dans le rythme des musiques en fonction des saisons.
+
+Pour cette étude, nous utiliserions les données suivantes :
+
+- released_month
+- bpm
+- 
+Nous pourrions alors supposer que cette étude pourrait démontrer que les musiques plus rythmées sont une tendance plus marquée pendant les saisons estivales.
 
 
 ## Auteurs
