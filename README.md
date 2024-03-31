@@ -168,7 +168,7 @@ Pour explorer l'existence de caractéristiques audio communes dans les morceaux 
 <strong>1. Regroupement des titres par saison :</strong>
    - Nous regrouperont les titres en fonction de leur date de sortie pour chaque saison de l'année.
 
-</strong>2. Analyse des caractéristiques audio :</strong>
+<strong>2. Analyse des caractéristiques audio :</strong>
    - Nous analyserons les caractéristiques audio des titres les plus populaires pour chaque saison. Cela pourrait inclure des mesures telles que le BPM, la tonalité, le mode, ainsi que des caractéristiques plus subjectives comme la danceability, la valence, l'énergie, etc.
 
 <strong>3. Comparaison entre les saisons :</strong>
@@ -196,7 +196,7 @@ Pour réaliser cette étude, nous allons avoir besoin des données suivantes :
 
 En suivant cette méthodologie, nous pourrions obtenir des informations intéressantes sur la relation entre les caractéristiques audio des morceaux de musique et les saisons de l'année, ce qui pourrait être utile en tant que professionnel de l'industrie musicale dans la création et la promotion de musique adaptée à chaque période de l'année.
 
-### Le covid-19 a-t’il eu une influence sur le nombre d’écoutes ? 
+### Le covid-19 a-t’il eu une influence sur l'industrie musicale ? 
 
 Pendant la période de la pandémie de COVID-19, le monde a été soumis à des mesures de confinement, ce qui a conduit à une augmentation significative du temps passé devant des écrans et des appareils connectés. On peut donc légitimement se demander si cette situation a eu une influence sur l'industrie musicale et les habitudes d'écoute. 
 
@@ -238,8 +238,7 @@ Pour évaluer l'influence du Covid-19 sur les écoutes de musique, nous pourrion
 
 Ces analyses nous permettraient de comprendre l'impact du Covid-19 sur les habitudes d'écoute de musique et sur l'industrie musicale dans son ensemble.
 
-## Critiques sur notre jeu de donnée : 
-
+## Critiques sur notre jeu de données : 
 En prenant du recul sur notre jeu de données, nous constatons qu'il offre une base solide pour aborder les questions que nous avons précédemment identifiées. Les informations sur les titres de musique, les artistes et les mesures de popularité nous permettent d'explorer divers aspects des tendances musicales et du succès des morceaux.
 
 Cependant, il est important de reconnaître que notre jeu de données présente certaines limites, notamment en ce qui concerne les aspects géographiques. En raison de l'absence d'informations sur la localisation géographique des auditeurs et des artistes, nous ne pouvons pas explorer les variations régionales dans les préférences musicales ou les habitudes d'écoute. Cette lacune réduit notre capacité à obtenir une image complète et nuancée des tendances musicales à travers différentes régions.
