@@ -134,6 +134,26 @@ On sait qu’il y a pleins de façons de faire de la musique et que la plupart d
   
 Nous supposons qu’il est peu probable que nous trouvions dans ce classement des musiques 100% acoustique, nous ne serions, au contraire, pas surpris de trouver de nombreuses chansons à 0%. Nous pensons qu’une majorité des chansons auront une part acoustique inférieure à 50%.
 
+### Quel titre de musique a eu le plus de succès selon sa date de sortie ?
+
+Pour identifier le titre de musique ayant eu le plus de succès selon sa date de sortie, nous pouvons utiliser les données suivantes :
+
+- track_name
+- artist(s)_name
+- released_year
+- released_month
+- released_day
+- streams
+
+Pour mettre en avant les titres les plus écoutés selon leur date de sortie, nous pouvons procéder comme suit :
+
+1. Visualiser les meilleurs titres par année : Nous pouvons regrouper les titres par année de sortie et identifier celui ayant reçu le plus grand nombre d'écoutes chaque année.
+
+2. Visualiser les meilleurs titres par mois : De même, nous pouvons analyser les tendances mensuelles en regroupant les titres par mois de sortie et en identifiant les plus populaires pour chaque mois.
+
+3. Visualiser les meilleurs titres par jour : Enfin, nous pouvons examiner les performances des titres en fonction des jours de sortie, en identifiant les titres les plus écoutés chaque jour.
+Ces analyses nous permettront de mettre en lumière les titres les plus populaires selon différents découpages temporels, offrant ainsi un aperçu précieux des préférences d'écoute du public au fil du temps.
+
 
 
 ## Auteurs
