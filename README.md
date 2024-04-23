@@ -11,6 +11,9 @@ Lien de notre dataset :
 </a>
 
 
+Ce jeu de données a été publié par l'utilisateur Nidula Elgiriyewithana ⚡ sur Kaggle, qui est un utilisateur ordinaire de cette plateforme mais qui a fusionné plusieurs API telles que celle de Spotify : <a href='https://developer.spotify.com/documentation/web-api/reference/get-multiple-artists'>https://developer.spotify.com/documentation/web-api/reference/get-multiple-artists</a> (mentionnée après qu'une personne a demandé la source des données dans les commentaires), ainsi que celles de Shazam, Deezer et Apple Music. Ce jeu de données est mis à jour annuellement. De nombreux correctifs ont été mis en place pour résoudre des problèmes depuis sa création, tels que des données erronées, des erreurs système, et autres.
+
+
 
 ## Pourquoi avons-nous choisi ce jeu de données ?
 
