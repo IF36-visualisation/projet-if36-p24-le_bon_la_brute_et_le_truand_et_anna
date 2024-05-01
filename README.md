@@ -83,7 +83,7 @@ tenter de prévoir ce qui fonctionnera à l’avenir.
 | `instrumentalness_%`   | entier               | Pourcentage estimant la quantité de la chanson qui est instrumentale. Peut aider à identifier les chansons avec peu ou pas de voix.                             |
 | `liveness_%`           | entier               | Pourcentage détectant la présence d'un public dans l'enregistrement. Indique si la chanson a été enregistrée en direct ou en studio.                            |
 | `speechiness_%`        | entier               | Pourcentage qui identifie la présence de paroles parlées dans une chanson. Utile pour distinguer les chansons chantées des chansons parlées.                    |
-</detail>
+</details>
 
 
 <details>
