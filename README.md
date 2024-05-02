@@ -87,6 +87,20 @@ manipulées
 <summary><b><font size="+1">Les musiques les moins écoutés sur spotify
 (unpopular_songs.csv et z_genre_of_artists.csv)</font></b></summary>
 
+| Attribut        | Type de données | Explication                                                                                      |
+|-----------------|-----------------|--------------------------------------------------------------------------------------------------|
+| `danceability`    | float           | Indique à quel point une chanson est adaptée à la danse. Utile pour comprendre l'aspect rythmique et l'attrait pour la danse.                   |
+| `energy`          | float           | L'intensité et l'activité de la chanson. Indique le niveau d'énergie perçu de la chanson.                                                                    |
+| `key`             | float           | La clé musicale dans laquelle la chanson est jouée. Utile pour l'analyse harmonique et la comparaison avec d'autres chansons.                               |
+| `loudness`        | float           | L'intensité sonore globale d'une chanson en décibels (dB).                                                                                                     |
+| `mode`            | float           | Le mode musical de la chanson, majeur ou mineur. Influence l'émotion et l'atmosphère perçue de la chanson.                                                    |
+| `speechiness`     | float           | La présence de paroles parlées dans une chanson. Utile pour distinguer les chansons chantées des chansons parlées.                                           |
+| `acousticness`    | float           | Indique la proportion d’accoustique d’une chanson. Utile pour distinguer les enregistrements acoustiques des enregistrements électroniques.                 |
+| `instrumentalness`| float           | Indique la quantité de la chanson qui est instrumentale. Peut aider à identifier les chansons avec peu ou pas de voix.                                         |
+| `liveness`        | float           | Détection de la présence d'un public dans l'enregistrement. Indique si la chanson a été enregistrée en direct ou en studio.                                   |
+| `valence`         | float           | Indique la positivité transmise par la chanson. Peut être utilisé pour analyser le sentiment et l'humeur de la chanson.                                      |
+
+
 </details>
 
 <details>
