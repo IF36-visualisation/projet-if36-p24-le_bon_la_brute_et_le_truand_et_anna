@@ -16,6 +16,7 @@ editor_options:
 library(dplyr)
 library(ggplot2)
 library(readr)
+library(gmp)
 ```
 
 ```{r setup}
@@ -183,6 +184,21 @@ Nous comparerons les bpm de chaque chanson puis nous introniserons les
 bpm les plus populaires.
 
 ### Les auditeurs valorisent-ils plus les paroles ou l’instrumental d’une musique?
+
+```{r}
+spot_data_clean <- spotify_data %>% filter(!is.na(as.numeric(streams)))
+                                            
+best_songs <- spot_data_clean%>% arrange(desc(streams)) %>% slice(1:10)
+
+ggplot(data = best_songs, aes(x = track_name, y = streams)) + geom_col() #TO DO: faire deux barres par son une pour instrumentalness et une pour speechiness
+
+
+
+
+
+
+
+```
 
 Nous comparerons la proportion de paroles dans une musique et verrons ce
 qui plait le plus en 2023. Pour cela nous utiliserons ces deux
