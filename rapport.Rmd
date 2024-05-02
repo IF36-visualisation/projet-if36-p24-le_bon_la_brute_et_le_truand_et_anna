@@ -316,9 +316,50 @@ saisons estivales.
 ### Existe-t’il des caractéristiques audio communes dans les sons populaires en fonction des saisons ?
 
 ```{r}
-carac <- 
+# 1. Créer une nouvelle variable pour représenter la saison en fonction du mois de sortie
+spotify_data <- spotify_data %>%
+  mutate(season = case_when(
+    released_month %in% c(12, 1, 2) ~ "Hiver",
+    released_month %in% c(3, 4, 5) ~ "Printemps",
+    released_month %in% c(6, 7, 8) ~ "Été",
+    released_month %in% c(9, 10, 11) ~ "Automne"
+  ))
+
+# 2. Sélectionner les chansons les plus populaires (par exemple, les 1000 chansons avec le plus grand nombre de streams)
+top_songs <- spotify_data %>%
+  arrange(desc(streams)) %>%
+  slice(1:1000)
+
+# 3. Comparer les caractéristiques audio des chansons populaires entre les saisons
+
+# Graphique 1 : Comparaison du BPM moyen entre les saisons
+ggplot(top_songs, aes(x = season, y = bpm, fill = season)) +
+  geom_boxplot() +
+  labs(title = "Comparaison du BPM moyen entre les saisons",
+       x = "Saison",
+       y = "BPM") +
+  theme_minimal()
+
+# Graphique 2 : Comparaison de la danceability moyenne entre les saisons
+ggplot(top_songs, aes(x = season, y = `danceability_%`, fill = season)) +
+  geom_boxplot() +
+  labs(title = "Comparaison de la danceability moyenne entre les saisons",
+       x = "Saison",
+       y = "Danceability (%)") +
+  theme_minimal()
+
+# Graphique 3 : Comparaison de la valence moyenne entre les saisons
+ggplot(top_songs, aes(x = season, y = `valence_%`, fill = season)) +
+  geom_boxplot() +
+  labs(title = "Comparaison de la valence moyenne entre les saisons",
+       x = "Saison",
+       y = "Valence (%)") +
+  theme_minimal()
+  
 
 ```
+
+
 
 Pour explorer l'existence de caractéristiques audio communes dans les
 morceaux populaires en fonction des saisons, nous pourrions suivre une
