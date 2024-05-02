@@ -18,11 +18,13 @@ library(ggplot2)
 library(readr)
 ```
 
-
 ```{r setup}
 
 # Chargement des données
-spotify_data <- read_csv("top_spotify_songs_2023.csv")
+spotify_data <- read_csv("./data/spotify-2023.csv")
+
+spotify_data
+
 ```
 
 # Analyse des données des sons les plus écoutés sur Spotify en 2023, ainsi que leurs statistiques sur toutes les plateformes de streaming.
@@ -66,7 +68,7 @@ tenter de prévoir ce qui fonctionnera à l’avenir.
 ## Les données manipulées
 
 | Attribut               | Type de données      | Explication                                                                                                                                                     |
-|------------------|------------------|-------------------------------------|
+|------------------|------------------|------------------------------------|
 | `track_name`           | chaîne de caractères | Nom de la chanson. Utile pour l'identification et la recherche de la chanson dans les bases de données et les plateformes de streaming.                         |
 | `artist(s)_name`       | chaîne de caractères | Nom de l'artiste(s) de la chanson. Permet d'analyser la popularité et le style de l'artiste associé à la chanson.                                               |
 | `artist_count`         | entier               | Nombre d'artistes participants sur le titre. Peut indiquer des collaborations et des influences multiples sur la chanson.                                       |

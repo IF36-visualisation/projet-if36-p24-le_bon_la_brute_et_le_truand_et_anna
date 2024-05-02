@@ -1,9 +1,3 @@
----
-editor_options: 
-  markdown: 
-    wrap: 72
----
-
 [![Review Assignment Due
 Date](https://classroom.github.com/assets/deadline-readme-button-24ddc0f5d75046c5622901739e7c5dd533143b0c8e959d652212380cedb1ea36.svg)](https://classroom.github.com/a/Fj4cXJY4)
 
@@ -34,7 +28,7 @@ jeu de données est mis à jour annuellement. De nombreux correctifs ont
 été mis en place pour résoudre des problèmes depuis sa création, tels
 que des données erronées, des erreurs système, et autres.
 
-### Les musiques les moins écoutés sur spotify toutes années confondu : 
+### Les musiques les moins écoutés sur spotify toutes années confondu :
 
 ### Les musiques les plus écoutés sur Spotify en 2022 avec leurs statistiques sur toutes les plateformes de streaming:
 
@@ -51,14 +45,16 @@ difficile de savoir qui signer ou non. En analysant les données des
 musiques les plus populaires peut être pouvons nous essayer d’établir ce
 qui plait le plus au consommateur sans pour autant s’attendre à une
 recette miracle, simplement observer les tendances et même peut être
-tenter de prévoir ce qui fonctionnera à l’avenir.
-## Les données manipulées
+tenter de prévoir ce qui fonctionnera à l’avenir. \## Les données
+manipulées
 
 <details>
-<summary><b><font size="+1">Les musiques plus écoutés sur Spotify en 2023 (spotify-2023.csv)</font></b></summary>
+
+<summary><b><font size="+1">Les musiques plus écoutés sur Spotify en
+2023 (spotify-2023.csv)</font></b></summary>
 
 | Attribut               | Type de données      | Explication                                                                                                                                                     |
-|-----------------|-----------------|--------------------------------------|
+|------------------|------------------|-------------------------------------|
 | `track_name`           | chaîne de caractères | Nom de la chanson. Utile pour l'identification et la recherche de la chanson dans les bases de données et les plateformes de streaming.                         |
 | `artist(s)_name`       | chaîne de caractères | Nom de l'artiste(s) de la chanson. Permet d'analyser la popularité et le style de l'artiste associé à la chanson.                                               |
 | `artist_count`         | entier               | Nombre d'artistes participants sur le titre. Peut indiquer des collaborations et des influences multiples sur la chanson.                                       |
@@ -83,22 +79,22 @@ tenter de prévoir ce qui fonctionnera à l’avenir.
 | `instrumentalness_%`   | entier               | Pourcentage estimant la quantité de la chanson qui est instrumentale. Peut aider à identifier les chansons avec peu ou pas de voix.                             |
 | `liveness_%`           | entier               | Pourcentage détectant la présence d'un public dans l'enregistrement. Indique si la chanson a été enregistrée en direct ou en studio.                            |
 | `speechiness_%`        | entier               | Pourcentage qui identifie la présence de paroles parlées dans une chanson. Utile pour distinguer les chansons chantées des chansons parlées.                    |
-</details>
-
-
-<details>
-<summary><b><font size="+1">Les musiques les moins écoutés sur spotify (unpopular_songs.csv et z_genre_of_artists.csv)</font></b></summary>
 
 </details>
 
 <details>
-<summary><b><font size="+1">Les musiques les plus écoutés sur spotify en 2022 (spotify_top_charts_22.csv)</font></b></summary>
+
+<summary><b><font size="+1">Les musiques les moins écoutés sur spotify
+(unpopular_songs.csv et z_genre_of_artists.csv)</font></b></summary>
 
 </details>
 
+<details>
 
+<summary><b><font size="+1">Les musiques les plus écoutés sur spotify en
+2022 (spotify_top_charts_22.csv)</font></b></summary>
 
-
+</details>
 
 ## Nos problématiques :
 
