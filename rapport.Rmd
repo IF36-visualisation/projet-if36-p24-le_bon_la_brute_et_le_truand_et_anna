@@ -16,15 +16,14 @@ editor_options:
 library(dplyr)
 library(ggplot2)
 library(readr)
-library(gmp)
 ```
 
 ```{r setup}
 
 # Chargement des données
 spotify_data <- read_csv("./data/spotify-2023.csv")
-
-spotify_data
+spotify22_data <- read_csv("./data/spotify_top_charts_22.csv")
+spotifyUnpopular_data <- read_csv("./data/unpopular_songs.csv")
 
 ```
 
@@ -188,15 +187,7 @@ bpm les plus populaires.
 ```{r}
 spot_data_clean <- spotify_data %>% filter(!is.na(as.numeric(streams)))
                                             
-best_songs <- spot_data_clean%>% arrange(desc(streams)) %>% slice(1:10)
-
-ggplot(data = best_songs, aes(x = track_name, y = streams)) + geom_col() #TO DO: faire deux barres par son une pour instrumentalness et une pour speechiness
-
-
-
-
-
-
+best_songs <- spot_data_clean%>% arrange(desc(streams)) %>% slice(1:100)
 
 ```
 
@@ -313,6 +304,32 @@ aperçu précieux des préférences d'écoute du public au fil du temps.
 
 ### Existe-t-il une influence entre le rythme et la saison ?
 
+```{r}
+# Créer une nouvelle variable pour représenter la saison en fonction du mois de sortie
+spotify_data <- spotify_data %>%
+  mutate(season = case_when(
+    released_month %in% c(12, 1, 2) ~ "Hiver",
+    released_month %in% c(3, 4, 5) ~ "Printemps",
+    released_month %in% c(6, 7, 8) ~ "Été",
+    released_month %in% c(9, 10, 11) ~ "Automne"
+  ))
+
+# Sélectionner les chansons les plus populaires (par exemple, les 1000 chansons avec le plus grand nombre de streams)
+top_songs <- spotify_data %>%
+  arrange(desc(streams)) %>%
+  slice(1:1000)
+
+# Comparer les caractéristiques audio des chansons populaires entre les saisons
+
+# Comparaison du BPM moyen entre les saisons
+ggplot(top_songs, aes(x = season, y = bpm, fill = season)) +
+  geom_boxplot() +
+  labs(title = "Comparaison du BPM moyen entre les saisons",
+       x = "Saison",
+       y = "BPM") +
+  theme_minimal()
+```
+
 En utilisant les données de BPM (battements par minute) fournies, nous
 pourrions examiner comment le rythme des musiques varie selon les
 saisons de l'année. Par exemple, nous pourrions regrouper les musiques
@@ -332,29 +349,7 @@ saisons estivales.
 ### Existe-t’il des caractéristiques audio communes dans les sons populaires en fonction des saisons ?
 
 ```{r}
-# 1. Créer une nouvelle variable pour représenter la saison en fonction du mois de sortie
-spotify_data <- spotify_data %>%
-  mutate(season = case_when(
-    released_month %in% c(12, 1, 2) ~ "Hiver",
-    released_month %in% c(3, 4, 5) ~ "Printemps",
-    released_month %in% c(6, 7, 8) ~ "Été",
-    released_month %in% c(9, 10, 11) ~ "Automne"
-  ))
 
-# 2. Sélectionner les chansons les plus populaires (par exemple, les 1000 chansons avec le plus grand nombre de streams)
-top_songs <- spotify_data %>%
-  arrange(desc(streams)) %>%
-  slice(1:1000)
-
-# 3. Comparer les caractéristiques audio des chansons populaires entre les saisons
-
-# Graphique 1 : Comparaison du BPM moyen entre les saisons
-ggplot(top_songs, aes(x = season, y = bpm, fill = season)) +
-  geom_boxplot() +
-  labs(title = "Comparaison du BPM moyen entre les saisons",
-       x = "Saison",
-       y = "BPM") +
-  theme_minimal()
 
 # Graphique 2 : Comparaison de la danceability moyenne entre les saisons
 ggplot(top_songs, aes(x = season, y = `danceability_%`, fill = season)) +
@@ -432,6 +427,11 @@ utile en tant que professionnel de l'industrie musicale dans la création
 et la promotion de musique adaptée à chaque période de l'année.
 
 ### Le covid-19 a-t’il eu une influence sur l'industrie musicale ?
+
+```{r}
+
+periode <- spotify_data %<% filter()
+```
 
 Pendant la période de la pandémie de COVID-19, le monde a été soumis à
 des mesures de confinement, ce qui a conduit à une augmentation
