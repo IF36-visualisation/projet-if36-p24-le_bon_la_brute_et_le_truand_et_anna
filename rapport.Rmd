@@ -189,6 +189,21 @@ spot_data_clean <- spotify_data %>% filter(!is.na(as.numeric(streams)))
                                             
 best_songs <- spot_data_clean%>% arrange(desc(streams)) %>% slice(1:100)
 
+# Diviser les pourcentages par 100 pour les ramener à une échelle de 0 à 1
+best_songs$instrumentalness_pct <- best_songs$`instrumentalness_%` / 100
+best_songs$speechiness_pct <- best_songs$`speechiness_%` / 100
+
+# Créer le graphique à barres
+ggplot(best_songs, aes(x = track_name)) +
+  geom_bar(aes(y = instrumentalness_pct, fill = "Instrumentalité"), stat = "identity", alpha = 0.6, position = "dodge") +
+  geom_bar(aes(y = speechiness_pct, fill = "Paroles"), stat = "identity", alpha = 0.6, position = "dodge") +
+  labs(y = "Pourcentage", title = "Instrumentalité vs Paroles dans les Meilleures Chansons",
+       subtitle = "Pourcentage de Contenu Instrumental et de Paroles Parlées dans les Meilleures Chansons",
+       caption = "Source des données : Spotify") +
+  scale_fill_manual(name = "Attribut", values = c("Instrumentalité" = "blue", "Paroles" = "red")) +
+  scale_y_continuous(labels = scales::percent_format(accuracy = 1)) +  
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
 ```
 
 Nous comparerons la proportion de paroles dans une musique et verrons ce
