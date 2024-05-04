@@ -68,7 +68,7 @@ tenter de prévoir ce qui fonctionnera à l’avenir.
 ## Les données manipulées
 
 | Attribut               | Type de données      | Explication                                                                                                                                                     |
-|------------------|------------------|-----------------------------------|
+|-------------------|-------------------|-----------------------------------|
 | `track_name`           | chaîne de caractères | Nom de la chanson. Utile pour l'identification et la recherche de la chanson dans les bases de données et les plateformes de streaming.                         |
 | `artist(s)_name`       | chaîne de caractères | Nom de l'artiste(s) de la chanson. Permet d'analyser la popularité et le style de l'artiste associé à la chanson.                                               |
 | `artist_count`         | entier               | Nombre d'artistes participants sur le titre. Peut indiquer des collaborations et des influences multiples sur la chanson.                                       |
@@ -117,7 +117,7 @@ utilisateurs sur chaque plateforme. - **Variations temporelles** : Nous
 popularité des chansons pour identifier toute fluctuation significative
 sur chaque plateforme au fil du temps.
 
-### Est ce qu’une application est plus influente que les autres?
+#### Est ce qu’une application est plus influente que les autres?
 
 Selon les musiques qu’elle met en playlist et le classement parmi les
 musiques les plus écoutées sur la plateforme. On espère pouvoir observer
@@ -174,6 +174,16 @@ le classement des musiques les plus populaires de 2023.
 
 ### Le tempo d’une musique joue-t-il un rôle important dans la popularité de celle-ci?
 
+Ici nous nous demandons simplement si une plage de tempo est
+particulièrement représentée dans notre jeu de donné. Nous utiliserons
+uniquement la donnée du bpm. - bpm: Beats per minute, a measure of song
+tempo
+
+Nous comparerons les bpm de chaque chanson puis nous introniserons les
+bpm les plus populaires.
+
+#### Exploration
+
 ```{r}
 # Sélectionner les 1000 premières chansons les plus populaires
 top_songs <- spotify_data %>%
@@ -193,17 +203,25 @@ ggplot(bpm_counts, aes(x = bpm_interval, y = n, fill = bpm_interval)) +
   labs(x = "Intervalles de BPM", y = "Nombre de chansons", title = "Répartition des BPM des 1000 premières chansons populaires") + theme_minimal() + scale_fill_brewer(palette = "Set2")
 
 ```
+**Analyse : **
 
-Ici nous nous demandons simplement si une plage de tempo est
-particulièrement représentée dans notre jeu de donné. Nous utiliserons
-uniquement la donnée du bpm. - bpm: Beats per minute, a measure of song
-tempo
-
-Nous comparerons les bpm de chaque chanson puis nous introniserons les
-bpm les plus populaires.
 
 ### Les auditeurs valorisent-ils plus les paroles ou l’instrumental d’une musique?
 
+Nous comparerons la proportion de paroles dans une musique et verrons ce
+qui plait le plus en 2023. Pour cela nous utiliserons ces deux
+données: - instrumentalness\_%: Amount of instrumental content in the
+song - speechiness\_%: Amount of spoken words in the song
+
+Cela nous permettra de savoir si un artiste doit plutôt investir dans
+l’instrumental ou dans les paroles. Malheureusement dans cette analyse
+nous ne pouvons pas évaluer la qualité des paroles (qui peut d’ailleurs
+être subjective), un pourcentage élevé de mots ne signifie pas forcément
+une richesse dans l’écriture non plus, cela peut simplement être la
+répétition d’un refrain par exemple, ce que nous ne pouvons établir non
+plus avec ce jeu de données.
+
+#### Exploration
 ```{r}
 spot_data_clean <- spotify_data %>% filter(!is.na(as.numeric(streams)))
                                             
@@ -226,18 +244,7 @@ ggplot(best_songs, aes(x = track_name)) +
 
 ```
 
-Nous comparerons la proportion de paroles dans une musique et verrons ce
-qui plait le plus en 2023. Pour cela nous utiliserons ces deux
-données: - instrumentalness\_%: Amount of instrumental content in the
-song - speechiness\_%: Amount of spoken words in the song
-
-Cela nous permettra de savoir si un artiste doit plutôt investir dans
-l’instrumental ou dans les paroles. Malheureusement dans cette analyse
-nous ne pouvons pas évaluer la qualité des paroles (qui peut d’ailleurs
-être subjective), un pourcentage élevé de mots ne signifie pas forcément
-une richesse dans l’écriture non plus, cela peut simplement être la
-répétition d’un refrain par exemple, ce que nous ne pouvons établir non
-plus avec ce jeu de données.
+**Analyse : **
 
 ### Pouvons nous évaluer la taille et l’engagement de la fanbase d’un artiste?
 
@@ -339,29 +346,6 @@ aperçu précieux des préférences d'écoute du public au fil du temps.
 
 ### Existe-t-il une influence entre le rythme et la saison ?
 
-```{r}
-# Créer une nouvelle variable pour représenter la saison en fonction du mois de sortie
-spotify_data <- spotify_data %>%
-  mutate(season = factor(season, levels = c("Hiver", "Printemps", "Été", "Automne")))
-
-
-# Sélectionner les chansons les plus populaires (par exemple, les 1000 chansons avec le plus grand nombre de streams)
-top_songs <- spotify_data %>%
-  arrange(desc(streams)) %>%
-  slice(1:1000)
-
-# Comparer les caractéristiques audio des chansons populaires entre les saisons
-
-# Comparaison du BPM moyen entre les saisons
-ggplot(top_songs, aes(x = season, y = bpm, fill = season)) +
-  geom_violin(trim = FALSE) +
-  geom_boxplot(width = 0.2, fill = "white", color = "black") +  # Ajout des boîtes pour montrer la médiane et les quartiles
-  labs(title = "Comparaison du BPM moyen entre les saisons",
-       x = "Saison",
-       y = "BPM") +
-  theme_minimal()
-```
-
 En utilisant les données de BPM (battements par minute) fournies, nous
 pourrions examiner comment le rythme des musiques varie selon les
 saisons de l'année. Par exemple, nous pourrions regrouper les musiques
@@ -378,29 +362,50 @@ Nous pourrions alors supposer que cette étude pourrait démontrer que les
 musiques plus rythmées sont une tendance plus marquée pendant les
 saisons estivales.
 
-### Existe-t’il des caractéristiques audio communes dans les sons populaires en fonction des saisons ?
+#### Exploration
 
 ```{r}
+# Créer une nouvelle variable pour représenter la saison en fonction du mois de sortie
+spotify_data <- spotify_data %>%
+  mutate(season = factor(season, levels = c("Hiver", "Printemps", "Été", "Automne")))
 
 
-# Graphique : Comparaison de la danceability moyenne entre les saisons
-ggplot(top_songs, aes(x = season, y = `danceability_%`, fill = season)) +
-  geom_boxplot() +
-  labs(title = "Comparaison de la danceability moyenne entre les saisons",
+# Sélectionner les chansons les plus populaires (par exemple, les 1000 chansons avec le plus grand nombre de streams)
+top_songs <- spotify_data %>%
+  arrange(desc(streams)) %>%
+  slice(1:1000)
+
+
+# Comparaison du BPM moyen entre les saisons
+ggplot(top_songs, aes(x = season, y = bpm, fill = season)) +
+  geom_violin(trim = FALSE) +
+  geom_boxplot(width = 0.2, fill = "white", color = "black") +  
+  labs(title = "Comparaison du BPM moyen entre les saisons",
        x = "Saison",
-       y = "Danceability (%)") +
+       y = "BPM") +
   theme_minimal()
-
-# Graphique : Comparaison de la valence moyenne entre les saisons
-ggplot(top_songs, aes(x = season, y = `valence_%`, fill = season)) +
-  geom_boxplot() +
-  labs(title = "Comparaison de la valence moyenne entre les saisons",
-       x = "Saison",
-       y = "Valence (%)") +
-  theme_minimal()
-  
-
 ```
+
+**Analyse : **
+
+Le graphique illustre une comparaison claire des **BPM moyens** entre les saisons : **Hiver**, **Printemps**, **Été** et **Automne**. Chaque saison est représentée par une couleur différente et présente une forme de distribution distincte. Les boîtes à moustaches superposées sur les violons indiquent la médiane et les quartiles pour chaque saison.
+
+On remarque donc plusieurs choses :
+
+- **Hiver** : La distribution est relativement étroite, suggérant des tempos musicaux plus lents pendant cette saison.
+
+- **Printemps** : La distribution est plus large avec une médiane similaire à celle de l'hiver. La variabilité est plus grande, indiquant une diversité de tempos musicaux.
+
+- **Été** : La médiane est plus élevée, et la distribution est plus étalée. L'été est associé à des tempos plus rapides.
+
+- **Automne** : La distribution est similaire à celle du printemps.
+
+Il est intéressant de noter que la médiane des BPM reste relativement constante pour chaque saison (environ 122 BPM), suggérant une certaine stabilité dans le rythme musical préféré pendant tout au long de l'année. Cependant, la variabilité dans la distribution des BPM indique des nuances dans les préférences de tempo, avec des saisons comme l'été montrant une tendance vers des tempos plus rapides.
+
+En conclusion, cette analyse met en lumière l'impact saisonnier sur les caractéristiques audio des chansons populaires, en particulier en ce qui concerne le tempo. Comprendre ces variations saisonnières peut être précieux pour les professionnels de l'industrie musicale dans la création et la promotion de musique adaptée à chaque période de l'année.
+
+
+### Existe-t’il des caractéristiques audio communes dans les sons populaires en fonction des saisons ?
 
 Pour explorer l'existence de caractéristiques audio communes dans les
 morceaux populaires en fonction des saisons, nous pourrions suivre une
@@ -456,75 +461,62 @@ morceaux de musique et les saisons de l'année, ce qui pourrait être
 utile en tant que professionnel de l'industrie musicale dans la création
 et la promotion de musique adaptée à chaque période de l'année.
 
-### Le covid-19 a-t’il eu une influence sur l'industrie musicale ?
+#### Exploration
 
 ```{r}
 
-periode <- spotify_data %<% filter()
+
+# Graphique : Comparaison de la danceability moyenne entre les saisons
+ggplot(top_songs, aes(x = season, y = `danceability_%`, fill = season)) +
+  geom_boxplot() +
+  labs(title = "Comparaison de la danceability moyenne entre les saisons",
+       x = "Saison",
+       y = "Danceability (%)") +
+  theme_minimal()
+
+# Graphique : Comparaison de la valence moyenne entre les saisons
+ggplot(top_songs, aes(x = season, y = `valence_%`, fill = season)) +
+  geom_boxplot() +
+  labs(title = "Comparaison de la valence moyenne entre les saisons",
+       x = "Saison",
+       y = "Valence (%)") +
+  theme_minimal()
+  
+
 ```
 
-Pendant la période de la pandémie de COVID-19, le monde a été soumis à
-des mesures de confinement, ce qui a conduit à une augmentation
-significative du temps passé devant des écrans et des appareils
-connectés. On peut donc légitimement se demander si cette situation a eu
-une influence sur l'industrie musicale et les habitudes d'écoute.
+### Conclusion
 
-Pour répondre à cette question, nous utiliserons les données suivantes :
+**Analyse : **
+L'analyse des caractéristiques audio des chansons populaires en fonction
+des saisons a révélé plusieurs tendances intéressantes. Tout d'abord,
+nous avons observé des variations significatives dans la danceability
+moyenne et la valence moyenne entre les saisons. En été, les chansons
+ont tendance à avoir un pourcentage de danceability plus élevé, ce qui
+suggère une préférence pour des rythmes plus entraînants et propices à
+la danse pendant cette période. En revanche, en automne, la danceability
+moyenne est plus basse, indiquant une possible transition vers des
+styles musicaux moins rythmés ou plus contemplatifs.
 
--   released_year
--   released_month
--   released_day
--   in_spotify_playlists
--   in_spotify_charts
--   streams
--   in_apple_playlists
--   in_apple_charts
--   in_deezer_playlists
--   in_deezer_charts
--   in_shazam_charts
--   bpm
--   key
--   mode
--   danceability\_%
--   valence\_%
--   energy\_%
--   acousticness\_%
--   instrumentalness\_%
--   liveness\_%
--   speechiness\_%
+De même, la valence moyenne est plus élevée pendant la saison d'hiver,
+ce qui suggère une préférence pour des chansons avec une ambiance plus
+positive et joyeuse pendant cette période. À l'inverse, la valence
+moyenne est plus basse en automne, ce qui pourrait refléter une
+atmosphère plus mélancolique ou introspective associée à cette saison.
 
-Pour évaluer l'influence du Covid-19 sur les écoutes de musique, nous
-pourrions comparer les données de streaming avant et pendant la
-pandémie. Voici les étapes à suivre :
+Cependant, il est important de noter que ces observations peuvent être
+influencées par la présence de données aberrantes ou une distribution
+asymétrique des valeurs dans notre ensemble de données. Une analyse plus
+approfondie serait nécessaire pour comprendre pleinement les facteurs
+sous-jacents qui contribuent à ces variations saisonnières dans les
+caractéristiques audio des chansons populaires.
 
-<strong>1. Segmentation temporelle : </strong> Diviser les données en
-trois périodes : avant le début de la pandémie, pendant la pandémie et
-après la pandémie.
-
-<strong>2. Comparaison des écoutes : </strong> Analyser les données de
-streaming pour chaque période afin de détecter toute variation
-significative du nombre d'écoutes pendant la pandémie par rapport à la
-période antérieure.
-
-<strong>3. Analyse des plateformes de streaming : </strong>Examiner les
-données spécifiques à chaque plateforme (Spotify, Apple Music, Deezer,
-etc.) pour déterminer s'il y a eu des changements dans les écoutes entre
-les différentes plateformes pendant la pandémie.
-
-<strong>4. Analyse mensuelle des écoutes : </strong>Examiner la tendance
-mensuelle des écoutes avant et pendant la pandémie pour identifier
-d'éventuels changements de comportement d'écoute en fonction de
-l'évolution de la situation sanitaire.
-
-<strong>5. Analyse des tendances par caractéristique musicale :</strong>
-Regrouper les données par caractéristique musicale et examiner s'il y a
-eu des changements dans les préférences d'écoute pendant la pandémie,
-notamment une augmentation de l'écoute de certains genres liés aux
-circonstances de la pandémie.
-
-Ces analyses nous permettraient de comprendre l'impact du Covid-19 sur
-les habitudes d'écoute de musique et sur l'industrie musicale dans son
-ensemble.
+En fin de compte, cette analyse met en lumière l'importance de prendre
+en compte le contexte saisonnier lors de la création et de la promotion
+de musique. Comprendre les préférences d'écoute du public en fonction
+des saisons peut aider les professionnels de l'industrie musicale à
+adapter leur offre pour répondre aux besoins et aux attentes changeants
+des auditeurs tout au long de l'année.
 
 ## Critiques sur notre jeu de données :
 
