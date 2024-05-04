@@ -13,7 +13,7 @@ interactif.*
 
 ### Les musiques les plus écoutés sur Spotify en 2023 avec leurs statistiques sur toutes les plateformes de streaming:
 
-Lien de notre dataset :
+Lien de ce dataset :
 <a href="https://www.kaggle.com/datasets/nelgiriyewithana/top-spotify-songs-2023" style="display: inline-block; ">
 <img src="https://cdn.icon-icons.com/icons2/3685/PNG/512/spotify_logo_icon_229290.png" alt="FOO" style="width: 40px; height: 40px; "/>
 </a>
@@ -30,9 +30,21 @@ que des données erronées, des erreurs système, et autres.
 
 ### Les musiques les moins écoutés sur spotify toutes années confondu :
 
+Lien de ce dataset : 
+<a href="https://www.kaggle.com/datasets/estienneggx/spotify-unpopular-songs" style="display: inline-block; ">
+<img src="https://cdn.icon-icons.com/icons2/3685/PNG/512/spotify_logo_icon_229290.png" alt="FOO" style="width: 40px; height: 40px; "/>
+</a>
+
+Ce jeu de données a été publié par l'utilisateur ESTIENNEGGX sur Kaggle, qui est un utilisateur ordinaire de cette plateforme. Les données ont été récupérées en utilisant Python avec l'API de Spotify et la bibliothèque Spotipy. La méthodologie utilisée est la suivante :
+- Récupération des albums impopulaires (l'API de Spotify ne permet pas de récupérer directement les chansons impopulaires)
+- Récupération des identifiants des chansons à partir des albums
+- Récupération des caractéristiques audio des chansons.
+La dernière modification de ce jeu de données remonte à plus d'un an.
+
+
 ### Les musiques les plus écoutés sur Spotify en 2022 avec leurs statistiques sur toutes les plateformes de streaming:
 
-Lien de notre dataset :
+Lien de ce dataset :
 <a href="https://www.kaggle.com/datasets/sveta151/spotify-top-chart-songs-2022?resource=download" style="display: inline-block; ">
 <img src="https://cdn.icon-icons.com/icons2/3685/PNG/512/spotify_logo_icon_229290.png" alt="FOO" style="width: 40px; height: 40px; "/>
 </a>
@@ -94,19 +106,25 @@ manipulées
 <summary><b><font size="+1">Les musiques les moins écoutés sur spotify
 (unpopular_songs.csv et z_genre_of_artists.csv)</font></b></summary>
 
-| Attribut        | Type de données | Explication                                                                                      |
-|-----------------|-----------------|--------------------------------------------------------------------------------------------------|
-| `danceability`    | float           | Indique à quel point une chanson est adaptée à la danse. Utile pour comprendre l'aspect rythmique et l'attrait pour la danse.                   |
-| `energy`          | float           | L'intensité et l'activité de la chanson. Indique le niveau d'énergie perçu de la chanson.                                                                    |
-| `key`             | float           | La clé musicale dans laquelle la chanson est jouée. Utile pour l'analyse harmonique et la comparaison avec d'autres chansons.                               |
-| `loudness`        | float           | L'intensité sonore globale d'une chanson en décibels (dB).                                                                                                     |
-| `mode`            | float           | Le mode musical de la chanson, majeur ou mineur. Influence l'émotion et l'atmosphère perçue de la chanson.                                                    |
-| `speechiness`     | float           | La présence de paroles parlées dans une chanson. Utile pour distinguer les chansons chantées des chansons parlées.                                           |
-| `acousticness`    | float           | Indique la proportion d’accoustique d’une chanson. Utile pour distinguer les enregistrements acoustiques des enregistrements électroniques.                 |
-| `instrumentalness`| float           | Indique la quantité de la chanson qui est instrumentale. Peut aider à identifier les chansons avec peu ou pas de voix.                                         |
-| `liveness`        | float           | Détection de la présence d'un public dans l'enregistrement. Indique si la chanson a été enregistrée en direct ou en studio.                                   |
-| `valence`         | float           | Indique la positivité transmise par la chanson. Peut être utilisé pour analyser le sentiment et l'humeur de la chanson.                                      |
-
+| Attribut           | Type de données | Explication                                                                                         |
+|--------------------|-----------------|-----------------------------------------------------------------------------------------------------|
+| `danceability`     | float           | Indique à quel point une chanson est adaptée à la danse. Utile pour comprendre l'aspect rythmique et l'attrait pour la danse.                   |
+| `energy`           | float           | L'intensité et l'activité de la chanson. Indique le niveau d'énergie perçu de la chanson.                                                                    |
+| `key`              | float           | La clé musicale dans laquelle la chanson est jouée. Utile pour l'analyse harmonique et la comparaison avec d'autres chansons.                               |
+| `loudness`         | float           | L'intensité sonore globale d'une chanson en décibels (dB).                                                                                                     |
+| `mode`             | float           | Le mode musical de la chanson, majeur ou mineur. Influence l'émotion et l'atmosphère perçue de la chanson.                                                    |
+| `speechiness`      | float           | La présence de paroles parlées dans une chanson. Utile pour distinguer les chansons chantées des chansons parlées.                                           |
+| `acousticness`     | float           | Indique la proportion d’accoustique d’une chanson. Utile pour distinguer les enregistrements acoustiques des enregistrements électroniques.                 |
+| `instrumentalness` | float           | Indique la quantité de la chanson qui est instrumentale. Peut aider à identifier les chansons avec peu ou pas de voix.                                         |
+| `liveness`         | float           | Détection de la présence d'un public dans l'enregistrement. Indique si la chanson a été enregistrée en direct ou en studio.                                   |
+| `valence`          | float           | Indique la positivité transmise par la chanson. Peut être utilisé pour analyser le sentiment et l'humeur de la chanson.                                      |
+| `tempo`            | numeric         | Le tempo de la chanson en battements par minute (BPM).                                                                                                          |
+| `duration_ms`      | numeric         | La durée de la chanson en millisecondes.                                                                                                                        |
+| `explicit`         | logical         | Indique si la chanson contient un langage explicite.                                                                                                            |
+| `popularity`       | integer         | La popularité de la chanson sur la plateforme Spotify.                                                                                                           |
+| `track_name`       | character       | Le nom de la chanson.                                                                                                                                            |
+| `track_artist`     | character       | L'artiste de la chanson.                                                                                                                                        |
+| `track_id`         | character       | L'identifiant unique de la chanson sur Spotify.                                                                                                                  |
 
 </details>
 
@@ -412,71 +430,6 @@ intéressantes sur la relation entre les caractéristiques audio des
 morceaux de musique et les saisons de l'année, ce qui pourrait être
 utile en tant que professionnel de l'industrie musicale dans la création
 et la promotion de musique adaptée à chaque période de l'année.
-
-### Le covid-19 a-t’il eu une influence sur l'industrie musicale ?
-
-Pendant la période de la pandémie de COVID-19, le monde a été soumis à
-des mesures de confinement, ce qui a conduit à une augmentation
-significative du temps passé devant des écrans et des appareils
-connectés. On peut donc légitimement se demander si cette situation a eu
-une influence sur l'industrie musicale et les habitudes d'écoute.
-
-Pour répondre à cette question, nous utiliserons les données suivantes :
-
--   released_year
--   released_month
--   released_day
--   in_spotify_playlists
--   in_spotify_charts
--   streams
--   in_apple_playlists
--   in_apple_charts
--   in_deezer_playlists
--   in_deezer_charts
--   in_shazam_charts
--   bpm
--   key
--   mode
--   danceability\_%
--   valence\_%
--   energy\_%
--   acousticness\_%
--   instrumentalness\_%
--   liveness\_%
--   speechiness\_%
-
-Pour évaluer l'influence du Covid-19 sur les écoutes de musique, nous
-pourrions comparer les données de streaming avant et pendant la
-pandémie. Voici les étapes à suivre :
-
-<strong>1. Segmentation temporelle : </strong> Diviser les données en
-trois périodes : avant le début de la pandémie, pendant la pandémie et
-après la pandémie.
-
-<strong>2. Comparaison des écoutes : </strong> Analyser les données de
-streaming pour chaque période afin de détecter toute variation
-significative du nombre d'écoutes pendant la pandémie par rapport à la
-période antérieure.
-
-<strong>3. Analyse des plateformes de streaming : </strong>Examiner les
-données spécifiques à chaque plateforme (Spotify, Apple Music, Deezer,
-etc.) pour déterminer s'il y a eu des changements dans les écoutes entre
-les différentes plateformes pendant la pandémie.
-
-<strong>4. Analyse mensuelle des écoutes : </strong>Examiner la tendance
-mensuelle des écoutes avant et pendant la pandémie pour identifier
-d'éventuels changements de comportement d'écoute en fonction de
-l'évolution de la situation sanitaire.
-
-<strong>5. Analyse des tendances par caractéristique musicale :</strong>
-Regrouper les données par caractéristique musicale et examiner s'il y a
-eu des changements dans les préférences d'écoute pendant la pandémie,
-notamment une augmentation de l'écoute de certains genres liés aux
-circonstances de la pandémie.
-
-Ces analyses nous permettraient de comprendre l'impact du Covid-19 sur
-les habitudes d'écoute de musique et sur l'industrie musicale dans son
-ensemble.
 
 ## Critiques sur notre jeu de données :
 
