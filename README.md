@@ -32,6 +32,13 @@ que des données erronées, des erreurs système, et autres.
 
 ### Les musiques les plus écoutés sur Spotify en 2022 avec leurs statistiques sur toutes les plateformes de streaming:
 
+Lien de notre dataset :
+<a href="https://www.kaggle.com/datasets/sveta151/spotify-top-chart-songs-2022?resource=download" style="display: inline-block; ">
+<img src="https://cdn.icon-icons.com/icons2/3685/PNG/512/spotify_logo_icon_229290.png" alt="FOO" style="width: 40px; height: 40px; "/>
+</a>
+
+Ce jeu de données a été publié par l'utilisateur SVETA151 sur Kaggle, qui est un utilisateur ordinaire de cette plateforme. Les données proviennent à l'origine de la plateforme "Top Chart Spotify Global". Le "Top Chart Spotify Global" est une liste des chansons les plus populaires dans le monde entier, selon les statistiques de streaming sur la plateforme Spotify. Les données y sont régulièrement mises à jour.
+
 ## Pourquoi avons-nous choisi ces jeux de données ?
 
 L’arrivée du streaming dans les années 2000 à transformé notre façon de
@@ -107,6 +114,27 @@ manipulées
 
 <summary><b><font size="+1">Les musiques les plus écoutés sur spotify en
 2022 (spotify_top_charts_22.csv)</font></b></summary>
+
+| Attribut        | Type de données | Explication                                                                                                                                                                    |
+|-----------------|-----------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `uri`             | Chaîne de caractères | URI de la chanson                                                                                                                                                          |
+| `artist_names`    | Chaîne de caractères | Nom de l’artiste                                                                                                                                                          |
+| `track_name`      | Chaîne de caractères | Nom de la chanson                                                                                                                                                          |
+| `peak_rank`       | Entier          | Classement maximal obtenu par la chanson                                                                                                                                      |
+| `weeks_on_chart`  | Entier          | Nombre de semaine dans les classements des meilleurs sons                                                                                                                     |
+| `danceability`    | Réel            | La danseabilité décrit à quel point une piste est adaptée à la danse en fonction d'une combinaison d'éléments musicaux comprenant le tempo, la stabilité du rythme, la force du rythme et la régularité globale. Une valeur de 0.0 est la moins adaptée à la danse et 1.0 est la plus adaptée. |
+| `energy`          | Réel            | L'énergie est une mesure de 0.0 à 1.0 et représente une mesure perceptive de l'intensité et de l'activité.                                                                  |
+| `key`             | Entier          | La tonalité dans laquelle la piste se trouve. Les entiers sont associés aux notes en utilisant la notation standard des classes de hauteur.                                     |
+| `loudness`        | Réel            | La loudness est la qualité d’un son qui est corrélé avec l’amplitude. Les valeurs se situent généralement entre -60 et 0 dB.                                                |
+| `mode`            | Entier          | Le mode indique la modalité (majeure ou mineure) d'une piste, le type de gamme à partir de laquelle son contenu mélodique est dérivé. La majeure est représentée par 1 et la mineure par 0.                                   |
+| `speechiness`     | Réel            | La parole détecte la présence de mots parlés dans une piste. Plus la valeur est proche de 1.0 plus l’enregistrement est parlé.                                               |
+| `acousticness`    | Réel            | Une mesure de confiance de 0.0 à 1.0 quant à savoir si la piste est acoustique.                                                                                             |
+| `instrumentalness`| Réel            | Détecte la place de l’instrumental dans un son. Plus la valeur est proche de 1.0, plus le son est considéré comme instrumental (moins il y a de contenu vocal).           |
+| `liveness`        | Réel            | Détecte la présence d'un public dans l'enregistrement.                                                                                                                       |
+| `tempo`           | Réel            | Le tempo estimé global d'une piste en battements par minute (BPM).                                                                                                           |
+| `time_signature`  | Entier          | La signature temporelle (ou mesure) est une convention de notation qui spécifie combien de temps (ou battements) il y a dans chaque mesure.                                   |
+| `duration_ms`     | Entier          | La durée de la piste en millisecondes.                                                                                                                                       |
+
 
 </details>
 
