@@ -40,14 +40,12 @@ interactif.*
 ### Les musiques les plus écoutés sur Spotify en 2023 avec leurs statistiques sur toutes les plateformes de streaming:
 
 Lien de ce dataset :
-<a href="https://www.kaggle.com/datasets/nelgiriyewithana/top-spotify-songs-2023" style="display: inline-block; ">
-<img src="https://cdn.icon-icons.com/icons2/3685/PNG/512/spotify_logo_icon_229290.png" alt="FOO" style="width: 40px; height: 40px; "/>
-</a>
+<https://www.kaggle.com/datasets/nelgiriyewithana/top-spotify-songs-2023>
 
 Ce jeu de données a été publié par l'utilisateur Nidula Elgiriyewithana
 ⚡ sur Kaggle, qui est un utilisateur ordinaire de cette plateforme mais
 qui a fusionné plusieurs API telles que celle de Spotify :
-<a href='https://developer.spotify.com/documentation/web-api/reference/get-multiple-artists'>https://developer.spotify.com/documentation/web-api/reference/get-multiple-artists</a>
+<https://developer.spotify.com/documentation/web-api/reference/get-multiple-artists>
 (mentionnée après qu'une personne a demandé la source des données dans
 les commentaires), ainsi que celles de Shazam, Deezer et Apple Music. Ce
 jeu de données est mis à jour annuellement. De nombreux correctifs ont
@@ -57,9 +55,7 @@ que des données erronées, des erreurs système, et autres.
 ### Les musiques les moins écoutés sur spotify toutes années confondu :
 
 Lien de ce dataset :
-<a href="https://www.kaggle.com/datasets/estienneggx/spotify-unpopular-songs" style="display: inline-block; ">
-<img src="https://cdn.icon-icons.com/icons2/3685/PNG/512/spotify_logo_icon_229290.png" alt="FOO" style="width: 40px; height: 40px; "/>
-</a>
+<https://www.kaggle.com/datasets/estienneggx/spotify-unpopular-songs>
 
 Ce jeu de données a été publié par l'utilisateur ESTIENNEGGX sur Kaggle,
 qui est un utilisateur ordinaire de cette plateforme. Les données ont
@@ -74,9 +70,7 @@ de données remonte à plus d'un an.
 ### Les musiques les plus écoutés sur Spotify en 2022 avec leurs statistiques sur toutes les plateformes de streaming:
 
 Lien de ce dataset :
-<a href="https://www.kaggle.com/datasets/sveta151/spotify-top-chart-songs-2022?resource=download" style="display: inline-block; ">
-<img src="https://cdn.icon-icons.com/icons2/3685/PNG/512/spotify_logo_icon_229290.png" alt="FOO" style="width: 40px; height: 40px; "/>
-</a>
+<https://www.kaggle.com/datasets/sveta151/spotify-top-chart-songs-2022?resource=download>
 
 Ce jeu de données a été publié par l'utilisateur SVETA151 sur Kaggle,
 qui est un utilisateur ordinaire de cette plateforme. Les données
@@ -104,79 +98,124 @@ tenter de prévoir ce qui fonctionnera à l’avenir.
 
 ### Les musiques plus écoutés sur Spotify en 2023 (spotify-2023.csv)
 
-- **Attribut** : `track_name`
-  - **Type de données** : chaîne de caractères
-  - **Explication** : Nom de la chanson. Utile pour l'identification et la recherche de la chanson dans les bases de données et les plateformes de streaming.
-- **Attribut** : `artist(s)_name`
-  - **Type de données** : chaîne de caractères
-  - **Explication** : Nom de l'artiste(s) de la chanson. Permet d'analyser la popularité et le style de l'artiste associé à la chanson.
-- **Attribut** : `artist_count`
-  - **Type de données** : entier
-  - **Explication** : Nombre d'artistes participants sur le titre. Peut indiquer des collaborations et des influences multiples sur la chanson.
-- **Attribut** : `released_year`
-  - **Type de données** : entier
-  - **Explication** : L'année de sortie de la chanson. Permet d'étudier les tendances musicales au fil du temps et de comparer la performance des chansons dans différentes périodes.
-- **Attribut** : `released_month`
-  - **Type de données** : entier
-  - **Explication** : Le mois de sortie de la chanson. Peut être utilisé pour analyser les saisonsnalités et les tendances saisonnières dans la musique.
-- **Attribut** : `released_day`
-  - **Type de données** : entier
-  - **Explication** : Le jour de sortie de la chanson. Peut être pertinent pour étudier les stratégies de lancement de chansons.
-- **Attribut** : `in_spotify_playlists`
-  - **Type de données** : entier
-  - **Explication** : Nombre de playlists Spotify dans lesquelles la chanson est présente. Indique la popularité et la portée de la chanson sur la plateforme Spotify.
-- **Attribut** : `in_spotify_charts`
-  - **Type de données** : entier
-  - **Explication** : Nombre de fois où la chanson est apparue dans les classements Spotify. Révèle la popularité et la tendance de la chanson sur Spotify.
-- **Attribut** : `streams`
-  - **Type de données** : entier
-  - **Explication** : Nombre de streams sur Spotify. Mesure la popularité et l'engagement des auditeurs avec la chanson sur Spotify.
-- **Attribut** : `in_apple_playlists`
-  - **Type de données** : entier
-  - **Explication** : Nombre de playlists Apple Music dans lesquelles la chanson est présente. Indique la popularité de la chanson sur Apple Music.
-- **Attribut** : `in_apple_charts`
-  - **Type de données** : entier
-  - **Explication** : Nombre de fois où la chanson est apparue dans les classements Apple Music. Révèle la popularité et la tendance de la chanson sur Apple Music.
-- **Attribut** : `in_deezer_playlists`
-  - **Type de données** : entier
-  - **Explication** : Nombre de playlists Deezer dans lesquelles la chanson est présente. Indique la popularité de la chanson sur Deezer.
-- **Attribut** : `in_deezer_charts`
-  - **Type de données** : entier
-  - **Explication** : Nombre de fois où la chanson est apparue dans les classements Deezer. Révèle la popularité et la tendance de la chanson sur Deezer.
-- **Attribut** : `in_shazam_charts`
-  - **Type de données** : entier
-  - **Explication** : Nombre de fois où la chanson est apparue dans les classements Shazam. Peut indiquer la popularité émergente de la chanson.
-- **Attribut** : `bpm`
-  - **Type de données** : entier
-  - **Explication** : Le nombre de battements par minute de la chanson, indiquant le tempo. Permet de classifier le style et le genre de la chanson.
-- **Attribut** : `key`
-  - **Type de données** : chaîne de caractères
-  - **Explication** : La clé musicale dans laquelle la chanson est jouée. Utile pour l'analyse harmonique et la comparaison avec d'autres chansons.
-- **Attribut** : `mode`
-  - **Type de données** : chaîne de caractères
-  - **Explication** : Le mode musical de la chanson, majeur ou mineur. Influence l'émotion et l'atmosphère perçue de la chanson.
-- **Attribut** : `danceability_%`
-  - **Type de données** : entier
-  - **Explication** : Pourcentage indiquant à quel point une chanson est adaptée à la danse. Utile pour comprendre l'aspect rythmique et l'attrait pour la danse.
-- **Attribut** : `valence_%`
-  - **Type de données** : entier
-  - **Explication** : Pourcentage reflétant la positivité transmise par la chanson. Peut être utilisé pour analyser le sentiment et l'humeur de la chanson.
-- **Attribut** : `energy_%`
-  - **Type de données** : entier
-  - **Explication** : Pourcentage mesurant l'intensité et l'activité de la chanson. Indique le niveau d'énergie perçu de la chanson.
-- **Attribut** : `acousticness_%`
-  - **Type de données** : entier
-  - **Explication** : Pourcentage indiquant à quel point une chanson est acoustique. Utile pour distinguer les enregistrements acoustiques des enregistrements électroniques.
-- **Attribut** : `instrumentalness_%`
-  - **Type de données** : entier
-  - **Explication** : Pourcentage estimant la quantité de la chanson qui est instrumentale. Peut aider à identifier les chansons avec peu ou pas de voix.
-- **Attribut** : `liveness_%`
-  - **Type de données** : entier
-  - **Explication** : Pourcentage détectant la présence d'un public dans l'enregistrement. Indique si la chanson a été enregistrée en direct ou en studio.
-- **Attribut** : `speechiness_%`
-  - **Type de données** : entier
-  - **Explication** : Pourcentage qui identifie la présence de paroles parlées dans une chanson. Utile pour distinguer les chansons chantées des chansons parlées.
-
+-   **Attribut** : `track_name`
+    -   **Type de données** : chaîne de caractères
+    -   **Explication** : Nom de la chanson. Utile pour l'identification
+        et la recherche de la chanson dans les bases de données et les
+        plateformes de streaming.
+-   **Attribut** : `artist(s)_name`
+    -   **Type de données** : chaîne de caractères
+    -   **Explication** : Nom de l'artiste(s) de la chanson. Permet
+        d'analyser la popularité et le style de l'artiste associé à la
+        chanson.
+-   **Attribut** : `artist_count`
+    -   **Type de données** : entier
+    -   **Explication** : Nombre d'artistes participants sur le titre.
+        Peut indiquer des collaborations et des influences multiples sur
+        la chanson.
+-   **Attribut** : `released_year`
+    -   **Type de données** : entier
+    -   **Explication** : L'année de sortie de la chanson. Permet
+        d'étudier les tendances musicales au fil du temps et de comparer
+        la performance des chansons dans différentes périodes.
+-   **Attribut** : `released_month`
+    -   **Type de données** : entier
+    -   **Explication** : Le mois de sortie de la chanson. Peut être
+        utilisé pour analyser les saisonsnalités et les tendances
+        saisonnières dans la musique.
+-   **Attribut** : `released_day`
+    -   **Type de données** : entier
+    -   **Explication** : Le jour de sortie de la chanson. Peut être
+        pertinent pour étudier les stratégies de lancement de chansons.
+-   **Attribut** : `in_spotify_playlists`
+    -   **Type de données** : entier
+    -   **Explication** : Nombre de playlists Spotify dans lesquelles la
+        chanson est présente. Indique la popularité et la portée de la
+        chanson sur la plateforme Spotify.
+-   **Attribut** : `in_spotify_charts`
+    -   **Type de données** : entier
+    -   **Explication** : Nombre de fois où la chanson est apparue dans
+        les classements Spotify. Révèle la popularité et la tendance de
+        la chanson sur Spotify.
+-   **Attribut** : `streams`
+    -   **Type de données** : entier
+    -   **Explication** : Nombre de streams sur Spotify. Mesure la
+        popularité et l'engagement des auditeurs avec la chanson sur
+        Spotify.
+-   **Attribut** : `in_apple_playlists`
+    -   **Type de données** : entier
+    -   **Explication** : Nombre de playlists Apple Music dans
+        lesquelles la chanson est présente. Indique la popularité de la
+        chanson sur Apple Music.
+-   **Attribut** : `in_apple_charts`
+    -   **Type de données** : entier
+    -   **Explication** : Nombre de fois où la chanson est apparue dans
+        les classements Apple Music. Révèle la popularité et la tendance
+        de la chanson sur Apple Music.
+-   **Attribut** : `in_deezer_playlists`
+    -   **Type de données** : entier
+    -   **Explication** : Nombre de playlists Deezer dans lesquelles la
+        chanson est présente. Indique la popularité de la chanson sur
+        Deezer.
+-   **Attribut** : `in_deezer_charts`
+    -   **Type de données** : entier
+    -   **Explication** : Nombre de fois où la chanson est apparue dans
+        les classements Deezer. Révèle la popularité et la tendance de
+        la chanson sur Deezer.
+-   **Attribut** : `in_shazam_charts`
+    -   **Type de données** : entier
+    -   **Explication** : Nombre de fois où la chanson est apparue dans
+        les classements Shazam. Peut indiquer la popularité émergente de
+        la chanson.
+-   **Attribut** : `bpm`
+    -   **Type de données** : entier
+    -   **Explication** : Le nombre de battements par minute de la
+        chanson, indiquant le tempo. Permet de classifier le style et le
+        genre de la chanson.
+-   **Attribut** : `key`
+    -   **Type de données** : chaîne de caractères
+    -   **Explication** : La clé musicale dans laquelle la chanson est
+        jouée. Utile pour l'analyse harmonique et la comparaison avec
+        d'autres chansons.
+-   **Attribut** : `mode`
+    -   **Type de données** : chaîne de caractères
+    -   **Explication** : Le mode musical de la chanson, majeur ou
+        mineur. Influence l'émotion et l'atmosphère perçue de la
+        chanson.
+-   **Attribut** : `danceability_%`
+    -   **Type de données** : entier
+    -   **Explication** : Pourcentage indiquant à quel point une chanson
+        est adaptée à la danse. Utile pour comprendre l'aspect rythmique
+        et l'attrait pour la danse.
+-   **Attribut** : `valence_%`
+    -   **Type de données** : entier
+    -   **Explication** : Pourcentage reflétant la positivité transmise
+        par la chanson. Peut être utilisé pour analyser le sentiment et
+        l'humeur de la chanson.
+-   **Attribut** : `energy_%`
+    -   **Type de données** : entier
+    -   **Explication** : Pourcentage mesurant l'intensité et l'activité
+        de la chanson. Indique le niveau d'énergie perçu de la chanson.
+-   **Attribut** : `acousticness_%`
+    -   **Type de données** : entier
+    -   **Explication** : Pourcentage indiquant à quel point une chanson
+        est acoustique. Utile pour distinguer les enregistrements
+        acoustiques des enregistrements électroniques.
+-   **Attribut** : `instrumentalness_%`
+    -   **Type de données** : entier
+    -   **Explication** : Pourcentage estimant la quantité de la chanson
+        qui est instrumentale. Peut aider à identifier les chansons avec
+        peu ou pas de voix.
+-   **Attribut** : `liveness_%`
+    -   **Type de données** : entier
+    -   **Explication** : Pourcentage détectant la présence d'un public
+        dans l'enregistrement. Indique si la chanson a été enregistrée
+        en direct ou en studio.
+-   **Attribut** : `speechiness_%`
+    -   **Type de données** : entier
+    -   **Explication** : Pourcentage qui identifie la présence de
+        paroles parlées dans une chanson. Utile pour distinguer les
+        chansons chantées des chansons parlées.
 
 ### Les musiques les moins écoutés sur spotify (unpopular_songs.csv et z_genre_of_artists.csv)
 
@@ -256,74 +295,80 @@ tenter de prévoir ce qui fonctionnera à l’avenir.
 
 ### Les musiques les plus écoutés sur spotify en 2022 (spotify_top_charts_22.csv)
 
-- **Attribut** : `uri`
-  - **Type de données** : Chaîne de caractères
-  - **Explication** : URI de la chanson.
-
-- **Attribut** : `artist_names`
-  - **Type de données** : Chaîne de caractères
-  - **Explication** : Nom de l'artiste.
-
-- **Attribut** : `track_name`
-  - **Type de données** : Chaîne de caractères
-  - **Explication** : Nom de la chanson.
-
-- **Attribut** : `peak_rank`
-  - **Type de données** : Entier
-  - **Explication** : Classement maximal obtenu par la chanson.
-
-- **Attribut** : `weeks_on_chart`
-  - **Type de données** : Entier
-  - **Explication** : Nombre de semaines dans les classements des meilleurs sons.
-
-- **Attribut** : `danceability`
-  - **Type de données** : Réel
-  - **Explication** : La danseabilité décrit à quel point une piste est adaptée à la danse en fonction d'une combinaison d'éléments musicaux comprenant le tempo, la stabilité du rythme, la force du rythme et la régularité globale. Une valeur de 0.0 est la moins adaptée à la danse et 1.0 est la plus adaptée.
-
-- **Attribut** : `energy`
-  - **Type de données** : Réel
-  - **Explication** : L'énergie est une mesure de 0.0 à 1.0 et représente une mesure perceptive de l'intensité et de l'activité.
-
-- **Attribut** : `key`
-  - **Type de données** : Entier
-  - **Explication** : La tonalité dans laquelle la piste se trouve. Les entiers sont associés aux notes en utilisant la notation standard des classes de hauteur.
-
-- **Attribut** : `loudness`
-  - **Type de données** : Réel
-  - **Explication** : La loudness est la qualité d’un son qui est corrélée avec l’amplitude. Les valeurs se situent généralement entre -60 et 0 dB.
-
-- **Attribut** : `mode`
-  - **Type de données** : Entier
-  - **Explication** : Le mode indique la modalité (majeure ou mineure) d'une piste, le type de gamme à partir de laquelle son contenu mélodique est dérivé. La majeure est représentée par 1 et la mineure par 0.
-
-- **Attribut** : `speechiness`
-  - **Type de données** : Réel
-  - **Explication** : La parole détecte la présence de mots parlés dans une piste. Plus la valeur est proche de 1.0, plus l’enregistrement est parlé.
-
-- **Attribut** : `acousticness`
-  - **Type de données** : Réel
-  - **Explication** : Une mesure de confiance de 0.0 à 1.0 quant à savoir si la piste est acoustique.
-
-- **Attribut** : `instrumentalness`
-  - **Type de données** : Réel
-  - **Explication** : Détecte la place de l’instrumental dans un son. Plus la valeur est proche de 1.0, plus le son est considéré comme instrumental (moins il y a de contenu vocal).
-
-- **Attribut** : `liveness`
-  - **Type de données** : Réel
-  - **Explication** : Détecte la présence d'un public dans l'enregistrement.
-
-- **Attribut** : `tempo`
-  - **Type de données** : Réel
-  - **Explication** : Le tempo estimé global d'une piste en battements par minute (BPM).
-
-- **Attribut** : `time_signature`
-  - **Type de données** : Entier
-  - **Explication** : La signature temporelle (ou mesure) est une convention de notation qui spécifie combien de temps (ou battements) il y a dans chaque mesure.
-
-- **Attribut** : `duration_ms`
-  - **Type de données** : Entier
-  - **Explication** : La durée de la piste en millisecondes.
-
+-   **Attribut** : `uri`
+    -   **Type de données** : Chaîne de caractères
+    -   **Explication** : URI de la chanson.
+-   **Attribut** : `artist_names`
+    -   **Type de données** : Chaîne de caractères
+    -   **Explication** : Nom de l'artiste.
+-   **Attribut** : `track_name`
+    -   **Type de données** : Chaîne de caractères
+    -   **Explication** : Nom de la chanson.
+-   **Attribut** : `peak_rank`
+    -   **Type de données** : Entier
+    -   **Explication** : Classement maximal obtenu par la chanson.
+-   **Attribut** : `weeks_on_chart`
+    -   **Type de données** : Entier
+    -   **Explication** : Nombre de semaines dans les classements des
+        meilleurs sons.
+-   **Attribut** : `danceability`
+    -   **Type de données** : Réel
+    -   **Explication** : La danseabilité décrit à quel point une piste
+        est adaptée à la danse en fonction d'une combinaison d'éléments
+        musicaux comprenant le tempo, la stabilité du rythme, la force
+        du rythme et la régularité globale. Une valeur de 0.0 est la
+        moins adaptée à la danse et 1.0 est la plus adaptée.
+-   **Attribut** : `energy`
+    -   **Type de données** : Réel
+    -   **Explication** : L'énergie est une mesure de 0.0 à 1.0 et
+        représente une mesure perceptive de l'intensité et de
+        l'activité.
+-   **Attribut** : `key`
+    -   **Type de données** : Entier
+    -   **Explication** : La tonalité dans laquelle la piste se trouve.
+        Les entiers sont associés aux notes en utilisant la notation
+        standard des classes de hauteur.
+-   **Attribut** : `loudness`
+    -   **Type de données** : Réel
+    -   **Explication** : La loudness est la qualité d’un son qui est
+        corrélée avec l’amplitude. Les valeurs se situent généralement
+        entre -60 et 0 dB.
+-   **Attribut** : `mode`
+    -   **Type de données** : Entier
+    -   **Explication** : Le mode indique la modalité (majeure ou
+        mineure) d'une piste, le type de gamme à partir de laquelle son
+        contenu mélodique est dérivé. La majeure est représentée par 1
+        et la mineure par 0.
+-   **Attribut** : `speechiness`
+    -   **Type de données** : Réel
+    -   **Explication** : La parole détecte la présence de mots parlés
+        dans une piste. Plus la valeur est proche de 1.0, plus
+        l’enregistrement est parlé.
+-   **Attribut** : `acousticness`
+    -   **Type de données** : Réel
+    -   **Explication** : Une mesure de confiance de 0.0 à 1.0 quant à
+        savoir si la piste est acoustique.
+-   **Attribut** : `instrumentalness`
+    -   **Type de données** : Réel
+    -   **Explication** : Détecte la place de l’instrumental dans un
+        son. Plus la valeur est proche de 1.0, plus le son est considéré
+        comme instrumental (moins il y a de contenu vocal).
+-   **Attribut** : `liveness`
+    -   **Type de données** : Réel
+    -   **Explication** : Détecte la présence d'un public dans
+        l'enregistrement.
+-   **Attribut** : `tempo`
+    -   **Type de données** : Réel
+    -   **Explication** : Le tempo estimé global d'une piste en
+        battements par minute (BPM).
+-   **Attribut** : `time_signature`
+    -   **Type de données** : Entier
+    -   **Explication** : La signature temporelle (ou mesure) est une
+        convention de notation qui spécifie combien de temps (ou
+        battements) il y a dans chaque mesure.
+-   **Attribut** : `duration_ms`
+    -   **Type de données** : Entier
+    -   **Explication** : La durée de la piste en millisecondes.
 
 ## Nos problématiques :
 
@@ -732,8 +777,6 @@ ggplot(top_songs, aes(x = season, y = `valence_%`, fill = season)) +
   
 
 ```
-
-### Conclusion
 
 **Analyse :** L'analyse des caractéristiques audio des chansons
 populaires en fonction des saisons a révélé plusieurs tendances
