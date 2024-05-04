@@ -646,6 +646,7 @@ saisons estivales.
 spotify_data <- spotify_data %>%
   mutate(season = factor(season, levels = c("Hiver", "Printemps", "Été", "Automne")))
 
+couleurs <- c("Hiver" = "blue", "Printemps" = "green", "Été" = "red", "Automne" = "orange")
 
 # Sélectionner les chansons les plus populaires (par exemple, les 1000 chansons avec le plus grand nombre de streams)
 top_songs <- spotify_data %>%
@@ -656,10 +657,11 @@ top_songs <- spotify_data %>%
 # Comparaison du BPM moyen entre les saisons
 ggplot(top_songs, aes(x = season, y = bpm, fill = season)) +
   geom_violin(trim = FALSE) +
-  geom_boxplot(width = 0.2, fill = "white", color = "black") +  
+  geom_boxplot(width = 0.2, fill = "white", color = "black") +
   labs(title = "Comparaison du BPM moyen entre les saisons",
        x = "Saison",
        y = "BPM") +
+  scale_fill_manual(values = c("Hiver" = "blue", "Printemps" = "green", "Été" = "red", "Automne" = "orange")) +
   theme_minimal()
 ```
 
@@ -762,14 +764,26 @@ et la promotion de musique adaptée à chaque période de l'année.
 # Graphique : Comparaison de la danceability moyenne entre les saisons
 ggplot(top_songs, aes(x = season, y = `danceability_%`, fill = season)) +
   geom_boxplot() +
+  scale_fill_manual(values = couleurs)+
   labs(title = "Comparaison de la danceability moyenne entre les saisons",
        x = "Saison",
        y = "Danceability (%)") +
   theme_minimal()
 
+ggplot(spotify_data, aes(x = `danceability_%`, fill = season)) +
+  geom_histogram(binwidth = 5, color = "black", position = "dodge") +
+  scale_fill_manual(values = couleurs) +
+  labs(title = "Histogramme de la danceability moyenne entre les saisons",
+       x = "Danceability (%)",
+       y = "Fréquence") +
+  facet_wrap(~season) +
+  theme_minimal()
+
+
+
 # Graphique : Comparaison de la valence moyenne entre les saisons
 ggplot(top_songs, aes(x = season, y = `valence_%`, fill = season)) +
-  geom_boxplot() +
+  geom_boxplot() +scale_fill_manual(values = couleurs)+
   labs(title = "Comparaison de la valence moyenne entre les saisons",
        x = "Saison",
        y = "Valence (%)") +
