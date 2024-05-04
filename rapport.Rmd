@@ -68,7 +68,7 @@ tenter de prévoir ce qui fonctionnera à l’avenir.
 ## Les données manipulées
 
 | Attribut               | Type de données      | Explication                                                                                                                                                     |
-|------------------|------------------|------------------------------------|
+|------------------|------------------|-----------------------------------|
 | `track_name`           | chaîne de caractères | Nom de la chanson. Utile pour l'identification et la recherche de la chanson dans les bases de données et les plateformes de streaming.                         |
 | `artist(s)_name`       | chaîne de caractères | Nom de l'artiste(s) de la chanson. Permet d'analyser la popularité et le style de l'artiste associé à la chanson.                                               |
 | `artist_count`         | entier               | Nombre d'artistes participants sur le titre. Peut indiquer des collaborations et des influences multiples sur la chanson.                                       |
@@ -187,10 +187,10 @@ top_songs <- mutate(top_songs, bpm_interval = cut(bpm, breaks = c(0, 50, 100, 15
 bpm_counts <- count(top_songs, bpm_interval)
 
 # Créer le graphique à barres
-ggplot(bpm_counts, aes(x = bpm_interval, y = n)) +
+ggplot(bpm_counts, aes(x = bpm_interval, y = n, fill = bpm_interval)) +
   geom_bar(stat = "identity") +
   scale_x_discrete(labels = c("0-50", "51-100", "101-150", "151-200", "201-250")) +
-  labs(x = "Intervalles de BPM", y = "Nombre de chansons", title = "Répartition des BPM des 1000 premières chansons populaires") + theme_minimal()
+  labs(x = "Intervalles de BPM", y = "Nombre de chansons", title = "Répartition des BPM des 1000 premières chansons populaires") + theme_minimal() + scale_fill_brewer(palette = "Set2")
 
 ```
 
@@ -342,12 +342,8 @@ aperçu précieux des préférences d'écoute du public au fil du temps.
 ```{r}
 # Créer une nouvelle variable pour représenter la saison en fonction du mois de sortie
 spotify_data <- spotify_data %>%
-  mutate(season = case_when(
-    released_month %in% c(12, 1, 2) ~ "Hiver",
-    released_month %in% c(3, 4, 5) ~ "Printemps",
-    released_month %in% c(6, 7, 8) ~ "Été",
-    released_month %in% c(9, 10, 11) ~ "Automne"
-  ))
+  mutate(season = factor(season, levels = c("Hiver", "Printemps", "Été", "Automne")))
+
 
 # Sélectionner les chansons les plus populaires (par exemple, les 1000 chansons avec le plus grand nombre de streams)
 top_songs <- spotify_data %>%
@@ -358,7 +354,8 @@ top_songs <- spotify_data %>%
 
 # Comparaison du BPM moyen entre les saisons
 ggplot(top_songs, aes(x = season, y = bpm, fill = season)) +
-  geom_boxplot() +
+  geom_violin(trim = FALSE) +
+  geom_boxplot(width = 0.2, fill = "white", color = "black") +  # Ajout des boîtes pour montrer la médiane et les quartiles
   labs(title = "Comparaison du BPM moyen entre les saisons",
        x = "Saison",
        y = "BPM") +
@@ -386,7 +383,7 @@ saisons estivales.
 ```{r}
 
 
-# Graphique 2 : Comparaison de la danceability moyenne entre les saisons
+# Graphique : Comparaison de la danceability moyenne entre les saisons
 ggplot(top_songs, aes(x = season, y = `danceability_%`, fill = season)) +
   geom_boxplot() +
   labs(title = "Comparaison de la danceability moyenne entre les saisons",
@@ -394,7 +391,7 @@ ggplot(top_songs, aes(x = season, y = `danceability_%`, fill = season)) +
        y = "Danceability (%)") +
   theme_minimal()
 
-# Graphique 3 : Comparaison de la valence moyenne entre les saisons
+# Graphique : Comparaison de la valence moyenne entre les saisons
 ggplot(top_songs, aes(x = season, y = `valence_%`, fill = season)) +
   geom_boxplot() +
   labs(title = "Comparaison de la valence moyenne entre les saisons",
