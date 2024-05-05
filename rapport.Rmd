@@ -16,9 +16,6 @@ editor_options:
 library(dplyr)
 library(ggplot2)
 library(readr)
-```
-
-```{r setup}
 
 # Chargement des données
 spotify_data <- read_csv("./data/spotify-2023.csv")
@@ -577,6 +574,16 @@ ggplot(best_songs, aes(x = track_name)) +
 ```
 
 **Analyse :**
+
+Sans trop de surprise on remarque une nette préférence chez les auditeurs pour des musiques comportant des paroles comparé aux morceaux purement instrumentaux. Ainsi il vaut mieux pour une maison de disque produire des chanteurs que des simples musiciens, si bien sûr c’est l’aspect commercial et économique qui les intéresse le plus.  
+
+
+Malheureusement dans cette analyse
+nous ne pouvons pas évaluer la qualité des paroles (qui peut d’ailleurs
+être subjective), un pourcentage élevé de mots ne signifie pas forcément
+une richesse dans l’écriture non plus, cela peut simplement être la
+répétition d’un refrain par exemple, ce que nous ne pouvons établir non
+plus avec ce jeu de données.
 
 ### Pouvons nous évaluer la taille et l’engagement de la fanbase d’un artiste?
 
