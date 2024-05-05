@@ -519,6 +519,28 @@ ggplot(best_songs, aes(x = track_name)) +
   scale_y_continuous(labels = scales::percent_format(accuracy = 1)) +  
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
 
+
+spot_data_clean <- spotify22_data %>% filter(!is.na(as.numeric(weeks_on_chart)))
+best_songs <- spot_data_clean %>% 
+  arrange(desc(weeks_on_chart)) %>% 
+  slice(1:100)
+
+# Normalisation de speechiness et instrumentalness
+best_songs <- best_songs %>%
+  mutate(instrumentalness_pct = instrumentalness / max(instrumentalness),
+         speechiness_pct = speechiness)
+
+# Création du graphique
+ggplot(best_songs, aes(x = track_name)) +
+  geom_bar(aes(y = instrumentalness_pct, fill = "Instrumentalité"), stat = "identity", alpha = 0.6, position = "dodge") +
+  geom_bar(aes(y = speechiness_pct, fill = "Paroles"), stat = "identity", alpha = 0.6, position = "dodge") +
+  labs(y = "Pourcentage normalisé", title = "Instrumentalité vs Paroles dans les Meilleures Chansons de 2022",
+       subtitle = "Pourcentage de Contenu Instrumental et de Paroles Parlées dans les Meilleures Chansons",
+       caption = "Source des données : Spotify") +
+  scale_fill_manual(name = "Attribut", values = c("Instrumentalité" = "blue", "Paroles" = "red")) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+
 ```
 
 **Analyse :**
@@ -698,7 +720,7 @@ En conclusion, cette analyse met en lumière l'impact saisonnier sur les
 caractéristiques audio des chansons populaires, en particulier en ce qui
 concerne le tempo. Comprendre ces variations saisonnières peut être
 précieux pour les professionnels de l'industrie musicale dans la
-création et la promotion de musique adaptée à chaque période de l'année.
+création et la promotion de musique adaptée à chaque période de l'année. Cependant, ces graphiques ne peuvent pas clairement nous aider à prendre des décisions en raison des écarts trop peu importants.
 
 ### Existe-t’il des caractéristiques audio communes dans les sons populaires en fonction des saisons ?
 
@@ -792,7 +814,8 @@ ggplot(top_songs, aes(x = season, y = `valence_%`, fill = season)) +
 
 ```
 
-**Analyse :** L'analyse des caractéristiques audio des chansons
+**Analyse :**
+L'analyse des caractéristiques audio des chansons
 populaires en fonction des saisons a révélé plusieurs tendances
 intéressantes. Tout d'abord, nous avons observé des variations
 significatives dans la danceability moyenne et la valence moyenne entre
@@ -821,7 +844,7 @@ en compte le contexte saisonnier lors de la création et de la promotion
 de musique. Comprendre les préférences d'écoute du public en fonction
 des saisons peut aider les professionnels de l'industrie musicale à
 adapter leur offre pour répondre aux besoins et aux attentes changeants
-des auditeurs tout au long de l'année.
+des auditeurs tout au long de l'année. À ce stade, il est difficile de parvenir à des conclusions définitives en raison de la faible amplitude des variations observées dans les données. Il est donc préférable de ne pas se fier uniquement à ce graphique pour prendre des décisions.
 
 ## Critiques sur notre jeu de données :
 
