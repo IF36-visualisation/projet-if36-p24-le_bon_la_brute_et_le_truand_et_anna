@@ -12,15 +12,32 @@ editor_options:
     wrap: 72
 ---
 
-```{r setup}
+```{r setup, include=FALSE}
 library(dplyr)
 library(ggplot2)
 library(readr)
 
-# Chargement des données
-spotify_data <- read_csv("./data/spotify-2023.csv")
-spotify22_data <- read_csv("./data/spotify_top_charts_22.csv")
-spotifyUnpopular_data <- read_csv("./data/unpopular_songs.csv")
+# Chargement et traitement des données pour Spotify 2023
+spotify_data <- read_csv("./data/spotify-2023.csv", locale = locale(encoding = "UTF-8"))
+
+# Chargement et traitement des données pour Spotify Top Charts 2022
+spotify22_data <- read_csv("./data/spotify_top_charts_22.csv", locale = locale(encoding = "UTF-8"))
+
+# Chargement et traitement des données pour les chansons impopulaires sur Spotify
+spotifyUnpopular_data <- read_csv("./data/unpopular_songs.csv", locale = locale(encoding = "UTF-8"))
+
+
+
+# Création de la colonne 'season' basée sur 'released_month' pour spotify_data
+spotify_data <- spotify_data %>%
+  mutate(season = case_when(
+    released_month %in% c(12, 1, 2) ~ "Hiver",
+    released_month %in% c(3, 4, 5) ~ "Printemps",
+    released_month %in% c(6, 7, 8) ~ "Été",
+    released_month %in% c(9, 10, 11) ~ "Automne",
+    TRUE ~ NA_character_ # pour les cas où `released_month` est NA ou inconnu
+  )) %>%
+  mutate(season = factor(season, levels = c("Hiver", "Printemps", "Été", "Automne")))
 
 ```
 
@@ -532,7 +549,7 @@ plus avec ce jeu de données.
 ```{r}
 spot_data_clean <- spotify_data %>% filter(!is.na(as.numeric(streams)))
                                             
-best_songs <- spot_data_clean%>% arrange(desc(streams)) %>% slice(1:100)
+best_songs <- spot_data_clean%>% arrange(desc(streams)) %>% slice(1:10)
 
 # Diviser les pourcentages par 100 pour les ramener à une échelle de 0 à 1
 best_songs$instrumentalness_pct <- best_songs$`instrumentalness_%` / 100
@@ -553,7 +570,7 @@ ggplot(best_songs, aes(x = track_name)) +
 spot_data_clean <- spotify22_data %>% filter(!is.na(as.numeric(weeks_on_chart)))
 best_songs <- spot_data_clean %>% 
   arrange(desc(weeks_on_chart)) %>% 
-  slice(1:100)
+  slice(1:10)
 
 # Normalisation de speechiness et instrumentalness
 best_songs <- best_songs %>%
@@ -570,20 +587,22 @@ ggplot(best_songs, aes(x = track_name)) +
   scale_fill_manual(name = "Attribut", values = c("Instrumentalité" = "blue", "Paroles" = "red")) +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
 
-
 ```
 
 **Analyse :**
 
-Sans trop de surprise on remarque une nette préférence chez les auditeurs pour des musiques comportant des paroles comparé aux morceaux purement instrumentaux. Ainsi il vaut mieux pour une maison de disque produire des chanteurs que des simples musiciens, si bien sûr c’est l’aspect commercial et économique qui les intéresse le plus.  
+Sans trop de surprise on remarque une nette préférence chez les
+auditeurs pour des musiques comportant des paroles comparé aux morceaux
+purement instrumentaux. Ainsi il vaut mieux pour une maison de disque
+produire des chanteurs que des simples musiciens, si bien sûr c’est
+l’aspect commercial et économique qui les intéresse le plus.
 
-
-Malheureusement dans cette analyse
-nous ne pouvons pas évaluer la qualité des paroles (qui peut d’ailleurs
-être subjective), un pourcentage élevé de mots ne signifie pas forcément
-une richesse dans l’écriture non plus, cela peut simplement être la
-répétition d’un refrain par exemple, ce que nous ne pouvons établir non
-plus avec ce jeu de données.
+Malheureusement dans cette analyse nous ne pouvons pas évaluer la
+qualité des paroles (qui peut d’ailleurs être subjective), un
+pourcentage élevé de mots ne signifie pas forcément une richesse dans
+l’écriture non plus, cela peut simplement être la répétition d’un
+refrain par exemple, ce que nous ne pouvons établir non plus avec ce jeu
+de données.
 
 ### Pouvons nous évaluer la taille et l’engagement de la fanbase d’un artiste?
 
@@ -704,9 +723,6 @@ saisons estivales.
 #### Exploration
 
 ```{r}
-# Créer une nouvelle variable pour représenter la saison en fonction du mois de sortie
-spotify_data <- spotify_data %>%
-  mutate(season = factor(season, levels = c("Hiver", "Printemps", "Été", "Automne")))
 
 couleurs <- c("Hiver" = "blue", "Printemps" = "green", "Été" = "red", "Automne" = "orange")
 
