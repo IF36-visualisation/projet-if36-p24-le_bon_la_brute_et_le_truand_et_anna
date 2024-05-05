@@ -448,15 +448,15 @@ oui ou non une catégorie est plus représentée. Nous supposons que les
 musiques festives et joyeuses pourraient être les plus représentées dans
 le classement des musiques les plus populaires de 2023.
 
-### Le tempo d’une musique joue-t-il un rôle important dans la popularité de celle-ci?
+### Le tempo d’une musique joue-t-il un rôle important dans la popularité de celle-ci ?
 
 Ici nous nous demandons simplement si une plage de tempo est
 particulièrement représentée dans notre jeu de donné. Nous utiliserons
 uniquement la donnée du bpm. - bpm: Beats per minute, a measure of song
 tempo
 
-Nous comparerons les bpm de chaque chanson puis nous introniserons les
-bpm les plus populaires.
+Nous comparerons les bpm des chanson les plus populaires en 2023 puis
+nous introniserons les bpm les plus populaires.
 
 #### Exploration
 
@@ -475,12 +475,45 @@ bpm_counts <- count(top_songs, bpm_interval)
 # Créer le graphique à barres
 ggplot(bpm_counts, aes(x = bpm_interval, y = n, fill = bpm_interval)) +
   geom_bar(stat = "identity") +
-  scale_x_discrete(labels = c("0-50", "51-100", "101-150", "151-200", "201-250")) +
+  scale_x_discrete(labels = c("0-50", "50-100", "100-150", "150-200", "200-250")) +
   labs(x = "Intervalles de BPM", y = "Nombre de chansons", title = "Répartition des BPM des 1000 premières chansons populaires") + theme_minimal() + scale_fill_brewer(palette = "Set2")
 
 ```
 
 **Analyse :**
+
+Le graphique illustre une distribution des BPM (battements par minute)
+des 1000 chansons les plus populaires en 2023. En observant les
+intervalles de BPM, on peut tirer quelques conclusions intéressantes :
+
+-   **0-50 BPM** : Environ un quart des chansons sont des musiques
+    lentes, ce qui suggère une appréciation persistante pour des rythmes
+    plus calmes ou des ballades dans le paysage musical populaire.
+
+-   **50-100 BPM** : Ce segment représente la majorité des chansons,
+    avec plus de 50% des chansons ayant un BPM compris entre 50 et 100.
+    Cela pourrait indiquer une tendance générale vers des tempos modérés
+    à énergiques qui sont souvent associés à une écoute agréable et à
+    une facilité de danse.
+
+-   **100-150 BPM** : Bien qu'une proportion moindre de chansons
+    populaires se situe dans cette plage de BPM, elle reste
+    significative. Cela pourrait refléter une diversité dans les
+    préférences musicales, où certains auditeurs sont attirés par des
+    rythmes plus rapides et plus entraînants.
+
+-   **150-200 BPM** : Ce segment représente une très petite proportion
+    des chansons populaires. Cela suggère que les chansons à rythme très
+    rapide sont moins courantes dans le paysage musical actuel, mais
+    qu'elles ne sont pas totalement absentes, ce qui pourrait indiquer
+    une appréciation persistante pour des genres musicaux spécifiques
+    qui utilisent des tempos plus élevés.
+
+En résumé, l'analyse du graphique révèle une diversité de BPM parmi les
+chansons populaires en 2023, allant des musiques lentes aux rythmes plus
+rapides, avec une concentration notable dans la plage de 50 à 100 BPM.
+Cela suggère une pluralité de goûts et de préférences dans la musique
+populaire contemporaine.
 
 ### Les auditeurs valorisent-ils plus les paroles ou l’instrumental d’une musique?
 
@@ -720,7 +753,9 @@ En conclusion, cette analyse met en lumière l'impact saisonnier sur les
 caractéristiques audio des chansons populaires, en particulier en ce qui
 concerne le tempo. Comprendre ces variations saisonnières peut être
 précieux pour les professionnels de l'industrie musicale dans la
-création et la promotion de musique adaptée à chaque période de l'année. Cependant, ces graphiques ne peuvent pas clairement nous aider à prendre des décisions en raison des écarts trop peu importants.
+création et la promotion de musique adaptée à chaque période de l'année.
+Cependant, ces graphiques ne peuvent pas clairement nous aider à prendre
+des décisions en raison des écarts trop peu importants.
 
 ### Existe-t’il des caractéristiques audio communes dans les sons populaires en fonction des saisons ?
 
@@ -814,8 +849,7 @@ ggplot(top_songs, aes(x = season, y = `valence_%`, fill = season)) +
 
 ```
 
-**Analyse :**
-L'analyse des caractéristiques audio des chansons
+**Analyse :** L'analyse des caractéristiques audio des chansons
 populaires en fonction des saisons a révélé plusieurs tendances
 intéressantes. Tout d'abord, nous avons observé des variations
 significatives dans la danceability moyenne et la valence moyenne entre
@@ -844,7 +878,10 @@ en compte le contexte saisonnier lors de la création et de la promotion
 de musique. Comprendre les préférences d'écoute du public en fonction
 des saisons peut aider les professionnels de l'industrie musicale à
 adapter leur offre pour répondre aux besoins et aux attentes changeants
-des auditeurs tout au long de l'année. À ce stade, il est difficile de parvenir à des conclusions définitives en raison de la faible amplitude des variations observées dans les données. Il est donc préférable de ne pas se fier uniquement à ce graphique pour prendre des décisions.
+des auditeurs tout au long de l'année. À ce stade, il est difficile de
+parvenir à des conclusions définitives en raison de la faible amplitude
+des variations observées dans les données. Il est donc préférable de ne
+pas se fier uniquement à ce graphique pour prendre des décisions.
 
 ## Critiques sur notre jeu de données :
 
