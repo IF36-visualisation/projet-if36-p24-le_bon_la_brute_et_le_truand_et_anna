@@ -16,7 +16,6 @@ editor_options:
 library(dplyr)
 library(ggplot2)
 library(readr)
-<<<<<<< HEAD
 
 # Chargement et traitement des données pour Spotify 2023
 spotify_data <- read_csv("./data/spotify-2023.csv", locale = locale(encoding = "UTF-8"))
@@ -39,12 +38,6 @@ spotify_data <- spotify_data %>%
     TRUE ~ NA_character_ # pour les cas où `released_month` est NA ou inconnu
   )) %>%
   mutate(season = factor(season, levels = c("Hiver", "Printemps", "Été", "Automne")))
-=======
-# Chargement des données
-spotify_data <- read_csv("./data/spotify-2023.csv")
-spotify22_data <- read_csv("./data/spotify_top_charts_22.csv")
-spotifyUnpopular_data <- read_csv("./data/unpopular_songs.csv")
->>>>>>> 624ee1d (ajout td shiny visualisation data)
 
 ```
 
