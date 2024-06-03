@@ -39,6 +39,10 @@ spotify_data <- spotify_data %>%
   )) %>%
   mutate(season = factor(season, levels = c("Hiver", "Printemps", "Été", "Automne")))
 
+
+spotify_data_23_ordre_decroissant <- spotify_data %>%
+  arrange(desc(streams))
+
 ```
 
 # Analyse des données des sons les plus écoutés sur Spotify en 2023 avec leurs statistiques sur toutes les plateformes de streaming, les musiques les moins écoutés sur la Plateforme toutes années confondu ainsi que les sons les plus écouter en 2022.
@@ -842,10 +846,10 @@ et la promotion de musique adaptée à chaque période de l'année.
 
 
 # Graphique : Comparaison de la danceability moyenne entre les saisons
-ggplot(top_songs, aes(x = season, y = `danceability_%`, fill = season)) +
+ggplot(spotify_data_23_ordre_decroissant, aes(x = season, y = `danceability_%`, fill = season)) +
   geom_boxplot() +
   scale_fill_manual(values = couleurs)+
-  labs(title = "Comparaison de la danceability moyenne entre les saisons",
+  labs(title = "Comparaison de la danceability moyenne entre les saisons pour l'année 2023",
        x = "Saison",
        y = "Danceability (%)") +
   theme_minimal()
@@ -862,7 +866,7 @@ ggplot(spotify_data, aes(x = `danceability_%`, fill = season)) +
 
 
 # Graphique : Comparaison de la valence moyenne entre les saisons
-ggplot(top_songs, aes(x = season, y = `valence_%`, fill = season)) +
+ggplot(spotify_data_23_ordre_decroissant, aes(x = season, y = `valence_%`, fill = season)) +
   geom_boxplot() +scale_fill_manual(values = couleurs)+
   labs(title = "Comparaison de la valence moyenne entre les saisons",
        x = "Saison",

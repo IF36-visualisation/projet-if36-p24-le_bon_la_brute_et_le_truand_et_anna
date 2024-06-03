@@ -7,10 +7,7 @@ ui <- dashboardPage(
     sidebarMenu(
       menuItem("Comparaison", tabName = "Comparaison", icon = icon("th")),
       menuItem("Graphiques", tabName = "Graphiques", icon = icon("chart-column")),
-      sliderInput("slider", "Nombre de musiques", 1, 100, 10),
-      selectInput("color", "Couleur pour la distribution:", choices = c("energy_%", "valence_%", "acousticness_%")),
-      selectInput("feature", "Feature pour le scatter plot:", choices = c("streams", "danceability_%", "bpm")),
-      selectInput("chart_type", "Type de graphique:", choices = c("Bar Plot", "Line Plot", "Scatter Plot"))
+      sliderInput("numSongs", "Nombre de musiques", 1, 100, 10)
     )
   ),
   dashboardBody(
@@ -19,8 +16,16 @@ ui <- dashboardPage(
               h2("Comparaison des données"),
               fluidRow(
                 valueBoxOutput("spotifyCount"),
-                valueBoxOutput("spotify22Count")
+                valueBoxOutput("spotify22Count"),
+                valueBoxOutput("spotifyUnpopular")
               ),
+              fluidRow(
+                valueBoxOutput("spotify23_dimension"),
+                valueBoxOutput("spotify22_dimension"),
+                valueBoxOutput("unpopular_dimension")
+                
+              ),
+              h2("Analyse des datasets"),
               fluidRow(
                 valueBoxOutput("spotifyStreams"),
                 valueBoxOutput("spotify22Streams")
@@ -29,22 +34,20 @@ ui <- dashboardPage(
       
       tabItem(tabName = "Graphiques",
               fluidRow(
-                box(
-                  title = "Comparaison des Streams",
-                  status = "primary",
-                  solidHeader = TRUE,
-                  collapsible = TRUE,
-                  plotOutput("streamsPlot", height = 250)
-                ),
-                box(
-                  title = "Comparaison des Features",
-                  status = "warning",
-                  solidHeader = TRUE,
-                  collapsible = TRUE,
-                  plotOutput("featurePlot", height = 250)
-                )
+                box(title = "Popularité sur Spotify 2023", status = "primary", solidHeader = TRUE, collapsible = TRUE, 
+                    plotOutput("popularitySpotify23")),
+                box(title = "Popularité sur Spotify 2022", status = "primary", solidHeader = TRUE, collapsible = TRUE, 
+                    plotOutput("popularitySpotify22"))
               ),
-              h2("Sélectionnez les paramètres pour afficher les graphiques.")
+              fluidRow(
+                box(title = "Comparaison des streams", status = "primary", solidHeader = TRUE, collapsible = TRUE, 
+                    plotOutput("streamComparison"))
+              ),
+              fluidRow(
+                box(title = "Caractéristiques des chansons", status = "primary", solidHeader = TRUE, collapsible = TRUE,
+                    selectInput("feature", "Sélectionner une caractéristique", choices = c("danceability", "energy", "speechiness", "acousticness", "liveness")),
+                    plotOutput("featureComparison"))
+              )
       )
     )
   )
