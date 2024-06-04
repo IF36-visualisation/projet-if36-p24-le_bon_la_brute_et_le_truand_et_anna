@@ -2,6 +2,7 @@ library(shiny)
 library(dplyr)
 library(ggplot2)
 library(shinydashboard)
+library(reshape2)
 
 server <- function(input, output) {
   
@@ -91,7 +92,6 @@ server <- function(input, output) {
     )
   })
   
-  
   # Render popularity plots
   output$popularitySpotify23 <- renderPlot({
     data <- spotify_data() %>% slice(1:input$numSongs)
@@ -111,6 +111,74 @@ server <- function(input, output) {
       theme_minimal() +
       labs(title = "Popularité des chansons sur Spotify en 2022", x = "Chanson", y = "Classement maximal")
   })
-
   
+  # Render correlation plots
+  output$corrDanceabilityStreams23 <- renderPlot({
+    data <- spotify_data() %>% slice(1:input$numSongs)
+    data$danceability <- as.numeric(data$danceability)
+    data$streams <- as.numeric(data$streams)
+    ggplot(data, aes(x = danceability, y = streams)) +
+      geom_point(color = "blue") +
+      theme_minimal() +
+      labs(title = "Corrélation entre Danceability et Streams (2023)", x = "Danceability", y = "Streams")
+  })
+  
+  output$corrDanceabilityRank22 <- renderPlot({
+    data <- spotify22_data() %>% slice(1:input$numSongs)
+    data$danceability <- as.numeric(data$danceability)
+    data$peak_rank <- as.numeric(data$peak_rank)
+    ggplot(data, aes(x = danceability, y = peak_rank)) +
+      geom_point(color = "red") +
+      theme_minimal() +
+      labs(title = "Corrélation entre Danceability et Classement (2022)", x = "Danceability", y = "Classement maximal")
+  })
+  
+  output$heatmapCorr23 <- renderPlot({
+    data <- spotify_data() %>% slice(1:input$numSongs)
+    corr_data <- data %>% select(danceability_., valence_., energy_., acousticness_., instrumentalness_., liveness_., speechiness_., streams) %>% 
+      mutate(across(everything(), as.numeric))
+    corr_matrix <- cor(corr_data, use = "complete.obs")
+    melted_corr_matrix <- melt(corr_matrix)
+    ggplot(melted_corr_matrix, aes(Var1, Var2, fill = value)) +
+      geom_tile() +
+      scale_fill_gradient2(low = "blue", high = "red", mid = "white", midpoint = 0, limit = c(-1, 1)) +
+      theme_minimal() +
+      labs(title = "Heatmap des corrélations (2023)", x = "", y = "")
+  })
+  
+  
+  output$heatmapCorr22 <- renderPlot({
+    data <- spotify22_data() %>% slice(1:input$numSongs)
+    corr_data <- data %>% select(danceability, energy, acousticness, instrumentalness, liveness, speechiness, peak_rank) %>% 
+      mutate(across(everything(), as.numeric))
+    corr_matrix <- cor(corr_data, use = "complete.obs")
+    melted_corr_matrix <- melt(corr_matrix)
+    ggplot(melted_corr_matrix, aes(Var1, Var2, fill = value)) +
+      geom_tile() +
+      scale_fill_gradient2(low = "blue", high = "red", mid = "white", midpoint = 0, limit = c(-1, 1)) +
+      theme_minimal() +
+      labs(title = "Heatmap des corrélations (2022)", x = "", y = "")
+  })
+  
+  # Render box plots
+  output$boxplotStreamsDanceability23 <- renderPlot({
+    data <- spotify_data() %>% slice(1:input$numSongs)
+    data$danceability <- as.numeric(data$danceability)
+    data$streams <- as.numeric(data$streams)
+    ggplot(data, aes(x = as.factor(danceability), y = streams)) +
+      geom_boxplot(fill = "blue") +
+      theme_minimal() +
+      labs(title = "Distribution des Streams par Danceability (2023)", x = "Danceability", y = "Streams")
+  })
+  
+  output$boxplotRankDanceability22 <- renderPlot({
+    data <- spotify22_data() %>% slice(1:input$numSongs)
+    data$danceability <- as.numeric(data$danceability)
+    data$peak_rank <- as.numeric(data$peak_rank)
+    ggplot(data, aes(x = as.factor(danceability), y = peak_rank)) +
+      geom_boxplot(fill = "red") +
+      theme_minimal() +
+      labs(title = "Distribution des Classements par Danceability (2022)", x = "Danceability", y = "Classement maximal")
+  })
 }
+

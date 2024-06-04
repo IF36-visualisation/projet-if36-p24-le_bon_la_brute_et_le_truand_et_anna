@@ -36,6 +36,24 @@ ui <- dashboardPage(
                     plotOutput("popularitySpotify23")),
                 box(title = "Popularité sur Spotify 2022", status = "primary", solidHeader = TRUE, collapsible = TRUE, 
                     plotOutput("popularitySpotify22"))
+              ),
+              fluidRow(
+                box(title = "Corrélation entre Danceability et Streams (2023)", status = "primary", solidHeader = TRUE, collapsible = TRUE, 
+                    plotOutput("corrDanceabilityStreams23")),
+                box(title = "Corrélation entre Danceability et Classement (2022)", status = "primary", solidHeader = TRUE, collapsible = TRUE, 
+                    plotOutput("corrDanceabilityRank22"))
+              ),
+              fluidRow(
+                box(title = "Heatmap des corrélations (2023)", status = "primary", solidHeader = TRUE, collapsible = TRUE, 
+                    plotOutput("heatmapCorr23")),
+                box(title = "Heatmap des corrélations (2022)", status = "primary", solidHeader = TRUE, collapsible = TRUE, 
+                    plotOutput("heatmapCorr22"))
+              ),
+              fluidRow(
+                box(title = "Distribution des Streams par Danceability (2023)", status = "primary", solidHeader = TRUE, collapsible = TRUE, 
+                    plotOutput("boxplotStreamsDanceability23")),
+                box(title = "Distribution des Classements par Danceability (2022)", status = "primary", solidHeader = TRUE, collapsible = TRUE, 
+                    plotOutput("boxplotRankDanceability22"))
               )
       )
     )
