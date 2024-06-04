@@ -1,21 +1,31 @@
 library(shiny)
 library(dplyr)
 library(ggplot2)
+library(shinydashboard)
 
 server <- function(input, output) {
   
+  # Function to read CSV with encoding
+  read_csv_with_encoding <- function(file) {
+    read.csv(file, encoding = "UTF-8")
+  }
+  
   spotify_data <- reactive({
-    read.csv("../data/spotify-2023.csv")
+    read_csv_with_encoding("../data/spotify-2023.csv") %>%
+      mutate(track_name = iconv(track_name, from = "UTF-8", to = "ASCII//TRANSLIT"))
   })
   
   spotify22_data <- reactive({
-    read.csv("../data/spotify_top_charts_22.csv")
+    read_csv_with_encoding("../data/spotify_top_charts_22.csv") %>%
+      mutate(track_name = iconv(track_name, from = "UTF-8", to = "ASCII//TRANSLIT"))
   })
   
   unpopular_data <- reactive({
-    read.csv("../data/unpopular_songs.csv")
+    read_csv_with_encoding("../data/unpopular_songs.csv") %>%
+      mutate(track_name = iconv(track_name, from = "UTF-8", to = "ASCII//TRANSLIT"))
   })
   
+  # Render value boxes
   output$spotifyCount <- renderValueBox({
     valueBox(
       value = spotify_data() %>% nrow(),
@@ -74,22 +84,15 @@ server <- function(input, output) {
     data <- spotify_data() %>% slice(1:input$numSongs)
     data$streams <- as.numeric(data$streams)
     valueBox(
-      value = sum(data$streams),
-      subtitle = paste("Total des streams dans spotify_data des ",input$numSongs," premières musiques"),
+      value = sum(data$streams, na.rm = TRUE),
+      subtitle = paste("Total des streams dans spotify_data des", input$numSongs, "premières musiques"),
       icon = icon("play"),
       color = "blue"
     )
   })
   
-  output$spotify22Streams <- renderValueBox({
-    valueBox(
-      value = sum(spotify22_data()$streams),
-      subtitle = "Total des streams dans spotify22_data",
-      icon = icon("play"),
-      color = "green"
-    )
-  })
   
+  # Render popularity plots
   output$popularitySpotify23 <- renderPlot({
     data <- spotify_data() %>% slice(1:input$numSongs)
     data$streams <- as.numeric(data$streams)
@@ -108,37 +111,6 @@ server <- function(input, output) {
       theme_minimal() +
       labs(title = "Popularité des chansons sur Spotify en 2022", x = "Chanson", y = "Classement maximal")
   })
+
   
-  output$streamComparison <- renderPlot({
-    data23 <- spotify_data() %>% slice(1:input$numSongs)
-    data22 <- spotify22_data() %>% slice(1:input$numSongs)
-    data23$type <- "Spotify 2023"
-    data22$type <- "Spotify 2022"
-    data <- rbind(data23 %>% select(track_name, streams) %>% rename(value = streams),
-                  data22 %>% select(track_name, peak_rank) %>% rename(value = peak_rank))
-    ggplot(data, aes(x = reorder(track_name, -value), y = value, fill = type)) +
-      geom_bar(stat = "identity", position = "dodge") +
-      coord_flip() +
-      theme_minimal() +
-      labs(title = "Comparaison des streams entre 2022 et 2023", x = "Chanson", y = "Valeur")
-  })
-  
-  output$featureComparison <- renderPlot({
-    feature <- input$feature
-    data23 <- spotify_data() %>% slice(1:input$numSongs)
-    data22 <- spotify22_data() %>% slice(1:input$numSongs)
-    data23$type <- "Spotify 2023"
-    data22$type <- "Spotify 2022"
-    data23 <- data23 %>% select(`artist(s)_name`, all_of(feature))
-    data22 <- data22 %>% select(artist_names, all_of(feature))
-    data22 <- data22 %>% rename(`artist(s)_name` = artist_names)
-    data <- rbind(data23 %>% rename(value = all_of(feature)),
-                  data22 %>% rename(value = all_of(feature)))
-    
-    ggplot(data, aes(x = reorder(`artist(s)_name`, -value), y = value, fill = type)) +
-      geom_bar(stat = "identity", position = "dodge") +
-      coord_flip() +
-      theme_minimal() +
-      labs(title = paste("Comparaison de", feature, "entre 2022 et 2023"), x = "Artiste", y = feature)
-  })
 }

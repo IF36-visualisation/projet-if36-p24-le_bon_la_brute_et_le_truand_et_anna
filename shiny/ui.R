@@ -1,5 +1,5 @@
+library(shiny)
 library(shinydashboard)
-library(dplyr)
 
 ui <- dashboardPage(
   dashboardHeader(title = "Comparaison des données Spotify"),
@@ -23,12 +23,10 @@ ui <- dashboardPage(
                 valueBoxOutput("spotify23_dimension"),
                 valueBoxOutput("spotify22_dimension"),
                 valueBoxOutput("unpopular_dimension")
-                
               ),
               h2("Analyse des datasets"),
               fluidRow(
-                valueBoxOutput("spotifyStreams"),
-                valueBoxOutput("spotify22Streams")
+                valueBoxOutput("spotifyStreams")
               )
       ),
       
@@ -38,15 +36,6 @@ ui <- dashboardPage(
                     plotOutput("popularitySpotify23")),
                 box(title = "Popularité sur Spotify 2022", status = "primary", solidHeader = TRUE, collapsible = TRUE, 
                     plotOutput("popularitySpotify22"))
-              ),
-              fluidRow(
-                box(title = "Comparaison des streams", status = "primary", solidHeader = TRUE, collapsible = TRUE, 
-                    plotOutput("streamComparison"))
-              ),
-              fluidRow(
-                box(title = "Caractéristiques des chansons", status = "primary", solidHeader = TRUE, collapsible = TRUE,
-                    selectInput("feature", "Sélectionner une caractéristique", choices = c("danceability", "energy", "speechiness", "acousticness", "liveness")),
-                    plotOutput("featureComparison"))
               )
       )
     )
