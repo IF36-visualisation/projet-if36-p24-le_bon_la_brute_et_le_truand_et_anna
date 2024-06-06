@@ -661,7 +661,7 @@ ggplot(plot_data, aes(x = track_name, y = value, fill = attribute)) +
        subtitle = "Pourcentage de Contenu Instrumental et de Paroles Parlées dans les Meilleures Chansons",
        caption = "Source des données : Spotify") +
   scale_fill_manual(name = "Attribut", values = c("Instrumentalité" = "blue", "Paroles" = "red")) +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1, vjust = 0.5))
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
 
 ```
 
