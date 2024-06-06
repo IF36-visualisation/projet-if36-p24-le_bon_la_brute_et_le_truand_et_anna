@@ -16,6 +16,9 @@ editor_options:
 library(dplyr)
 library(ggplot2)
 library(readr)
+library(tidyr)
+library(stringr)
+library(stringi)
 
 # Chargement et traitement des données pour Spotify 2023
 spotify_data <- read_csv("./data/spotify-2023.csv", locale = locale(encoding = "UTF-8"))
@@ -442,6 +445,61 @@ Spotify, De plus si nous avions eu aussi le nombre total d’utilisateurs
 de chaque plateforme nous aurions pu étayer notre analyse en prenant en
 considération ces informations.
 
+
+```{r}
+
+
+clean_track_name <- function(name) {
+  name <- stri_enc_toutf8(name, validate = TRUE)  # Convert to UTF-8
+  name <- stri_replace_all_regex(name, "[^\x20-\x7E]", "")  # Remove non-ASCII characters
+  return(name)
+}
+
+# Apply cleaning function to track names
+spotify_data_23_ordre_decroissant$track_name <- sapply(spotify_data_23_ordre_decroissant$track_name, clean_track_name)
+
+# Filter and transform data for the bar plot
+playlist_data <- spotify_data_23_ordre_decroissant %>%
+  select(track_name, in_spotify_playlists, in_apple_playlists, in_deezer_playlists) %>%
+  pivot_longer(cols = starts_with("in_"), names_to = "platform", values_to = "playlist_count")
+
+# Rename platforms for better readability
+playlist_data <- playlist_data %>%
+  mutate(platform = case_when(
+    platform == "in_spotify_playlists" ~ "Spotify",
+    platform == "in_apple_playlists" ~ "Apple Music",
+    platform == "in_deezer_playlists" ~ "Deezer",
+    TRUE ~ platform
+  ))
+
+# Aggregate playlist counts by track name
+agg_playlist_data <- playlist_data %>%
+  group_by(track_name) %>%
+  summarise(total_playlists = sum(playlist_count)) %>%
+  arrange(desc(total_playlists))
+
+# Select top 20 tracks
+top_tracks <- agg_playlist_data %>%
+  slice_max(order_by = total_playlists, n = 20)
+
+# Filter the original data to include only the top tracks
+filtered_playlist_data <- playlist_data %>%
+  filter(track_name %in% top_tracks$track_name)
+
+# Truncate track names for better readability in the plot
+filtered_playlist_data <- filtered_playlist_data %>%
+  mutate(track_name = ifelse(nchar(track_name) > 20, paste0(str_sub(track_name, 1, 17), "..."), track_name))
+
+# Verify the cleaned and transformed data
+print(head(filtered_playlist_data))
+
+# Create the bar plot
+ggplot(filtered_playlist_data, aes(x = track_name, y = playlist_count, fill = platform)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  labs(title = "Number of Playlists per Platform (Top 20 Tracks)", x = "Track Name", y = "Number of Playlists") +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))
+```
+
 ### L’ambiance de la musique nous dit-elle quelque chose sur la popularité d’une musique? ou Est ce qu’une ambiance de musique est particulièrement populaire?
 
 Autrement dit: observons nous la présence d’une ambiance en majorité
@@ -576,20 +634,34 @@ best_songs <- spot_data_clean %>%
   arrange(desc(weeks_on_chart)) %>% 
   slice(1:10)
 
-# Normalisation de speechiness et instrumentalness
+best_songs$track_name <- sapply(best_songs$track_name, clean_track_name)
+
+# Normalize speechiness and instrumentalness
 best_songs <- best_songs %>%
   mutate(instrumentalness_pct = instrumentalness / max(instrumentalness),
          speechiness_pct = speechiness)
 
-# Création du graphique
-ggplot(best_songs, aes(x = track_name)) +
-  geom_bar(aes(y = instrumentalness_pct, fill = "Instrumentalité"), stat = "identity", alpha = 0.6, position = "dodge") +
-  geom_bar(aes(y = speechiness_pct, fill = "Paroles"), stat = "identity", alpha = 0.6, position = "dodge") +
+# Transform data for plotting
+plot_data <- best_songs %>%
+  select(track_name, instrumentalness_pct, speechiness_pct) %>%
+  pivot_longer(cols = c(instrumentalness_pct, speechiness_pct), names_to = "attribute", values_to = "value")
+
+# Rename attributes for better readability
+plot_data <- plot_data %>%
+  mutate(attribute = case_when(
+    attribute == "instrumentalness_pct" ~ "Instrumentalité",
+    attribute == "speechiness_pct" ~ "Paroles",
+    TRUE ~ attribute
+  ))
+
+# Create the bar plot
+ggplot(plot_data, aes(x = track_name, y = value, fill = attribute)) +
+  geom_bar(stat = "identity", position = "dodge", alpha = 0.6) +
   labs(y = "Pourcentage normalisé", title = "Instrumentalité vs Paroles dans les Meilleures Chansons de 2022",
        subtitle = "Pourcentage de Contenu Instrumental et de Paroles Parlées dans les Meilleures Chansons",
        caption = "Source des données : Spotify") +
   scale_fill_manual(name = "Attribut", values = c("Instrumentalité" = "blue", "Paroles" = "red")) +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+  theme(axis.text.x = element_text(angle = 45, hjust = 1, vjust = 0.5))
 
 ```
 
