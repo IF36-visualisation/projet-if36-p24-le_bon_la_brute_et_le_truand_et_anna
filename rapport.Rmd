@@ -548,11 +548,27 @@ top_songs <- mutate(top_songs, bpm_interval = cut(bpm, breaks = c(0, 50, 100, 15
 # Compter le nombre de chansons dans chaque intervalle
 bpm_counts <- count(top_songs, bpm_interval)
 
-# Créer le graphique à barres
+# 1. Histogramme de la distribution des BPM
+ggplot(top_songs, aes(x = bpm)) +
+  geom_histogram(binwidth = 5, fill = "blue", color = "white", alpha = 0.7) +
+  labs(x = "BPM", y = "Nombre de chansons", title = "Distribution des BPM des 1000 premières chansons populaires") +
+  theme_minimal()
+
+# 2. Boxplot des BPM par quartile de streams
+top_songs <- top_songs %>%
+  mutate(streams_quartile = ntile(streams, 4))
+
+ggplot(top_songs, aes(x = factor(streams_quartile), y = bpm)) +
+  geom_boxplot(fill = "purple", alpha = 0.6) +
+  labs(x = "Quartiles de popularité (streams)", y = "BPM", title = "Boxplot des BPM par quartile de popularité") +
+  theme_minimal()
+
+# 3. Répartition des BPM par intervalles
 ggplot(bpm_counts, aes(x = bpm_interval, y = n, fill = bpm_interval)) +
   geom_bar(stat = "identity") +
   scale_x_discrete(labels = c("0-50", "50-100", "100-150", "150-200", "200-250")) +
-  labs(x = "Intervalles de BPM", y = "Nombre de chansons", title = "Répartition des BPM des 1000 premières chansons populaires") + theme_minimal() + scale_fill_brewer(palette = "Set2")
+  labs(x = "Intervalles de BPM", y = "Nombre de chansons", title = "Répartition des BPM des 1000 premières chansons populaires") +
+  theme_minimal() + scale_fill_brewer(palette = "Set2")
 
 ```
 
@@ -609,44 +625,27 @@ plus avec ce jeu de données.
 #### Exploration
 
 ```{r}
-spot_data_clean <- spotify_data %>% filter(!is.na(as.numeric(streams)))
-                                            
-best_songs <- spot_data_clean%>% arrange(desc(streams)) %>% slice(1:10)
+spot_data_clean <- spotify22_data %>% 
+  filter(!is.na(as.numeric(weeks_on_chart)))
 
-# Diviser les pourcentages par 100 pour les ramener à une échelle de 0 à 1
-best_songs$instrumentalness_pct <- best_songs$`instrumentalness_%` / 100
-best_songs$speechiness_pct <- best_songs$`speechiness_%` / 100
-
-# Créer le graphique à barres
-ggplot(best_songs, aes(x = track_name)) +
-  geom_bar(aes(y = instrumentalness_pct, fill = "Instrumentalité"), stat = "identity", alpha = 0.6, position = "dodge") +
-  geom_bar(aes(y = speechiness_pct, fill = "Paroles"), stat = "identity", alpha = 0.6, position = "dodge") +
-  labs(y = "Pourcentage", title = "Instrumentalité vs Paroles dans les Meilleures Chansons",
-       subtitle = "Pourcentage de Contenu Instrumental et de Paroles Parlées dans les Meilleures Chansons",
-       caption = "Source des données : Spotify") +
-  scale_fill_manual(name = "Attribut", values = c("Instrumentalité" = "blue", "Paroles" = "red")) +
-  scale_y_continuous(labels = scales::percent_format(accuracy = 1)) +  
-  theme(axis.text.x = element_text(angle = 45, hjust = 1))
-
-
-spot_data_clean <- spotify22_data %>% filter(!is.na(as.numeric(weeks_on_chart)))
 best_songs <- spot_data_clean %>% 
   arrange(desc(weeks_on_chart)) %>% 
   slice(1:10)
 
 best_songs$track_name <- sapply(best_songs$track_name, clean_track_name)
 
-# Normalize speechiness and instrumentalness
+# Normaliser les pourcentages
 best_songs <- best_songs %>%
-  mutate(instrumentalness_pct = instrumentalness / max(instrumentalness),
+  mutate(instrumentalness_pct = instrumentalness / max(instrumentalness, na.rm = TRUE),
          speechiness_pct = speechiness)
 
-# Transform data for plotting
+# Transformer les données pour le graphique
 plot_data <- best_songs %>%
   select(track_name, instrumentalness_pct, speechiness_pct) %>%
-  pivot_longer(cols = c(instrumentalness_pct, speechiness_pct), names_to = "attribute", values_to = "value")
+  pivot_longer(cols = c(instrumentalness_pct, speechiness_pct), 
+               names_to = "attribute", values_to = "value")
 
-# Rename attributes for better readability
+# Renommer les attributs
 plot_data <- plot_data %>%
   mutate(attribute = case_when(
     attribute == "instrumentalness_pct" ~ "Instrumentalité",
@@ -654,13 +653,22 @@ plot_data <- plot_data %>%
     TRUE ~ attribute
   ))
 
-# Create the bar plot
+# Abréger ou tronquer les noms des chansons
+plot_data <- plot_data %>%
+  mutate(track_name = ifelse(nchar(track_name) > 20, 
+                             paste0(substr(track_name, 1, 17), "..."), 
+                             track_name))
+
+# Créer le graphique à barres
 ggplot(plot_data, aes(x = track_name, y = value, fill = attribute)) +
   geom_bar(stat = "identity", position = "dodge", alpha = 0.6) +
-  labs(y = "Pourcentage normalisé", title = "Instrumentalité vs Paroles dans les Meilleures Chansons de 2022",
+  labs(y = "Pourcentage normalisé (0-1)", 
+       title = "Instrumentalité vs Paroles dans les Meilleures Chansons de 2022",
        subtitle = "Pourcentage de Contenu Instrumental et de Paroles Parlées dans les Meilleures Chansons",
        caption = "Source des données : Spotify") +
   scale_fill_manual(name = "Attribut", values = c("Instrumentalité" = "blue", "Paroles" = "red")) +
+  scale_x_discrete(labels = function(x) stringr::str_wrap(x, width = 10)) +
+  scale_y_continuous(labels = scales::percent_format(accuracy = 1)) +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
 
 ```
@@ -855,6 +863,8 @@ précieux pour les professionnels de l'industrie musicale dans la
 création et la promotion de musique adaptée à chaque période de l'année.
 Cependant, ces graphiques ne peuvent pas clairement nous aider à prendre
 des décisions en raison des écarts trop peu importants.
+
+Malheureusement, nous ne pouvons pas établir de corrélation entre le dataset de 2023 et 2022 puisque dans le dataset de 2022 nous n'avons pas de données sur les saisons. Nous ne pouvons donc pas comparer les deux années. De même, pour le dataset des chansons les moins populaires.
 
 ### Existe-t’il des caractéristiques audio communes dans les sons populaires en fonction des saisons ?
 
