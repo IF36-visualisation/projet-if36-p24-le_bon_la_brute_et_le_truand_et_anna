@@ -737,6 +737,29 @@ possible qu’une musique n’ait pas été populaire parce qu’elle était en
 playliste mais qu’elle ait été en playlist parce qu’elle était déjà
 populaire. Nous ne savons pas dans quel ordre cela se fait.
 
+```{r}
+# Nombre fois supérieur à 1 qu'un artist apparait dans le dataset 1
+spotify_name23 <- spotify_data
+spotify_name22 <- spotify22_data
+spotifypaspop_name <- spotifyUnpopular_data
+
+# Étape 1: Compter les apparitions de chaque artiste
+artist_counts <- spotify_name23 %>%
+  count(`artist(s)_name`) %>%
+  filter(n > 1)  # Étape 2: Filtrer les artistes apparaissant plus d'une fois
+
+# Étape 3: Créer un graphique à barres
+ggplot(artist_counts, aes(x = reorder(`artist(s)_name`, n), y = n)) +
+  geom_bar(stat = "identity", fill = "steelblue") +
+  coord_flip() +  # Retourner le graphique pour une meilleure lisibilité
+  labs(title = "Nombre de fois que chaque artiste apparait plus d'une fois dans le dataset",
+       x = "Artiste",
+       y = "Nombre d'apparitions") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+```
+
 ### Quelle place l'acoustique a-t-il dans la musique? Est ce populaire de nos jours?
 
 On sait qu’il y a pleins de façons de faire de la musique et que la
