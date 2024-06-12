@@ -746,17 +746,32 @@ spotifypaspop_name <- spotifyUnpopular_data
 # Étape 1: Compter les apparitions de chaque artiste
 artist_counts <- spotify_name23 %>%
   count(`artist(s)_name`) %>%
-  filter(n > 1)  # Étape 2: Filtrer les artistes apparaissant plus d'une fois
+  filter(n > 1)  
+# Étape 2: Filtrer les artistes apparaissant plus d'une fois
 
-# Étape 3: Créer un graphique à barres
-ggplot(artist_counts, aes(x = reorder(`artist(s)_name`, n), y = n)) +
+# Étape 3: Créer un graphique à barres pour dataset 2023
+artist_counts <- spotify_data_23_ordre_decroissant %>%
+  count(`artist(s)_name`) %>%
+  filter(n > 1) 
+
+top_n <- 20
+top_artists <- artist_counts %>%
+  top_n(top_n, wt = n) %>%
+  pull(`artist(s)_name`)
+artist_counts_top <- artist_counts %>%
+  filter(`artist(s)_name` %in% top_artists)
+
+
+ggplot(artist_counts_top, aes(x = reorder(`artist(s)_name`, desc(n)), y = n)) +
   geom_bar(stat = "identity", fill = "steelblue") +
-  coord_flip() +  # Retourner le graphique pour une meilleure lisibilité
-  labs(title = "Nombre de fois que chaque artiste apparait plus d'une fois dans le dataset",
+  geom_text(aes(label = n), vjust = -0.5, size = 3) +
+  labs(title = "Top 20 des artistes les plus fréquents",
        x = "Artiste",
        y = "Nombre d'apparitions") +
   theme_minimal() +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+
 
 ```
 
