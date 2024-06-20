@@ -500,6 +500,12 @@ ggplot(filtered_playlist_data, aes(x = track_name, y = playlist_count, fill = pl
   theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))
 ```
 
+**Analyse : **
+
+Le graphique est un histogramme intitulé “Nombre de playlists par plateforme (Top 20 des morceaux)”. Il affiche trois groupes de barres pour chaque morceau, représentant le nombre de playlists sur Apple Music, Deezer, et Spotify. L’axe vertical, étiqueté “Nombre de playlists”, varie de 0 à 40 000 avec des incréments de 5 000. L’axe horizontal énumère les 20 morceaux principaux. Chaque groupe de barres est coloré différemment selon la plateforme : bleu pour Apple Music, rouge pour Deezer, et vert pour Spotify.
+
+Ce graphique est intéressant car il visualise la popularité des morceaux les plus écoutés sur trois grandes plateformes de streaming musical, en montrant la fréquence de leur inclusion dans les playlists. Il permet de comparer rapidement quels morceaux sont les plus souvent présents dans les playlists et comment cela diffère selon la plateforme. Cela suggère que Spotify est la plateforme la plus influente en matière de musique. Cependant, l'exactitude de ces données est incertaine puisque le dataset intitulé "SpotifyData" ne fournit pas d'informations sur la source des données des autres plateformes.
+
 ### L’ambiance de la musique nous dit-elle quelque chose sur la popularité d’une musique? ou Est ce qu’une ambiance de musique est particulièrement populaire?
 
 Autrement dit: observons nous la présence d’une ambiance en majorité
@@ -562,6 +568,7 @@ ggplot(top_songs, aes(x = factor(streams_quartile), y = bpm)) +
   geom_boxplot(fill = "purple", alpha = 0.6) +
   labs(x = "Quartiles de popularité (streams)", y = "BPM", title = "Boxplot des BPM par quartile de popularité") +
   theme_minimal()
+
 
 # 3. Répartition des BPM par intervalles
 ggplot(bpm_counts, aes(x = bpm_interval, y = n, fill = bpm_interval)) +
@@ -967,6 +974,7 @@ ggplot(spotify_data, aes(x = `danceability_%`, fill = season)) +
        y = "Fréquence") +
   facet_wrap(~season) +
   theme_minimal()
+
 
 
 
