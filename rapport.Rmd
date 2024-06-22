@@ -19,6 +19,14 @@ library(readr)
 library(tidyr)
 library(stringr)
 library(stringi)
+library(reshape2)
+
+suppressWarnings({
+  library(ggplot2)
+  library(dplyr)
+  library(reshape2)
+})
+
 
 # Chargement et traitement des données pour Spotify 2023
 spotify_data <- read_csv("./data/spotify-2023.csv", locale = locale(encoding = "UTF-8"))
@@ -1359,6 +1367,156 @@ des auditeurs tout au long de l'année. À ce stade, il est difficile de
 parvenir à des conclusions définitives en raison de la faible amplitude
 des variations observées dans les données. Il est donc préférable de ne
 pas se fier uniquement à ce graphique pour prendre des décisions.
+
+## La danceability d'une musique influence-t-elle significativement son succès en termes de streams et de classement sur Spotify?
+
+La "danceability" d'une chanson est une caractéristique clé dans l'analyse musicale, particulièrement lorsqu'on examine son impact sur le succès d'une chanson sur des plateformes comme Spotify. La danceability mesure dans quelle mesure une chanson est adaptée à la danse, en se basant sur des éléments comme le tempo, la stabilité du rythme, la force des battements et la régularité générale. La valeur de la danceability varie de 0 à 100, avec des valeurs plus élevées indiquant que la chanson est plus dansante.
+
+Notre objectif est de déterminer si la danceability influence significativement le succès d'une chanson, mesuré par le nombre de streams ou son classement dans les charts Spotify. Nous analyserons des données provenant de deux ensembles distincts : un pour l'année 2022 et un autre pour 2023. L'ensemble de données de 2023 se concentre sur le nombre de streams, tandis que celui de 2022 met l'accent sur le classement maximal des chansons.
+
+### Présentation et Description du Problème
+
+1. **Ensemble de données 2022** : Contient des informations sur les noms des chansons, les artistes, le classement maximal, les semaines dans le chart, et diverses caractéristiques musicales, y compris la danceability, l'énergie, la sonorité, le discours, et plus encore.
+2. **Ensemble de données 2023** : Comprend les noms des chansons, les artistes, les dates de sortie, le nombre de streams, et des caractéristiques musicales similaires, avec la danceability représentée en pourcentage.
+
+### Graphiques de Corrélation
+
+#### Corrélation entre Danceability et Streams (2023)
+Dans l'ensemble de données de 2023, nous traçons la danceability contre le nombre de streams pour observer toute corrélation apparente.
+
+```{r corrDanceabilityStreams23, echo=FALSE}
+# Préparation des données
+data_2023 <- spotify_data %>% 
+  slice(1:100) %>%  # Choisir un nombre fixe de chansons
+  mutate(danceability = as.numeric(`danceability_%`),
+         streams = as.numeric(streams)) %>%
+  drop_na(danceability, streams)
+
+# Génération du graphique
+ggplot(data_2023, aes(x = danceability, y = streams)) +
+  geom_point(color = "blue") +
+  theme_minimal() +
+  labs(title = "Corrélation entre Danceability et Streams (2023)", x = "Danceability", y = "Streams")
+```
+
+**Observation**: Le graphique en nuages de points montre une large dispersion des données, suggérant une faible corrélation entre la danceability et le nombre de streams.
+
+**Interprétation**: La danceability ne semble pas être un déterminant majeur du succès en termes de streams pour l'année 2023. Le nombre de streams varie largement indépendamment de la danceability, indiquant que d'autres facteurs peuvent avoir une influence plus significative.
+
+
+#### Corrélation entre Danceability et Classement (2022)
+Ensuite, nous examinons l'ensemble de données de 2022 en traçant la danceability contre le classement maximal pour identifier toute tendance.
+
+
+```{r corrDanceabilityRank22, echo=FALSE}
+# Préparation des données
+data_2022 <- spotify22_data %>% 
+  slice(1:100) %>%  # Choisir un nombre fixe de chansons
+  mutate(danceability = as.numeric(danceability),
+         peak_rank = as.numeric(peak_rank)) %>%
+  drop_na(danceability, peak_rank)
+
+# Génération du graphique
+ggplot(data_2022, aes(x = danceability, y = peak_rank)) +
+  geom_point(color = "red") +
+  theme_minimal() +
+  labs(title = "Corrélation entre Danceability et Classement (2022)", x = "Danceability", y = "Classement maximal")
+```
+
+**Observation**: Les points de données sont également largement dispersés avec quelques clusters, montrant une légère tendance où des chansons plus dansantes tendent à obtenir de meilleurs classements.
+
+**Interprétation**: Il y a une faible corrélation positive indiquant que des chansons avec une danceability plus élevée pourraient avoir de meilleurs classements, mais cette tendance n'est pas assez forte pour tirer des conclusions définitives. D'autres facteurs musicaux ou externes jouent probablement un rôle plus substantiel dans la détermination des classements.
+
+
+- **Données de 2023** : Il n'y a pas de corrélation significative entre la danceability et le nombre de streams. La danceability seule ne prédit pas le succès des streams.
+- **Données de 2022** : Il y a une légère tendance suggérant que des chansons plus dansantes peuvent obtenir de meilleurs classements, mais la corrélation est faible.
+
+En général, bien que la danceability puisse influencer le succès d'une chanson dans une certaine mesure, il est clair qu'elle n'est pas le seul facteur. Une analyse complète devrait considérer plusieurs attributs musicaux et peut-être des facteurs externes comme les efforts de marketing et l'influence des médias sociaux.
+
+
+### Heatmaps de corrélation 
+
+Les heatmaps de corrélation pour les années 2023 et 2022 présentent une vue d'ensemble des relations entre différentes caractéristiques musicales et les mesures de succès des chansons sur Spotify. Ces visualisations nous permettent de comprendre quelles caractéristiques sont potentiellement interconnectées et leur impact sur le succès des chansons.
+
+#### Heatmap des Corrélations (2023)
+
+
+```{r heatmapCorr23, echo=FALSE}
+
+# Select data and calculate correlations
+corr_data_2023 <- spotify_data %>% 
+  slice(1:100) %>%  # Adjust the number of songs as needed
+  select(danceability_ = `danceability_%`, valence_ = `valence_%`, energy_ = `energy_%`, 
+         acousticness_ = `acousticness_%`, instrumentalness_ = `instrumentalness_%`, 
+         liveness_ = `liveness_%`, speechiness_ = `speechiness_%`, streams) %>%
+  mutate(across(everything(), as.numeric))
+
+# Compute correlation matrix
+corr_matrix_2023 <- cor(corr_data_2023, use = "complete.obs")
+
+# Melt the correlation matrix for visualization
+melted_corr_matrix_2023 <- melt(corr_matrix_2023)
+
+# Detach the reshape2 package to avoid conflicts
+detach("package:reshape2", unload=TRUE)
+
+# Generate the heatmap
+ggplot(melted_corr_matrix_2023, aes(Var1, Var2, fill = value)) +
+  geom_tile() +
+  scale_fill_gradient2(low = "blue", high = "red", mid = "white", midpoint = 0, limit = c(-1, 1)) +
+  theme_minimal() +
+  labs(title = "Heatmap des corrélations (2023)", x = "", y = "")
+```
+
+#### Heatmap des Corrélations (2022)
+
+
+```{r heatmapCorr22, echo=FALSE}
+library(reshape2)
+
+# Select data and calculate correlations
+corr_data_2022 <- spotify22_data %>% 
+  slice(1:100) %>%  # Adjust the number of songs as needed
+  select(danceability, energy, acousticness, instrumentalness, liveness, speechiness, peak_rank) %>%
+  mutate(across(everything(), as.numeric))
+
+# Compute correlation matrix
+corr_matrix_2022 <- cor(corr_data_2022, use = "complete.obs")
+
+# Melt the correlation matrix for visualization
+melted_corr_matrix_2022 <- melt(corr_matrix_2022)
+
+# Detach the reshape2 package to avoid conflicts
+detach("package:reshape2", unload=TRUE)
+
+# Generate the heatmap
+ggplot(melted_corr_matrix_2022, aes(Var1, Var2, fill = value)) +
+  geom_tile() +
+  scale_fill_gradient2(low = "blue", high = "red", mid = "white", midpoint = 0, limit = c(-1, 1)) +
+  theme_minimal() +
+  labs(title = "Heatmap des corrélations (2022)", x = "", y = "")
+```
+
+### Analyse des Heatmaps
+
+Les heatmaps de corrélation montrent les relations entre différentes caractéristiques musicales pour les années 2023 et 2022. Voici quelques points d'intérêt et interprétations des résultats :
+
+#### Heatmap des Corrélations (2023)
+
+- **Danceability et Streams** : Il n'y a pas de corrélation marquée entre la danceability et les streams. Cela confirme notre analyse précédente, indiquant que la danceability n'est pas un facteur déterminant du nombre de streams.
+- **Energy et Valence** : Une corrélation positive notable entre l'énergie et la valence, suggérant que les chansons énergiques tendent à être perçues comme plus positives.
+- **Instrumentalness et Acousticness** : Une forte corrélation positive, ce qui est attendu puisque les chansons avec une instrumentalité élevée ont souvent un caractère acoustique prononcé.
+
+#### Heatmap des Corrélations (2022)
+
+- **Danceability et Classement** : La danceability montre une faible corrélation positive avec le classement, ce qui est cohérent avec notre analyse antérieure des données de 2022.
+- **Energy et Acousticness** : Une corrélation négative entre l'énergie et l'acousticness, indiquant que les chansons énergiques sont souvent moins acoustiques.
+- **Speechiness et Classement** : Une légère corrélation négative entre la speechiness et le classement, suggérant que les chansons avec plus de paroles parlées tendent à avoir des classements inférieurs.
+
+
+Les heatmaps de corrélation fournissent une vue d'ensemble des interrelations entre différentes caractéristiques musicales et leur impact potentiel sur le succès des chansons. Bien que la danceability ne soit pas fortement corrélée avec les mesures de succès (streams et classement), d'autres caractéristiques comme l'énergie, la valence, et l'acousticness montrent des corrélations intéressantes. Ces insights peuvent être précieux pour les artistes et producteurs cherchant à optimiser certaines caractéristiques musicales pour maximiser le succès de leurs chansons sur Spotify.
+
+
 
 ## Critiques sur notre jeu de données :
 
