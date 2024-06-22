@@ -714,15 +714,7 @@ included in - in_deezer_charts: Presence and rank of the song on Deezer
 charts - in_shazam_charts: Presence and rank of the song on Shazam
 charts
 
-Nous pouvons pour estimer l’engagement des auditeurs regarder si les
-featurings sur lesquels l’artiste apparaît sont aussi bcp écoutés. Par
-exemple, si il y a deux artistes sur une musique et que l’un des deux
-artistes est présent plusieurs fois dans le classement des musiques les
-plus populaires, nous pouvons supposer que ce sont ses fans plus que
-celui de l’autre artiste qui ont permis à cette chanson de se retrouver
-dans ce classement.
-
-On peut également supposer que si un artiste n’est présent qu’une seule
+  Nous pouvons supposer que si un artiste n’est présent qu’une seule
 fois dans ce classement c’est parce qu’une de ses chansons à eu du
 succès auprès du grand public d’une manière générale, mais qu’il n’a pas
 forcément une grosse fanbase qui écoute toutes ses musiques dès qu’elles
@@ -737,12 +729,14 @@ nous sans que l’on soit des grands connaisseurs de l’artiste, donc cela
 pourrait être le signe que l’artiste à bbcp ou pas de nouveaux
 auditeurs.
 
-Seulement si on avait la liste du nombre d’auditeurs mensuels moyens des
+  Seulement si on avait la liste du nombre d’auditeurs mensuels moyens des
 artistes de spotify nous pourrions avoir une idée plus claire de
 l’engagement des auditeurs envers un artiste. De plus, il est aussi
 possible qu’une musique n’ait pas été populaire parce qu’elle était en
 playliste mais qu’elle ait été en playlist parce qu’elle était déjà
 populaire. Nous ne savons pas dans quel ordre cela se fait.
+
+Commençons par observer les tops artistes les plus présents dans le classement et les artistes les plus streamés: 
 
 ```{r}
 # Nombre fois supérieur à 1 qu'un artist apparait dans le dataset 1
@@ -777,11 +771,339 @@ ggplot(artist_counts_top, aes(x = reorder(`artist(s)_name`, desc(n)), y = n)) +
        y = "Nombre d'apparitions") +
   theme_minimal() +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
+
+```{r}
+#Stream par artiste
+
+spotify_data_23_ordre_decroissant$streams <- as.integer(spotify_data_23_ordre_decroissant$streams)
+
+
+top_artists_streams <- spotify_data_23_ordre_decroissant %>%
+  group_by(`artist(s)_name`) %>%
+  summarise(total_streams = sum(streams)) %>%
+  top_n(20, total_streams) %>%
+  arrange(desc(total_streams))
+
+ggplot(top_artists_streams, aes(x = reorder(`artist(s)_name`, total_streams), y = total_streams)) +
+  geom_bar(stat = "identity", fill = "steelblue") +
+  geom_text(aes(label = scales::comma(total_streams)),
+            hjust = -0.1, size = 3) +
+  labs(title = "Top 20 des artistes avec le plus de streams",
+       x = "Artiste",
+       y = "Nombre total de streams") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) + 
+  coord_flip()
+
 
 
 
 ```
 
+**Analyse :**
+
+  Le premier graphique nous donne le top 20 des artistes dont le nom revient le plus souvent dans notre base de donnée, ici Les musiques plus écoutés sur Spotify en 2023. Ainsi ce sont les artistes qui ont le plus de musique dans le top 2023 de spotify. Nous aimerions savoir quels artistes parmi cette échantillon de 20 artistes ont une communauté de fan engagé. Selon toute logique si un artiste a beaucoup de titre alors il devrait également avoir beaucoup de stream.
+  
+  Le deuxième graphique nous permet donc d'avoir le classement des artistes qui enregistrent le plus de stream. On remarque immédiatement que Taylor Swift est première dans les deux classements, elle a en tout 34 musiques dans le classement et est celle qui est le plus écouté avec plus de 10 milliards de stream, les résultats sont donc cohérents. 
+
+```{r}
+
+#Nombre de streams pour chaque titre d'un artiste
+spotify_data$streams <- as.integer(spotify_data$streams)
+
+#Choisir le nom de l'artiste
+chosen_artist <- "Taylor Swift"
+
+
+artist_data <- spotify_data %>%
+  filter(grepl(chosen_artist, `artist(s)_name`, ignore.case = TRUE))
+
+#les données sont non nulles
+if (nrow(artist_data) == 0) {
+  stop(paste("Aucune chanson trouvée pour l'artiste:", chosen_artist))
+}
+
+# Abréger ou tronquer les noms des chansons
+plot_data <- artist_data %>%
+  mutate(track_name = ifelse(nchar(track_name) > 20, 
+                             paste0(substr(track_name, 1, 17), "..."), 
+                             track_name))
+
+plot_data <- plot_data[!is.na(plot_data$streams), ]
+
+# Calculez la marge pour un affichage optimal
+max_streams <- max(plot_data$streams)
+y_limit <- max_streams + max_streams * 0.1
+
+ggplot(plot_data, aes(x = reorder(track_name, streams), y = streams)) +
+  geom_bar(stat = "identity", fill = "lightgreen", width = 0.8) +  # Réduire la largeur des barres
+  geom_text(aes(label = scales::comma(streams)), 
+            hjust = -0.1, size = 3.5, nudge_y = 0) +  # Positionner légèrement à l'extérieur des barres
+  coord_flip() +  # Retourner le graphique
+  ylim(0, y_limit) +  # Ajouter de l'espace au-dessus des barres
+  labs(title = paste("Streams par Chanson pour", chosen_artist),
+       x = "Titres",
+       y = "Nombre de streams") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 0, hjust = 1))
+```
+
+**Analyse :**
+
+  Si on regarde plus en détaille le nombre de streams par musique le nombre de streams n'est pas homogène mais élevé pour chacun des sons, le moins streamé etant tout de même au dessus de 30 millions. Des titres étant sorti il y a des années sont toujours très écoutés comme Shake It Off, sorti en 2014. Le fait qu'elle soit allé en tournée mondiale peut aussi expliquer ces chiffres ainsi on peut en déduire qu'elle a une audience investit et qui la suit, qui écoute ses chansons même ancienne et qui probablement va la voir en concert.
+  
+  
+```{r}
+#Apparition de la chanson en playlist
+spotify_data$in_spotify_playlists <- as.integer(spotify_data$in_spotify_playlists)
+
+#coisir le nom de l'artiste
+chosen_artist <- "Taylor Swift"
+
+
+artist_data <- spotify_data %>%
+  filter(grepl(chosen_artist, `artist(s)_name`, ignore.case = TRUE))
+
+#les données sont non nulles
+if (nrow(artist_data) == 0) {
+  stop(paste("Aucune chanson trouvée pour l'artiste:", chosen_artist))
+}
+
+# Abréger ou tronquer les noms des chansons
+plot_data <- artist_data %>%
+  mutate(track_name = ifelse(nchar(track_name) > 20, 
+                             paste0(substr(track_name, 1, 17), "..."), 
+                             track_name))
+
+plot_data <- plot_data[!is.na(plot_data$in_spotify_playlists), ]
+
+# Calculez la marge pour un affichage optimal
+max_streams <- max(plot_data$in_spotify_playlists)
+y_limit <- max_streams + max_streams * 0.1
+
+ggplot(plot_data, aes(x = reorder(track_name, in_spotify_playlists), y = in_spotify_playlists)) +
+  geom_bar(stat = "identity", fill = "purple", width = 0.8) +  # Réduire la largeur des barres
+  geom_text(aes(label = scales::comma(in_spotify_playlists)), 
+            hjust = -0.1, size = 3.5, nudge_y = 0) +  # Positionner légèrement à l'extérieur des barres
+  coord_flip() +  # Retourner le graphique
+  ylim(0, y_limit) +  # Ajouter de l'espace au-dessus des barres
+  labs(title = paste("Apparition en playlist par Chanson pour", chosen_artist),
+       x = "Titres",
+       y = "Nombre d'apparition en playlist") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 0, hjust = 1))
+```
+
+**Analyse :**
+
+  On peut également remarquer une corrélation entre le nombre d'écoute et la présence du son en playlist, qui est généralement élevé. En effet si on compare les deux graphiques on observe que l'ordre des titres est assez similaire donc on peut déduire qu'il y a un lien entre la présence en playlist d'un titre et son nombre de stream. On ne sait cependant pas si le son est rentré en playlist parce qu'il était déjà beaucoup écouté ou si il est beaucoup écouté parce qu'il est en playlist. Toutefois même les sons les moins présents en playlist sont très écouté, Better Than Revenge sorti en 2010 et présent uniquement 86 fois en playlist cumule plus de 30 millions de streams. Nous pouvons estimer que cela est un indicateur pertinent sur l'engagement de sa fan base.
+
+  En revanche The Weeknd le deuxième artiste qui a le plus de chanson dans le classement, 22 titres en tout, n'est pas dans le top 20 des artistes les plus streamés. Ce qui ressort à l'issue de cette observation c'est qu'il a à chaque fois assez d'auditeurs pour être dans le classement des musiques les plus écouté mais qu'il n'est pas assez mainstream pour être dans le top des artistes les plus streamés.
+  
+```{r}
+#Nombre de stream
+spotify_data$streams <- as.integer(spotify_data$streams)
+
+#Choisir le nom de l'artiste
+chosen_artist <- "The Weeknd"
+
+
+artist_data <- spotify_data %>%
+  filter(grepl(chosen_artist, `artist(s)_name`, ignore.case = TRUE))
+
+#les données sont non nulles
+if (nrow(artist_data) == 0) {
+  stop(paste("Aucune chanson trouvée pour l'artiste:", chosen_artist))
+}
+
+# Abréger ou tronquer les noms des chansons
+plot_data <- artist_data %>%
+  mutate(track_name = ifelse(nchar(track_name) > 20, 
+                             paste0(substr(track_name, 1, 17), "..."), 
+                             track_name))
+
+plot_data <- plot_data[!is.na(plot_data$streams), ]
+
+# Calculez la marge pour un affichage optimal
+max_streams <- max(plot_data$streams)
+y_limit <- max_streams + max_streams * 0.1
+
+ggplot(plot_data, aes(x = reorder(track_name, streams), y = streams)) +
+  geom_bar(stat = "identity", fill = "lightgreen", width = 0.8) +  # Réduire la largeur des barres
+  geom_text(aes(label = scales::comma(streams)), 
+            hjust = -0.1, size = 3.5, nudge_y = 0) +  # Positionner légèrement à l'extérieur des barres
+  coord_flip() +  # Retourner le graphique
+  ylim(0, y_limit) +  # Ajouter de l'espace au-dessus des barres
+  labs(title = paste("Streams par Chanson pour", chosen_artist),
+       x = "Titres",
+       y = "Nombre de streams") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 0, hjust = 1))
+```
+
+  
+```{r}
+#Apparition de la chanson en playlist
+spotify_data$in_spotify_playlists <- as.integer(spotify_data$in_spotify_playlists)
+
+#coisir le nom de l'artiste
+chosen_artist <- "The Weeknd"
+
+
+artist_data <- spotify_data %>%
+  filter(grepl(chosen_artist, `artist(s)_name`, ignore.case = TRUE))
+
+#les données sont non nulles
+if (nrow(artist_data) == 0) {
+  stop(paste("Aucune chanson trouvée pour l'artiste:", chosen_artist))
+}
+
+# Abréger ou tronquer les noms des chansons
+plot_data <- artist_data %>%
+  mutate(track_name = ifelse(nchar(track_name) > 20, 
+                             paste0(substr(track_name, 1, 17), "..."), 
+                             track_name))
+
+plot_data <- plot_data[!is.na(plot_data$in_spotify_playlists), ]
+
+# Calculez la marge 
+max_streams <- max(plot_data$in_spotify_playlists)
+y_limit <- max_streams + max_streams * 0.1
+
+ggplot(plot_data, aes(x = reorder(track_name, in_spotify_playlists), y = in_spotify_playlists)) +
+  geom_bar(stat = "identity", fill = "purple", width = 0.8) + 
+  geom_text(aes(label = scales::comma(in_spotify_playlists)), 
+            hjust = -0.1, size = 3.5, nudge_y = 0) + coord_flip() + ylim(0, y_limit) +labs(title = paste("Apparition en playlist par Chanson pour", chosen_artist), x = "Titres", y = "Nombre d'apparition en playlist") + theme_minimal() + theme(axis.text.x = element_text(angle = 0, hjust = 1))
+```
+ 
+**Analyse :**
+
+  De plus on constate qu'il apparait plus souvent en playlist sur spotify que Taylor Swift, son titre qui est le plus en playlist apparait plus de 43000 fois tandis que pour Taylor Swift c'est autour de 21000 fois. Ainsi cette comparaison nous permet de confirmer que Taylor Swift a une fanbase fidèle. Nous ne pouvons pas réellement tirer de conclusion quant à la fanbase de The Weeknd. On peut tout de même supposer qu'il ait possiblement une fanbase fidèle pour être présent une vingtaine de fois dans les artistes les plus présent dans les meilleurs classement et touche peu de nouveaux auditeurs malgré sa présence en playlist.
+  
+A présent concentrons nous sur Eminem:
+  
+```{r}
+
+#Nombre de stream
+spotify_data$streams <- as.integer(spotify_data$streams)
+
+#Choisir le nom de l'artiste
+chosen_artist <- "Eminem"
+
+
+artist_data <- spotify_data %>%
+  filter(grepl(chosen_artist, `artist(s)_name`, ignore.case = TRUE))
+
+#les données sont non nulles
+if (nrow(artist_data) == 0) {
+  stop(paste("Aucune chanson trouvée pour l'artiste:", chosen_artist))
+}
+
+# Abréger ou tronquer les noms des chansons
+plot_data <- artist_data %>%
+  mutate(track_name = ifelse(nchar(track_name) > 20, 
+                             paste0(substr(track_name, 1, 17), "..."), 
+                             track_name))
+
+plot_data <- plot_data[!is.na(plot_data$streams), ]
+
+# Calculez la marge pour un affichage optimal
+max_streams <- max(plot_data$streams)
+y_limit <- max_streams + max_streams * 0.1
+
+ggplot(plot_data, aes(x = reorder(track_name, streams), y = streams)) +
+  geom_bar(stat = "identity", fill = "lightgreen", width = 0.8) +  # Réduire la largeur des barres
+  geom_text(aes(label = scales::comma(streams)), 
+            hjust = -0.1, size = 3.5, nudge_y = 0) +  # Positionner légèrement à l'extérieur des barres
+  coord_flip() +  # Retourner le graphique
+  ylim(0, y_limit) +  # Ajouter de l'espace au-dessus des barres
+  labs(title = paste("Streams par Chanson pour", chosen_artist),
+       x = "Titres",
+       y = "Nombre de streams") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 0, hjust = 1))
+```
+
+```{r}
+#Apparition de la chanson en playlist
+spotify_data$in_spotify_playlists <- as.integer(spotify_data$in_spotify_playlists)
+
+#coisir le nom de l'artiste
+chosen_artist <- "Eminem"
+
+
+artist_data <- spotify_data %>%
+  filter(grepl(chosen_artist, `artist(s)_name`, ignore.case = TRUE))
+
+#les données sont non nulles
+if (nrow(artist_data) == 0) {
+  stop(paste("Aucune chanson trouvée pour l'artiste:", chosen_artist))
+}
+
+# Abréger ou tronquer les noms des chansons
+plot_data <- artist_data %>%
+  mutate(track_name = ifelse(nchar(track_name) > 20, 
+                             paste0(substr(track_name, 1, 17), "..."), 
+                             track_name))
+
+plot_data <- plot_data[!is.na(plot_data$in_spotify_playlists), ]
+
+# Calculez la marge 
+max_streams <- max(plot_data$in_spotify_playlists)
+y_limit <- max_streams + max_streams * 0.1
+
+ggplot(plot_data, aes(x = reorder(track_name, in_spotify_playlists), y = in_spotify_playlists)) +
+  geom_bar(stat = "identity", fill = "purple", width = 0.8) + 
+  geom_text(aes(label = scales::comma(in_spotify_playlists)), 
+            hjust = -0.1, size = 3.5, nudge_y = 0) + coord_flip() + ylim(0, y_limit) +labs(title = paste("Apparition en playlist par Chanson pour", chosen_artist), x = "Titres", y = "Nombre d'apparition en playlist") + theme_minimal() + theme(axis.text.x = element_text(angle = 0, hjust = 1))
+```
+
+```{r}
+#Apparition de la chanson sur shazam
+spotify_data$in_shazam_charts <- as.integer(spotify_data$in_shazam_charts)
+
+#Choisir le nom de l'artiste
+chosen_artist <- "Eminem"
+
+
+artist_data <- spotify_data %>%
+  filter(grepl(chosen_artist, `artist(s)_name`, ignore.case = TRUE))
+
+#Les données sont non nulles
+if (nrow(artist_data) == 0) {
+  stop(paste("Aucune chanson trouvée pour l'artiste:", chosen_artist))
+}
+
+# Abréger ou tronquer les noms des chansons
+plot_data <- artist_data %>%
+  mutate(track_name = ifelse(nchar(track_name) > 20, 
+                             paste0(substr(track_name, 1, 17), "..."), 
+                             track_name))
+
+plot_data <- plot_data[!is.na(plot_data$in_shazam_charts), ]
+
+# Calculez la marge 
+max_streams <- max(plot_data$in_shazam_charts)
+y_limit <- max_streams + max_streams * 0.1
+
+ggplot(plot_data, aes(x = reorder(track_name, in_shazam_charts), y = in_shazam_charts)) +
+  geom_bar(stat = "identity", fill = "pink", width = 0.8) + 
+  
+# Réduire la largeur des barres
+  geom_text(aes(label = scales::comma(in_shazam_charts)), 
+            hjust = -0.1, size = 3.5, nudge_y = 0) + coord_flip() +   ylim(0, y_limit) + labs(title = paste("Apparition sur Shazam par Chanson pour", chosen_artist),
+       x = "Titres",
+       y = "Nombre d'apparition en playlist") +theme_minimal() +
+  theme(axis.text.x = element_text(angle = 0, hjust = 1))
+```
+
+**Analyse:**
+
+  Le cas d'Eminem nous permet par contre de déduire un réel engagement et attachement de son public. Dans le premier graphique on Observe qu'il est dans le top 20 des artistes les plus présents dans le classement, il  est vingtième ex-eaquo avec d'autres artistes tandis que dans le classement des artistes les plus streamés il est quatrième. Lorsqu'on regarde le nombre de streams plus précisement on remarque que cinq de ses titres sont chacun à plus d'un milliard d'e stream'écoute dans l'année. En comparaison Taylor Swift n'en a que deux. De plus ces titres sont tous sorti il y a plus de dix ans, ainsi bien qu'il soit possible que de nouveaux auditeurs l'écoutent, il est probable qu'il y ait une grosse base d'auditeurs qui écoute Eminem depuis des années. De plus peu des chansons sont présentes dans les classements de shazam et même si ils le sont le chiffre est très faible, par exemple Lose Yourself apparait sur shazam uniquement 51 fois alors qu'il est streamé plus d'un milliard de fois, tout en étant sorti il y a plus de 20 ans, en 2002.
+
+  En somme, nous voulions savoir si avec nos données nous pouvions évaluer l'engagement d'une fanbase, nos observations ne nous permette pas de conclure réellement nous pouvons uniquement établir des pistes quant à la fidélité des auditeurs d'un artiste.
+  
 ### Quelle place l'acoustique a-t-il dans la musique? Est ce populaire de nos jours?
 
 On sait qu’il y a pleins de façons de faire de la musique et que la
