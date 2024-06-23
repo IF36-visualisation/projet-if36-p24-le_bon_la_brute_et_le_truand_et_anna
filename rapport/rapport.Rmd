@@ -25,13 +25,13 @@ suppressPackageStartupMessages(library(reshape2))
 
 
 # Chargement et traitement des données pour Spotify 2023
-spotify_data <- read_csv("./data/spotify-2023.csv", locale = locale(encoding = "UTF-8"))
+spotify_data <- read_csv("../data/spotify-2023.csv", locale = locale(encoding = "UTF-8"))
 
 # Chargement et traitement des données pour Spotify Top Charts 2022
-spotify22_data <- read_csv("./data/spotify_top_charts_22.csv", locale = locale(encoding = "UTF-8"))
+spotify22_data <- read_csv("../data/spotify_top_charts_22.csv", locale = locale(encoding = "UTF-8"))
 
 # Chargement et traitement des données pour les chansons impopulaires sur Spotify
-spotifyUnpopular_data <- read_csv("./data/unpopular_songs.csv", locale = locale(encoding = "UTF-8"))
+spotifyUnpopular_data <- read_csv("../data/unpopular_songs.csv", locale = locale(encoding = "UTF-8"))
 
 
 
@@ -453,10 +453,11 @@ considération ces informations.
 
 
 clean_track_name <- function(name) {
-  name <- stri_enc_toutf8(name, validate = TRUE)  # Convert to UTF-8
-  name <- stri_replace_all_regex(name, "[^\x20-\x7E]", "")  # Remove non-ASCII characters
+  name <- stri_trans_general(name, "Latin-ASCII")  # Transliterate to ASCII
+  name <- stri_replace_all_regex(name, "[^\x20-\x7E]", "")  # Remove remaining non-ASCII characters
   return(name)
 }
+
 
 # Apply cleaning function to track names
 spotify_data_23_ordre_decroissant$track_name <- sapply(spotify_data_23_ordre_decroissant$track_name, clean_track_name)
@@ -492,9 +493,6 @@ filtered_playlist_data <- playlist_data %>%
 # Truncate track names for better readability in the plot
 filtered_playlist_data <- filtered_playlist_data %>%
   mutate(track_name = ifelse(nchar(track_name) > 20, paste0(str_sub(track_name, 1, 17), "..."), track_name))
-
-# Verify the cleaned and transformed data
-print(head(filtered_playlist_data))
 
 # Create the bar plot
 ggplot(filtered_playlist_data, aes(x = track_name, y = playlist_count, fill = platform)) +
@@ -795,7 +793,13 @@ ggplot(artist_counts_top, aes(x = reorder(`artist(s)_name`, desc(n)), y = n)) +
 ```{r}
 #Stream par artiste
 # Convertir les streams en entiers
-spotify_data_23_ordre_decroissant$streams <- as.integer(spotify_data_23_ordre_decroissant$streams)
+# Nettoyage des données
+# Suppression des caractères non numériques
+spotify_data_23_ordre_decroissant$streams <- gsub("[^0-9]", "", spotify_data_23_ordre_decroissant$streams)
+
+# Conversion en integer avec gestion des NA directement
+spotify_data_23_ordre_decroissant$streams <- suppressWarnings(as.integer(spotify_data_23_ordre_decroissant$streams))
+spotify_data_23_ordre_decroissant$streams[is.na(spotify_data_23_ordre_decroissant$streams)] <- 0
 
 # Calculer le nombre total de streams par artiste
 top_artists_streams <- spotify_data_23_ordre_decroissant %>% # Utiliser le dataset 2023
@@ -840,14 +844,17 @@ plus de 10 milliards de stream, les résultats sont donc cohérents.
 ```{r}
 
 #Nombre de streams pour chaque titre d'un artiste
-spotify_data$streams <- as.integer(spotify_data$streams)
+spotify_data$streams <- suppressWarnings(as.integer(spotify_data$streams))
 
 #Choisir le nom de l'artiste
 chosen_artist <- "Taylor Swift"
 
+spotify_data$`artist(s)_name` <- iconv(spotify_data$`artist(s)_name`, to = "UTF-8")
 
-artist_data <- spotify_data %>%
-  filter(grepl(chosen_artist, `artist(s)_name`, ignore.case = TRUE))
+artist_data <- suppressWarnings({
+  spotify_data %>%
+    filter(grepl(chosen_artist, `artist(s)_name`, ignore.case = TRUE))
+})
 
 #les données sont non nulles
 if (nrow(artist_data) == 0) {
@@ -1697,7 +1704,7 @@ Nous avons été amenés à créer une nouvelle variable (interval_tempo)
 afin de répartir correctement chaque musique dans l'intervalle qui lui
 correspondait et de faciliter la lecture graphique.
 
-![graphiques tempo](image/tempo.PNG)
+![graphiques tempo](../image/tempo.PNG)
 
 #### Analyse :
 
@@ -1749,7 +1756,7 @@ Pour réaliser nos graphiques, nous avons utilisé les variables suivantes
 -   track_name : qui donne l'ID de chaque chanson moins écoutée
 -   track_name : qui donne le nom de chaque musique populaire en 2022
 
-![graphiques mode](image/mode.PNG)
+![graphiques mode](../image/mode.PNG)
 
 #### Analyse :
 
@@ -1783,7 +1790,7 @@ Nous avons été amenés à créer une nouvelle variable
 dans l'intervalle qui lui correspondait et de faciliter la lecture
 graphique.
 
-![graphiques danceability](image/danceability.PNG)
+![graphiques danceability](../image/danceability.PNG)
 
 #### Analyse :
 
@@ -1835,7 +1842,7 @@ nouvelle variable (interval_duration) afin de répartir correctement
 chaque musique dans l'intervalle qui lui correspondait et de faciliter
 la lecture graphique.
 
-![graphiques durée](image/duree.PNG)
+![graphiques durée](../image/duree.PNG)
 
 #### Analyse :
 
