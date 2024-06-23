@@ -1840,13 +1840,64 @@ la lecture graphique.
 
 ![graphiques durée](image/duree.PNG)
 
-#### Analyse : 
+#### Analyse :
 
-Nous pouvons observer un schéma clair pour les musiques les plus populaires en 2022 : la grande majorité des chansons se situent dans l'intervalle de 2 à 4 minutes. Cette tendance marquée parmi les chansons les plus appréciées de l'année souligne une préférence générale pour des compositions à la fois concises et captivantes. Cette durée semble idéale pour maintenir l'attention des auditeurs tout en permettant le développement d'une structure musicale complète et mémorable.
+Nous pouvons observer un schéma clair pour les musiques les plus
+populaires en 2022 : la grande majorité des chansons se situent dans
+l'intervalle de 2 à 4 minutes. Cette tendance marquée parmi les chansons
+les plus appréciées de l'année souligne une préférence générale pour des
+compositions à la fois concises et captivantes. Cette durée semble
+idéale pour maintenir l'attention des auditeurs tout en permettant le
+développement d'une structure musicale complète et mémorable.
 
-En revanche, dans les chansons moins populaires, bien que la plupart se trouvent également dans l'intervalle de 2 à 4 minutes, une proportion significative s'étend au-delà de cette plage. Cette observation révèle une différence notable par rapport aux chansons les plus populaires, suggérant une plus grande diversité dans les approches créatives ou une exploration de formats moins conventionnels par les artistes.
+En revanche, dans les chansons moins populaires, bien que la plupart se
+trouvent également dans l'intervalle de 2 à 4 minutes, une proportion
+significative s'étend au-delà de cette plage. Cette observation révèle
+une différence notable par rapport aux chansons les plus populaires,
+suggérant une plus grande diversité dans les approches créatives ou une
+exploration de formats moins conventionnels par les artistes.
 
-Nous pouvons donc conclure que la durée d'une chanson joue un rôle crucial dans sa perception par le public. Il semble moins risqué de se conformer à l'intervalle de durée mis en avant par cette étude. Cependant, il est également important de noter que des stratégies alternatives peuvent trouver leur place sur le marché musical. Ainsi, la durée demeure un facteur clé à prendre en compte lors de la création et de la promotion de nouvelles musiques.
+Nous pouvons donc conclure que la durée d'une chanson joue un rôle
+crucial dans sa perception par le public. Il semble moins risqué de se
+conformer à l'intervalle de durée mis en avant par cette étude.
+Cependant, il est également important de noter que des stratégies
+alternatives peuvent trouver leur place sur le marché musical. Ainsi, la
+durée demeure un facteur clé à prendre en compte lors de la création et
+de la promotion de nouvelles musiques.
+
+## Conclusion :
+
+Dans le cadre de ce projet, nous avons entrepris une démarche
+exploratoire approfondie sur l'ensemble des données disponibles dans nos
+datasets. En nous plaçant dans la perspective d'une maison de disques
+cherchant à produire le prochain hit, nous avons examiné les différentes
+problématiques associées à la popularité des chansons. Cette approche
+nous a permis de discerner les caractéristiques des morceaux les plus
+populaires en 2022 et 2023, tout en garantissant l'objectivité de nos
+conclusions en menant une analyse parallèle des chansons les moins
+populaires sur Spotify.
+
+L'étude des chansons les plus populaires a révélé des tendances et des
+patterns récurrents, tels que des durées spécifiques, des tempos
+optimaux, et des niveaux de danceability précis. En parallèle, l'analyse
+des morceaux moins populaires a offert une perspective contrastée,
+mettant en évidence des écarts et des variations qui peuvent expliquer
+leur moindre succès.
+
+Il est essentiel de noter qu'il n'existe pas de recette miracle pour
+assurer la popularité d'une chanson. Les goûts du public sont variés et
+en constante évolution, influencés par de nombreux facteurs culturels et
+contextuels. Toutefois, nos résultats mettent en évidence des tendances
+et des schémas distincts qui peuvent servir de guide. Suivre ces
+indications pourrait augmenter les chances de créer une chanson qui
+résonne bien avec le public.
+
+En somme, bien que la créativité et l'originalité demeurent des éléments
+cruciaux dans la production musicale, une compréhension approfondie des
+tendances actuelles et des préférences du public peut fournir un
+avantage stratégique. En s'appuyant sur les résultats de notre étude,
+une maison de disque peut donc affiner son approche et maximiser les
+chances de succès de ses futures productions musicales.
 
 ## Critiques sur notre jeu de données :
 
@@ -1864,3 +1915,18 @@ les variations régionales dans les préférences musicales ou les
 habitudes d'écoute. Cette lacune réduit notre capacité à obtenir une
 image complète et nuancée des tendances musicales à travers différentes
 régions.
+
+Nous remarquons également les limites de notre jeu de données en raison
+du manque d'informations contextuelles. En effet, nos recherches ont
+fourni de précieuses informations sur l'industrie musicale, mais elles
+ont également soulevé d'autres interrogations que nous n'avons
+malheureusement pas pu approfondir. Par exemple, les fêtes de fin
+d'année pourraient-elles être la cause de l'écoute de musique joyeuse
+plutôt que mélancolique en hiver ?
+
+Toutefois, l'émergence de nouvelles questions, même non résolues,
+s'inscrit parfaitement dans la démarche exploratoire entreprise dans le
+cadre de ce projet. Ces interrogations offrent des pistes pour des
+recherches futures et mettent en lumière l'importance d'un contexte plus
+riche pour une analyse encore plus approfondie de la popularité
+musicale.
