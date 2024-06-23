@@ -3,7 +3,7 @@ library(dplyr)
 library(ggplot2)
 library(shinydashboard)
 library(reshape2)
-
+# Define server logic required to draw plots and value boxes
 server <- function(input, output) {
   
   # Function to read CSV with encoding
@@ -29,7 +29,7 @@ server <- function(input, output) {
   # Render value boxes
   output$spotifyCount <- renderValueBox({
     valueBox(
-      value = spotify_data() %>% nrow(),
+      value = nrow(spotify_data()),
       subtitle = "Nombre de musiques dans spotify_data",
       icon = icon("music"),
       color = "blue"
@@ -38,7 +38,7 @@ server <- function(input, output) {
   
   output$spotify22Count <- renderValueBox({
     valueBox(
-      value = spotify22_data() %>% nrow(),
+      value = nrow(spotify22_data()),
       subtitle = "Nombre de musiques dans spotify22_data",
       icon = icon("music"),
       color = "green"
@@ -47,7 +47,7 @@ server <- function(input, output) {
   
   output$spotifyUnpopular <- renderValueBox({
     valueBox(
-      value = unpopular_data() %>% nrow(),
+      value = nrow(unpopular_data()),
       subtitle = "Nombre de musiques dans unpopular_data",
       icon = icon("music"),
       color = "red"
@@ -133,6 +133,7 @@ server <- function(input, output) {
       labs(title = "Corrélation entre Danceability et Classement (2022)", x = "Danceability", y = "Classement maximal")
   })
   
+  # Render heatmaps
   output$heatmapCorr23 <- renderPlot({
     data <- spotify_data() %>% slice(1:input$numSongs)
     corr_data <- data %>% select(danceability_., valence_., energy_., acousticness_., instrumentalness_., liveness_., speechiness_., streams) %>% 
@@ -146,10 +147,10 @@ server <- function(input, output) {
       labs(title = "Heatmap des corrélations (2023)", x = "", y = "")
   })
   
-  
   output$heatmapCorr22 <- renderPlot({
     data <- spotify22_data() %>% slice(1:input$numSongs)
-    corr_data <- data %>% select(danceability, energy, acousticness, instrumentalness, liveness, speechiness, peak_rank) %>% 
+    corr_data <- data %>% 
+      select(danceability, energy, acousticness, instrumentalness, liveness, speechiness, peak_rank) %>% 
       mutate(across(everything(), as.numeric))
     corr_matrix <- cor(corr_data, use = "complete.obs")
     melted_corr_matrix <- melt(corr_matrix)
@@ -181,4 +182,3 @@ server <- function(input, output) {
       labs(title = "Distribution des Classements par Danceability (2022)", x = "Danceability", y = "Classement maximal")
   })
 }
-

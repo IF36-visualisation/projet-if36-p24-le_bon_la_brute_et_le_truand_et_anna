@@ -20,12 +20,8 @@ library(tidyr)
 library(stringr)
 library(stringi)
 library(reshape2)
+suppressPackageStartupMessages(library(reshape2))
 
-suppressWarnings({
-  library(ggplot2)
-  library(dplyr)
-  library(reshape2)
-})
 
 
 # Chargement et traitement des données pour Spotify 2023
@@ -798,16 +794,17 @@ ggplot(artist_counts_top, aes(x = reorder(`artist(s)_name`, desc(n)), y = n)) +
 
 ```{r}
 #Stream par artiste
-
+# Convertir les streams en entiers
 spotify_data_23_ordre_decroissant$streams <- as.integer(spotify_data_23_ordre_decroissant$streams)
 
-
-top_artists_streams <- spotify_data_23_ordre_decroissant %>%
-  group_by(`artist(s)_name`) %>%
+# Calculer le nombre total de streams par artiste
+top_artists_streams <- spotify_data_23_ordre_decroissant %>% # Utiliser le dataset 2023
+  group_by(`artist(s)_name`) %>% # Regrouper par artiste
   summarise(total_streams = sum(streams)) %>%
   top_n(20, total_streams) %>%
   arrange(desc(total_streams))
 
+# Création graphique à barres pour les streams par artiste
 ggplot(top_artists_streams, aes(x = reorder(`artist(s)_name`, total_streams), y = total_streams)) +
   geom_bar(stat = "identity", fill = "steelblue") +
   geom_text(aes(label = scales::comma(total_streams)),
@@ -1384,6 +1381,7 @@ ggplot(spotify_data_23_ordre_decroissant, aes(x = season, y = `danceability_%`, 
        y = "Danceability (%)") +
   theme_minimal()
 
+#
 ggplot(spotify_data, aes(x = `danceability_%`, fill = season)) +
   geom_histogram(binwidth = 5, color = "black", position = "dodge") +
   scale_fill_manual(values = couleurs) +
@@ -1478,10 +1476,10 @@ classement maximal des chansons.
 Dans l'ensemble de données de 2023, nous traçons la danceability contre
 le nombre de streams pour observer toute corrélation apparente.
 
-```{r corrDanceabilityStreams23, echo=FALSE}
+```{r corrDanceabilityStreams23}
 # Préparation des données
 data_2023 <- spotify_data %>% 
-  slice(1:100) %>%  # Choisir un nombre fixe de chansons
+  slice(1:100) %>% 
   mutate(danceability = as.numeric(`danceability_%`),
          streams = as.numeric(streams)) %>%
   drop_na(danceability, streams)
@@ -1511,7 +1509,7 @@ tendance.
 ```{r corrDanceabilityRank22, echo=FALSE}
 # Préparation des données
 data_2022 <- spotify22_data %>% 
-  slice(1:100) %>%  # Choisir un nombre fixe de chansons
+  slice(1:100) %>% 
   mutate(danceability = as.numeric(danceability),
          peak_rank = as.numeric(peak_rank)) %>%
   drop_na(danceability, peak_rank)
@@ -1544,8 +1542,7 @@ détermination des classements.
 En général, bien que la danceability puisse influencer le succès d'une
 chanson dans une certaine mesure, il est clair qu'elle n'est pas le seul
 facteur. Une analyse complète devrait considérer plusieurs attributs
-musicaux et peut-être des facteurs externes comme les efforts de
-marketing et l'influence des médias sociaux.
+musicaux et peut-être des facteurs externes pour mieux comprendre les clés du succès musical.
 
 ### Heatmaps de corrélation
 
@@ -1558,26 +1555,26 @@ chansons.
 
 #### Heatmap des Corrélations (2023)
 
-```{r heatmapCorr23, echo=FALSE}
+```{r heatmapCorr23}
 
-# Select data and calculate correlations
+# Sélectionner les données et calculer les corrélations
 corr_data_2023 <- spotify_data %>% 
-  slice(1:100) %>%  # Adjust the number of songs as needed
+  slice(1:100) %>%  
   select(danceability_ = `danceability_%`, valence_ = `valence_%`, energy_ = `energy_%`, 
          acousticness_ = `acousticness_%`, instrumentalness_ = `instrumentalness_%`, 
          liveness_ = `liveness_%`, speechiness_ = `speechiness_%`, streams) %>%
   mutate(across(everything(), as.numeric))
 
-# Compute correlation matrix
+# Calculer la matrice de corrélation
 corr_matrix_2023 <- cor(corr_data_2023, use = "complete.obs")
 
-# Melt the correlation matrix for visualization
+# Transformer la matrice de corrélation pour la visualisation
 melted_corr_matrix_2023 <- melt(corr_matrix_2023)
 
-# Detach the reshape2 package to avoid conflicts
+# Empêcher les avertissements de réattachement du package
 detach("package:reshape2", unload=TRUE)
 
-# Generate the heatmap
+# Générer la heatmap
 ggplot(melted_corr_matrix_2023, aes(Var1, Var2, fill = value)) +
   geom_tile() +
   scale_fill_gradient2(low = "blue", high = "red", mid = "white", midpoint = 0, limit = c(-1, 1)) +
@@ -1588,24 +1585,24 @@ ggplot(melted_corr_matrix_2023, aes(Var1, Var2, fill = value)) +
 #### Heatmap des Corrélations (2022)
 
 ```{r heatmapCorr22, echo=FALSE}
-library(reshape2)
-
-# Select data and calculate correlations
+# Sélectionner les données et calculer les corrélations
 corr_data_2022 <- spotify22_data %>% 
-  slice(1:100) %>%  # Adjust the number of songs as needed
+  slice(1:100) %>%  
   select(danceability, energy, acousticness, instrumentalness, liveness, speechiness, peak_rank) %>%
   mutate(across(everything(), as.numeric))
 
-# Compute correlation matrix
+# Charger le package reshape2 pour utiliser la fonction melt
+suppressPackageStartupMessages(library(reshape2))
+
+# Calculer la matrice de corrélation
 corr_matrix_2022 <- cor(corr_data_2022, use = "complete.obs")
 
-# Melt the correlation matrix for visualization
+# Transformer la matrice de corrélation pour la visualisation
 melted_corr_matrix_2022 <- melt(corr_matrix_2022)
+# Empêcher les avertissements de réattachement du package
+detach("package:reshape2", unload = TRUE)
 
-# Detach the reshape2 package to avoid conflicts
-detach("package:reshape2", unload=TRUE)
-
-# Generate the heatmap
+# Générer la heatmap
 ggplot(melted_corr_matrix_2022, aes(Var1, Var2, fill = value)) +
   geom_tile() +
   scale_fill_gradient2(low = "blue", high = "red", mid = "white", midpoint = 0, limit = c(-1, 1)) +

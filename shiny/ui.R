@@ -1,13 +1,18 @@
+# Load required libraries
 library(shiny)
 library(shinydashboard)
+library(dplyr)
+library(ggplot2)
+library(reshape2)
 
+# Define UI for application
 ui <- dashboardPage(
   dashboardHeader(title = "Comparaison des données Spotify"),
   dashboardSidebar(
     sidebarMenu(
       menuItem("Comparaison", tabName = "Comparaison", icon = icon("th")),
       menuItem("Graphiques", tabName = "Graphiques", icon = icon("chart-column")),
-      sliderInput("numSongs", "Nombre de musiques", 1, 100, 10)
+      sliderInput("numSongs", "Nombre de musiques", min = 1, max = 100, value = 10)
     )
   ),
   dashboardBody(
@@ -29,7 +34,6 @@ ui <- dashboardPage(
                 valueBoxOutput("spotifyStreams")
               )
       ),
-      
       tabItem(tabName = "Graphiques",
               fluidRow(
                 box(title = "Popularité sur Spotify 2023", status = "primary", solidHeader = TRUE, collapsible = TRUE, 
