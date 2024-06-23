@@ -453,7 +453,6 @@ Spotify, De plus si nous avions eu aussi le nombre total d’utilisateurs
 de chaque plateforme nous aurions pu étayer notre analyse en prenant en
 considération ces informations.
 
-
 ```{r}
 
 
@@ -508,11 +507,26 @@ ggplot(filtered_playlist_data, aes(x = track_name, y = playlist_count, fill = pl
   theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))
 ```
 
-**Analyse : **
+**Analyse :**
 
-Le graphique est un histogramme intitulé “Nombre de playlists par plateforme (Top 20 des morceaux)”. Il affiche trois groupes de barres pour chaque morceau, représentant le nombre de playlists sur Apple Music, Deezer, et Spotify. L’axe vertical, étiqueté “Nombre de playlists”, varie de 0 à 40 000 avec des incréments de 5 000. L’axe horizontal énumère les 20 morceaux principaux. Chaque groupe de barres est coloré différemment selon la plateforme : bleu pour Apple Music, rouge pour Deezer, et vert pour Spotify.
+Le graphique est un histogramme intitulé “Nombre de playlists par
+plateforme (Top 20 des morceaux)”. Il affiche trois groupes de barres
+pour chaque morceau, représentant le nombre de playlists sur Apple
+Music, Deezer, et Spotify. L’axe vertical, étiqueté “Nombre de
+playlists”, varie de 0 à 40 000 avec des incréments de 5 000. L’axe
+horizontal énumère les 20 morceaux principaux. Chaque groupe de barres
+est coloré différemment selon la plateforme : bleu pour Apple Music,
+rouge pour Deezer, et vert pour Spotify.
 
-Ce graphique est intéressant car il visualise la popularité des morceaux les plus écoutés sur trois grandes plateformes de streaming musical, en montrant la fréquence de leur inclusion dans les playlists. Il permet de comparer rapidement quels morceaux sont les plus souvent présents dans les playlists et comment cela diffère selon la plateforme. Cela suggère que Spotify est la plateforme la plus influente en matière de musique. Cependant, l'exactitude de ces données est incertaine puisque le dataset intitulé "SpotifyData" ne fournit pas d'informations sur la source des données des autres plateformes.
+Ce graphique est intéressant car il visualise la popularité des morceaux
+les plus écoutés sur trois grandes plateformes de streaming musical, en
+montrant la fréquence de leur inclusion dans les playlists. Il permet de
+comparer rapidement quels morceaux sont les plus souvent présents dans
+les playlists et comment cela diffère selon la plateforme. Cela suggère
+que Spotify est la plateforme la plus influente en matière de musique.
+Cependant, l'exactitude de ces données est incertaine puisque le dataset
+intitulé "SpotifyData" ne fournit pas d'informations sur la source des
+données des autres plateformes.
 
 ### L’ambiance de la musique nous dit-elle quelque chose sur la popularité d’une musique? ou Est ce qu’une ambiance de musique est particulièrement populaire?
 
@@ -722,9 +736,9 @@ included in - in_deezer_charts: Presence and rank of the song on Deezer
 charts - in_shazam_charts: Presence and rank of the song on Shazam
 charts
 
-  Nous pouvons supposer que si un artiste n’est présent qu’une seule
-fois dans ce classement c’est parce qu’une de ses chansons à eu du
-succès auprès du grand public d’une manière générale, mais qu’il n’a pas
+Nous pouvons supposer que si un artiste n’est présent qu’une seule fois
+dans ce classement c’est parce qu’une de ses chansons à eu du succès
+auprès du grand public d’une manière générale, mais qu’il n’a pas
 forcément une grosse fanbase qui écoute toutes ses musiques dès qu’elles
 sortent. En observant la présence d’une musique en playlist nous pouvons
 voir si la musique à été poussée vers l’auditeur ou si sans être
@@ -737,14 +751,15 @@ nous sans que l’on soit des grands connaisseurs de l’artiste, donc cela
 pourrait être le signe que l’artiste à bbcp ou pas de nouveaux
 auditeurs.
 
-  Seulement si on avait la liste du nombre d’auditeurs mensuels moyens des
+Seulement si on avait la liste du nombre d’auditeurs mensuels moyens des
 artistes de spotify nous pourrions avoir une idée plus claire de
 l’engagement des auditeurs envers un artiste. De plus, il est aussi
 possible qu’une musique n’ait pas été populaire parce qu’elle était en
 playliste mais qu’elle ait été en playlist parce qu’elle était déjà
 populaire. Nous ne savons pas dans quel ordre cela se fait.
 
-Commençons par observer les tops artistes les plus présents dans le classement et les artistes les plus streamés: 
+Commençons par observer les tops artistes les plus présents dans le
+classement et les artistes les plus streamés:
 
 ```{r}
 # Nombre fois supérieur à 1 qu'un artist apparait dans le dataset 1
@@ -811,9 +826,19 @@ ggplot(top_artists_streams, aes(x = reorder(`artist(s)_name`, total_streams), y 
 
 **Analyse :**
 
-  Le premier graphique nous donne le top 20 des artistes dont le nom revient le plus souvent dans notre base de donnée, ici Les musiques plus écoutés sur Spotify en 2023. Ainsi ce sont les artistes qui ont le plus de musique dans le top 2023 de spotify. Nous aimerions savoir quels artistes parmi cette échantillon de 20 artistes ont une communauté de fan engagé. Selon toute logique si un artiste a beaucoup de titre alors il devrait également avoir beaucoup de stream.
-  
-  Le deuxième graphique nous permet donc d'avoir le classement des artistes qui enregistrent le plus de stream. On remarque immédiatement que Taylor Swift est première dans les deux classements, elle a en tout 34 musiques dans le classement et est celle qui est le plus écouté avec plus de 10 milliards de stream, les résultats sont donc cohérents. 
+Le premier graphique nous donne le top 20 des artistes dont le nom
+revient le plus souvent dans notre base de donnée, ici Les musiques plus
+écoutés sur Spotify en 2023. Ainsi ce sont les artistes qui ont le plus
+de musique dans le top 2023 de spotify. Nous aimerions savoir quels
+artistes parmi cette échantillon de 20 artistes ont une communauté de
+fan engagé. Selon toute logique si un artiste a beaucoup de titre alors
+il devrait également avoir beaucoup de stream.
+
+Le deuxième graphique nous permet donc d'avoir le classement des
+artistes qui enregistrent le plus de stream. On remarque immédiatement
+que Taylor Swift est première dans les deux classements, elle a en tout
+34 musiques dans le classement et est celle qui est le plus écouté avec
+plus de 10 milliards de stream, les résultats sont donc cohérents.
 
 ```{r}
 
@@ -859,9 +884,15 @@ ggplot(plot_data, aes(x = reorder(track_name, streams), y = streams)) +
 
 **Analyse :**
 
-  Si on regarde plus en détaille le nombre de streams par musique le nombre de streams n'est pas homogène mais élevé pour chacun des sons, le moins streamé etant tout de même au dessus de 30 millions. Des titres étant sorti il y a des années sont toujours très écoutés comme Shake It Off, sorti en 2014. Le fait qu'elle soit allé en tournée mondiale peut aussi expliquer ces chiffres ainsi on peut en déduire qu'elle a une audience investit et qui la suit, qui écoute ses chansons même ancienne et qui probablement va la voir en concert.
-  
-  
+Si on regarde plus en détaille le nombre de streams par musique le
+nombre de streams n'est pas homogène mais élevé pour chacun des sons, le
+moins streamé etant tout de même au dessus de 30 millions. Des titres
+étant sorti il y a des années sont toujours très écoutés comme Shake It
+Off, sorti en 2014. Le fait qu'elle soit allé en tournée mondiale peut
+aussi expliquer ces chiffres ainsi on peut en déduire qu'elle a une
+audience investit et qui la suit, qui écoute ses chansons même ancienne
+et qui probablement va la voir en concert.
+
 ```{r}
 #Apparition de la chanson en playlist
 spotify_data$in_spotify_playlists <- as.integer(spotify_data$in_spotify_playlists)
@@ -905,10 +936,25 @@ ggplot(plot_data, aes(x = reorder(track_name, in_spotify_playlists), y = in_spot
 
 **Analyse :**
 
-  On peut également remarquer une corrélation entre le nombre d'écoute et la présence du son en playlist, qui est généralement élevé. En effet si on compare les deux graphiques on observe que l'ordre des titres est assez similaire donc on peut déduire qu'il y a un lien entre la présence en playlist d'un titre et son nombre de stream. On ne sait cependant pas si le son est rentré en playlist parce qu'il était déjà beaucoup écouté ou si il est beaucoup écouté parce qu'il est en playlist. Toutefois même les sons les moins présents en playlist sont très écouté, Better Than Revenge sorti en 2010 et présent uniquement 86 fois en playlist cumule plus de 30 millions de streams. Nous pouvons estimer que cela est un indicateur pertinent sur l'engagement de sa fan base.
+On peut également remarquer une corrélation entre le nombre d'écoute et
+la présence du son en playlist, qui est généralement élevé. En effet si
+on compare les deux graphiques on observe que l'ordre des titres est
+assez similaire donc on peut déduire qu'il y a un lien entre la présence
+en playlist d'un titre et son nombre de stream. On ne sait cependant pas
+si le son est rentré en playlist parce qu'il était déjà beaucoup écouté
+ou si il est beaucoup écouté parce qu'il est en playlist. Toutefois même
+les sons les moins présents en playlist sont très écouté, Better Than
+Revenge sorti en 2010 et présent uniquement 86 fois en playlist cumule
+plus de 30 millions de streams. Nous pouvons estimer que cela est un
+indicateur pertinent sur l'engagement de sa fan base.
 
-  En revanche The Weeknd le deuxième artiste qui a le plus de chanson dans le classement, 22 titres en tout, n'est pas dans le top 20 des artistes les plus streamés. Ce qui ressort à l'issue de cette observation c'est qu'il a à chaque fois assez d'auditeurs pour être dans le classement des musiques les plus écouté mais qu'il n'est pas assez mainstream pour être dans le top des artistes les plus streamés.
-  
+En revanche The Weeknd le deuxième artiste qui a le plus de chanson dans
+le classement, 22 titres en tout, n'est pas dans le top 20 des artistes
+les plus streamés. Ce qui ressort à l'issue de cette observation c'est
+qu'il a à chaque fois assez d'auditeurs pour être dans le classement des
+musiques les plus écouté mais qu'il n'est pas assez mainstream pour être
+dans le top des artistes les plus streamés.
+
 ```{r}
 #Nombre de stream
 spotify_data$streams <- as.integer(spotify_data$streams)
@@ -950,7 +996,6 @@ ggplot(plot_data, aes(x = reorder(track_name, streams), y = streams)) +
   theme(axis.text.x = element_text(angle = 0, hjust = 1))
 ```
 
-  
 ```{r}
 #Apparition de la chanson en playlist
 spotify_data$in_spotify_playlists <- as.integer(spotify_data$in_spotify_playlists)
@@ -984,13 +1029,21 @@ ggplot(plot_data, aes(x = reorder(track_name, in_spotify_playlists), y = in_spot
   geom_text(aes(label = scales::comma(in_spotify_playlists)), 
             hjust = -0.1, size = 3.5, nudge_y = 0) + coord_flip() + ylim(0, y_limit) +labs(title = paste("Apparition en playlist par Chanson pour", chosen_artist), x = "Titres", y = "Nombre d'apparition en playlist") + theme_minimal() + theme(axis.text.x = element_text(angle = 0, hjust = 1))
 ```
- 
+
 **Analyse :**
 
-  De plus on constate qu'il apparait plus souvent en playlist sur spotify que Taylor Swift, son titre qui est le plus en playlist apparait plus de 43000 fois tandis que pour Taylor Swift c'est autour de 21000 fois. Ainsi cette comparaison nous permet de confirmer que Taylor Swift a une fanbase fidèle. Nous ne pouvons pas réellement tirer de conclusion quant à la fanbase de The Weeknd. On peut tout de même supposer qu'il ait possiblement une fanbase fidèle pour être présent une vingtaine de fois dans les artistes les plus présent dans les meilleurs classement et touche peu de nouveaux auditeurs malgré sa présence en playlist.
-  
+De plus on constate qu'il apparait plus souvent en playlist sur spotify
+que Taylor Swift, son titre qui est le plus en playlist apparait plus de
+43000 fois tandis que pour Taylor Swift c'est autour de 21000 fois.
+Ainsi cette comparaison nous permet de confirmer que Taylor Swift a une
+fanbase fidèle. Nous ne pouvons pas réellement tirer de conclusion quant
+à la fanbase de The Weeknd. On peut tout de même supposer qu'il ait
+possiblement une fanbase fidèle pour être présent une vingtaine de fois
+dans les artistes les plus présent dans les meilleurs classement et
+touche peu de nouveaux auditeurs malgré sa présence en playlist.
+
 A présent concentrons nous sur Eminem:
-  
+
 ```{r}
 
 #Nombre de stream
@@ -1108,10 +1161,27 @@ ggplot(plot_data, aes(x = reorder(track_name, in_shazam_charts), y = in_shazam_c
 
 **Analyse:**
 
-  Le cas d'Eminem nous permet par contre de déduire un réel engagement et attachement de son public. Dans le premier graphique on Observe qu'il est dans le top 20 des artistes les plus présents dans le classement, il  est vingtième ex-eaquo avec d'autres artistes tandis que dans le classement des artistes les plus streamés il est quatrième. Lorsqu'on regarde le nombre de streams plus précisement on remarque que cinq de ses titres sont chacun à plus d'un milliard d'e stream'écoute dans l'année. En comparaison Taylor Swift n'en a que deux. De plus ces titres sont tous sorti il y a plus de dix ans, ainsi bien qu'il soit possible que de nouveaux auditeurs l'écoutent, il est probable qu'il y ait une grosse base d'auditeurs qui écoute Eminem depuis des années. De plus peu des chansons sont présentes dans les classements de shazam et même si ils le sont le chiffre est très faible, par exemple Lose Yourself apparait sur shazam uniquement 51 fois alors qu'il est streamé plus d'un milliard de fois, tout en étant sorti il y a plus de 20 ans, en 2002.
+Le cas d'Eminem nous permet par contre de déduire un réel engagement et
+attachement de son public. Dans le premier graphique on Observe qu'il
+est dans le top 20 des artistes les plus présents dans le classement, il
+est vingtième ex-eaquo avec d'autres artistes tandis que dans le
+classement des artistes les plus streamés il est quatrième. Lorsqu'on
+regarde le nombre de streams plus précisement on remarque que cinq de
+ses titres sont chacun à plus d'un milliard d'e stream'écoute dans
+l'année. En comparaison Taylor Swift n'en a que deux. De plus ces titres
+sont tous sorti il y a plus de dix ans, ainsi bien qu'il soit possible
+que de nouveaux auditeurs l'écoutent, il est probable qu'il y ait une
+grosse base d'auditeurs qui écoute Eminem depuis des années. De plus peu
+des chansons sont présentes dans les classements de shazam et même si
+ils le sont le chiffre est très faible, par exemple Lose Yourself
+apparait sur shazam uniquement 51 fois alors qu'il est streamé plus d'un
+milliard de fois, tout en étant sorti il y a plus de 20 ans, en 2002.
 
-  En somme, nous voulions savoir si avec nos données nous pouvions évaluer l'engagement d'une fanbase, nos observations ne nous permette pas de conclure réellement nous pouvons uniquement établir des pistes quant à la fidélité des auditeurs d'un artiste.
-  
+En somme, nous voulions savoir si avec nos données nous pouvions évaluer
+l'engagement d'une fanbase, nos observations ne nous permette pas de
+conclure réellement nous pouvons uniquement établir des pistes quant à
+la fidélité des auditeurs d'un artiste.
+
 ### Quelle place l'acoustique a-t-il dans la musique? Est ce populaire de nos jours?
 
 On sait qu’il y a pleins de façons de faire de la musique et que la
@@ -1239,7 +1309,10 @@ création et la promotion de musique adaptée à chaque période de l'année.
 Cependant, ces graphiques ne peuvent pas clairement nous aider à prendre
 des décisions en raison des écarts trop peu importants.
 
-Malheureusement, nous ne pouvons pas établir de corrélation entre le dataset de 2023 et 2022 puisque dans le dataset de 2022 nous n'avons pas de données sur les saisons. Nous ne pouvons donc pas comparer les deux années. De même, pour le dataset des chansons les moins populaires.
+Malheureusement, nous ne pouvons pas établir de corrélation entre le
+dataset de 2023 et 2022 puisque dans le dataset de 2022 nous n'avons pas
+de données sur les saisons. Nous ne pouvons donc pas comparer les deux
+années. De même, pour le dataset des chansons les moins populaires.
 
 ### Existe-t’il des caractéristiques audio communes dans les sons populaires en fonction des saisons ?
 
@@ -1370,19 +1443,40 @@ pas se fier uniquement à ce graphique pour prendre des décisions.
 
 ## La danceability d'une musique influence-t-elle significativement son succès en termes de streams et de classement sur Spotify?
 
-La "danceability" d'une chanson est une caractéristique clé dans l'analyse musicale, particulièrement lorsqu'on examine son impact sur le succès d'une chanson sur des plateformes comme Spotify. La danceability mesure dans quelle mesure une chanson est adaptée à la danse, en se basant sur des éléments comme le tempo, la stabilité du rythme, la force des battements et la régularité générale. La valeur de la danceability varie de 0 à 100, avec des valeurs plus élevées indiquant que la chanson est plus dansante.
+La "danceability" d'une chanson est une caractéristique clé dans
+l'analyse musicale, particulièrement lorsqu'on examine son impact sur le
+succès d'une chanson sur des plateformes comme Spotify. La danceability
+mesure dans quelle mesure une chanson est adaptée à la danse, en se
+basant sur des éléments comme le tempo, la stabilité du rythme, la force
+des battements et la régularité générale. La valeur de la danceability
+varie de 0 à 100, avec des valeurs plus élevées indiquant que la chanson
+est plus dansante.
 
-Notre objectif est de déterminer si la danceability influence significativement le succès d'une chanson, mesuré par le nombre de streams ou son classement dans les charts Spotify. Nous analyserons des données provenant de deux ensembles distincts : un pour l'année 2022 et un autre pour 2023. L'ensemble de données de 2023 se concentre sur le nombre de streams, tandis que celui de 2022 met l'accent sur le classement maximal des chansons.
+Notre objectif est de déterminer si la danceability influence
+significativement le succès d'une chanson, mesuré par le nombre de
+streams ou son classement dans les charts Spotify. Nous analyserons des
+données provenant de deux ensembles distincts : un pour l'année 2022 et
+un autre pour 2023. L'ensemble de données de 2023 se concentre sur le
+nombre de streams, tandis que celui de 2022 met l'accent sur le
+classement maximal des chansons.
 
 ### Présentation et Description du Problème
 
-1. **Ensemble de données 2022** : Contient des informations sur les noms des chansons, les artistes, le classement maximal, les semaines dans le chart, et diverses caractéristiques musicales, y compris la danceability, l'énergie, la sonorité, le discours, et plus encore.
-2. **Ensemble de données 2023** : Comprend les noms des chansons, les artistes, les dates de sortie, le nombre de streams, et des caractéristiques musicales similaires, avec la danceability représentée en pourcentage.
+1.  **Ensemble de données 2022** : Contient des informations sur les
+    noms des chansons, les artistes, le classement maximal, les semaines
+    dans le chart, et diverses caractéristiques musicales, y compris la
+    danceability, l'énergie, la sonorité, le discours, et plus encore.
+2.  **Ensemble de données 2023** : Comprend les noms des chansons, les
+    artistes, les dates de sortie, le nombre de streams, et des
+    caractéristiques musicales similaires, avec la danceability
+    représentée en pourcentage.
 
 ### Graphiques de Corrélation
 
 #### Corrélation entre Danceability et Streams (2023)
-Dans l'ensemble de données de 2023, nous traçons la danceability contre le nombre de streams pour observer toute corrélation apparente.
+
+Dans l'ensemble de données de 2023, nous traçons la danceability contre
+le nombre de streams pour observer toute corrélation apparente.
 
 ```{r corrDanceabilityStreams23, echo=FALSE}
 # Préparation des données
@@ -1399,14 +1493,20 @@ ggplot(data_2023, aes(x = danceability, y = streams)) +
   labs(title = "Corrélation entre Danceability et Streams (2023)", x = "Danceability", y = "Streams")
 ```
 
-**Observation**: Le graphique en nuages de points montre une large dispersion des données, suggérant une faible corrélation entre la danceability et le nombre de streams.
+**Observation**: Le graphique en nuages de points montre une large
+dispersion des données, suggérant une faible corrélation entre la
+danceability et le nombre de streams.
 
-**Interprétation**: La danceability ne semble pas être un déterminant majeur du succès en termes de streams pour l'année 2023. Le nombre de streams varie largement indépendamment de la danceability, indiquant que d'autres facteurs peuvent avoir une influence plus significative.
-
+**Interprétation**: La danceability ne semble pas être un déterminant
+majeur du succès en termes de streams pour l'année 2023. Le nombre de
+streams varie largement indépendamment de la danceability, indiquant que
+d'autres facteurs peuvent avoir une influence plus significative.
 
 #### Corrélation entre Danceability et Classement (2022)
-Ensuite, nous examinons l'ensemble de données de 2022 en traçant la danceability contre le classement maximal pour identifier toute tendance.
 
+Ensuite, nous examinons l'ensemble de données de 2022 en traçant la
+danceability contre le classement maximal pour identifier toute
+tendance.
 
 ```{r corrDanceabilityRank22, echo=FALSE}
 # Préparation des données
@@ -1423,23 +1523,40 @@ ggplot(data_2022, aes(x = danceability, y = peak_rank)) +
   labs(title = "Corrélation entre Danceability et Classement (2022)", x = "Danceability", y = "Classement maximal")
 ```
 
-**Observation**: Les points de données sont également largement dispersés avec quelques clusters, montrant une légère tendance où des chansons plus dansantes tendent à obtenir de meilleurs classements.
+**Observation**: Les points de données sont également largement
+dispersés avec quelques clusters, montrant une légère tendance où des
+chansons plus dansantes tendent à obtenir de meilleurs classements.
 
-**Interprétation**: Il y a une faible corrélation positive indiquant que des chansons avec une danceability plus élevée pourraient avoir de meilleurs classements, mais cette tendance n'est pas assez forte pour tirer des conclusions définitives. D'autres facteurs musicaux ou externes jouent probablement un rôle plus substantiel dans la détermination des classements.
+**Interprétation**: Il y a une faible corrélation positive indiquant que
+des chansons avec une danceability plus élevée pourraient avoir de
+meilleurs classements, mais cette tendance n'est pas assez forte pour
+tirer des conclusions définitives. D'autres facteurs musicaux ou
+externes jouent probablement un rôle plus substantiel dans la
+détermination des classements.
 
+-   **Données de 2023** : Il n'y a pas de corrélation significative
+    entre la danceability et le nombre de streams. La danceability seule
+    ne prédit pas le succès des streams.
+-   **Données de 2022** : Il y a une légère tendance suggérant que des
+    chansons plus dansantes peuvent obtenir de meilleurs classements,
+    mais la corrélation est faible.
 
-- **Données de 2023** : Il n'y a pas de corrélation significative entre la danceability et le nombre de streams. La danceability seule ne prédit pas le succès des streams.
-- **Données de 2022** : Il y a une légère tendance suggérant que des chansons plus dansantes peuvent obtenir de meilleurs classements, mais la corrélation est faible.
+En général, bien que la danceability puisse influencer le succès d'une
+chanson dans une certaine mesure, il est clair qu'elle n'est pas le seul
+facteur. Une analyse complète devrait considérer plusieurs attributs
+musicaux et peut-être des facteurs externes comme les efforts de
+marketing et l'influence des médias sociaux.
 
-En général, bien que la danceability puisse influencer le succès d'une chanson dans une certaine mesure, il est clair qu'elle n'est pas le seul facteur. Une analyse complète devrait considérer plusieurs attributs musicaux et peut-être des facteurs externes comme les efforts de marketing et l'influence des médias sociaux.
+### Heatmaps de corrélation
 
-
-### Heatmaps de corrélation 
-
-Les heatmaps de corrélation pour les années 2023 et 2022 présentent une vue d'ensemble des relations entre différentes caractéristiques musicales et les mesures de succès des chansons sur Spotify. Ces visualisations nous permettent de comprendre quelles caractéristiques sont potentiellement interconnectées et leur impact sur le succès des chansons.
+Les heatmaps de corrélation pour les années 2023 et 2022 présentent une
+vue d'ensemble des relations entre différentes caractéristiques
+musicales et les mesures de succès des chansons sur Spotify. Ces
+visualisations nous permettent de comprendre quelles caractéristiques
+sont potentiellement interconnectées et leur impact sur le succès des
+chansons.
 
 #### Heatmap des Corrélations (2023)
-
 
 ```{r heatmapCorr23, echo=FALSE}
 
@@ -1470,7 +1587,6 @@ ggplot(melted_corr_matrix_2023, aes(Var1, Var2, fill = value)) +
 
 #### Heatmap des Corrélations (2022)
 
-
 ```{r heatmapCorr22, echo=FALSE}
 library(reshape2)
 
@@ -1499,24 +1615,238 @@ ggplot(melted_corr_matrix_2022, aes(Var1, Var2, fill = value)) +
 
 ### Analyse des Heatmaps
 
-Les heatmaps de corrélation montrent les relations entre différentes caractéristiques musicales pour les années 2023 et 2022. Voici quelques points d'intérêt et interprétations des résultats :
+Les heatmaps de corrélation montrent les relations entre différentes
+caractéristiques musicales pour les années 2023 et 2022. Voici quelques
+points d'intérêt et interprétations des résultats :
 
 #### Heatmap des Corrélations (2023)
 
-- **Danceability et Streams** : Il n'y a pas de corrélation marquée entre la danceability et les streams. Cela confirme notre analyse précédente, indiquant que la danceability n'est pas un facteur déterminant du nombre de streams.
-- **Energy et Valence** : Une corrélation positive notable entre l'énergie et la valence, suggérant que les chansons énergiques tendent à être perçues comme plus positives.
-- **Instrumentalness et Acousticness** : Une forte corrélation positive, ce qui est attendu puisque les chansons avec une instrumentalité élevée ont souvent un caractère acoustique prononcé.
+-   **Danceability et Streams** : Il n'y a pas de corrélation marquée
+    entre la danceability et les streams. Cela confirme notre analyse
+    précédente, indiquant que la danceability n'est pas un facteur
+    déterminant du nombre de streams.
+-   **Energy et Valence** : Une corrélation positive notable entre
+    l'énergie et la valence, suggérant que les chansons énergiques
+    tendent à être perçues comme plus positives.
+-   **Instrumentalness et Acousticness** : Une forte corrélation
+    positive, ce qui est attendu puisque les chansons avec une
+    instrumentalité élevée ont souvent un caractère acoustique prononcé.
 
 #### Heatmap des Corrélations (2022)
 
-- **Danceability et Classement** : La danceability montre une faible corrélation positive avec le classement, ce qui est cohérent avec notre analyse antérieure des données de 2022.
-- **Energy et Acousticness** : Une corrélation négative entre l'énergie et l'acousticness, indiquant que les chansons énergiques sont souvent moins acoustiques.
-- **Speechiness et Classement** : Une légère corrélation négative entre la speechiness et le classement, suggérant que les chansons avec plus de paroles parlées tendent à avoir des classements inférieurs.
+-   **Danceability et Classement** : La danceability montre une faible
+    corrélation positive avec le classement, ce qui est cohérent avec
+    notre analyse antérieure des données de 2022.
+-   **Energy et Acousticness** : Une corrélation négative entre
+    l'énergie et l'acousticness, indiquant que les chansons énergiques
+    sont souvent moins acoustiques.
+-   **Speechiness et Classement** : Une légère corrélation négative
+    entre la speechiness et le classement, suggérant que les chansons
+    avec plus de paroles parlées tendent à avoir des classements
+    inférieurs.
 
+Les heatmaps de corrélation fournissent une vue d'ensemble des
+interrelations entre différentes caractéristiques musicales et leur
+impact potentiel sur le succès des chansons. Bien que la danceability ne
+soit pas fortement corrélée avec les mesures de succès (streams et
+classement), d'autres caractéristiques comme l'énergie, la valence, et
+l'acousticness montrent des corrélations intéressantes. Ces insights
+peuvent être précieux pour les artistes et producteurs cherchant à
+optimiser certaines caractéristiques musicales pour maximiser le succès
+de leurs chansons sur Spotify.
 
-Les heatmaps de corrélation fournissent une vue d'ensemble des interrelations entre différentes caractéristiques musicales et leur impact potentiel sur le succès des chansons. Bien que la danceability ne soit pas fortement corrélée avec les mesures de succès (streams et classement), d'autres caractéristiques comme l'énergie, la valence, et l'acousticness montrent des corrélations intéressantes. Ces insights peuvent être précieux pour les artistes et producteurs cherchant à optimiser certaines caractéristiques musicales pour maximiser le succès de leurs chansons sur Spotify.
+### Peut-on trouver des caractéristiques communes aux chansons les moins populaires ?
 
+Maintenant que nous avons étudié les caractéristiques des chansons les
+plus populaires, il est important de s'interroger sur les chansons qui
+sont le moins écoutées. En effet, cette étude pourrait nous fournir des
+informations précieuses sur l'industrie musicale et ses rouages.
 
+Pour répondre à cette problématique, nous avons utilisé le logiciel
+Tableau. En effet, Tableau est un logiciel de visualisation de données
+qui permet de créer des graphiques et des tableaux de bord interactifs.
+Facile à utiliser, il aide les utilisateurs à explorer leurs données et
+à prendre des décisions éclairées grâce à des visualisations claires et
+percutantes. Grâce à celui-ci, nous avons pu mener à bien notre démarche
+exploratoire et ainsi finaliser notre analyse.
+
+Lors de cette étude, nous avons utilisé deux jeux de données différents
+:
+
+-   Les musiques les moins écoutées sur Spotify, toutes années
+    confondues.
+-   Les musiques les plus écoutées sur Spotify en 2022, avec leurs
+    statistiques sur toutes les plateformes de streaming.
+
+Cette comparaison va nous permettre de tirer des conclusions réalistes à
+partir des différentes visualisations.
+
+#### Le tempo peut-il avoir une influence négative sur une chanson ?
+
+Nous avons précédemment étudié l'influence du tempo sur la popularité
+d'une musique. Nous avons conclu que les chansons les plus populaires se
+situaient entre 90 et 130 BPM. Nous nous sommes alors demandés si, parmi
+les chansons les moins populaires, un tempo particulier était plus
+représenté.
+
+Pour réaliser nos graphiques, nous avons utilisé les variables suivantes
+:
+
+-   tempo : qui donne la valeur du BPM pour chaque chanson
+-   track_id : qui donne l'ID de chaque chanson moins écoutée
+-   track_name : qui donne le nom de chaque musique populaire en 2022
+
+Nous avons été amenés à créer une nouvelle variable (interval_tempo)
+afin de répartir correctement chaque musique dans l'intervalle qui lui
+correspondait et de faciliter la lecture graphique.
+
+![graphiques tempo](image/tempo.PNG)
+
+#### Analyse :
+
+Nous pouvons voir ici que le graphique de répartition du tempo sur les
+meilleures chansons de 2022 corrobore bien le résultat trouvé plus tôt
+dans cette étude. Le BPM est centré entre 90 et 130.Ce tempo particulier
+semble correspondre à un équilibre optimal qui attire l'audience et
+favorise la popularité des morceaux musicaux. Cela suggère que les
+artistes et producteurs peuvent utiliser ce range de BPM comme une
+référence pour créer des chansons potentiellement plus attrayantes pour
+un large public.
+
+En contraste, lorsque l'on examine la répartition du tempo des chansons
+moins populaires, une dispersion plus large est observable, avec la
+majorité des tempos variant entre 70 et 150 BPM. Cette variabilité
+pourrait indiquer une diversité stylistique ou une tentative de se
+démarquer parmi une concurrence moins régulée. Cependant, pour les
+chansons ayant un tempo similaire à celui des hits (90-130 BPM) mais ne
+réussissant pas à atteindre une popularité comparable, cela suggère que
+d'autres aspects musicaux ou extra-musicaux pourraient jouer un rôle
+déterminant dans leur réception par le public.
+
+Par conséquent, bien que le tempo entre 90 et 130 BPM semble offrir un
+avantage initial en termes de popularité potentielle, sortir de cette
+plage constitue un véritable risque. Les graphiques de répartition
+mettent en lumière cette réalité en montrant une diminution de la
+fréquence des chansons en dehors de cette zone, ce qui pourrait refléter
+une moindre acceptation par le public. Ainsi, ces observations
+encouragent à considérer le tempo comme un élément clé, mais non
+exclusif, de la recette du succès musical.
+
+#### Le mode d'une musique a-t-il une influence sur sa popularité ?
+
+Nous allons maintenant nous intéresser au mode en musique. Le mode
+désigne l'ensemble des notes utilisées pour créer une mélodie et des
+accords. Le mode majeur est associé à une ambiance lumineuse et joyeuse,
+utilisant une échelle où la tonique et la tierce majeure créent une
+sensation de stabilité et de positivité. En revanche, le mode mineur
+crée une atmosphère plus sombre et mélancolique en utilisant une tierce
+mineure, produisant un son plus intense et émotionnel. Ces choix de mode
+ont une influence profonde sur l'émotion et le style d'une composition
+musicale.
+
+Pour réaliser nos graphiques, nous avons utilisé les variables suivantes
+:
+
+-   mode : qui donne le mode de chaque morceau (1 = majeur et 0 =
+    mineur)
+-   track_name : qui donne l'ID de chaque chanson moins écoutée
+-   track_name : qui donne le nom de chaque musique populaire en 2022
+
+![graphiques mode](image/mode.PNG)
+
+#### Analyse :
+
+Nous observons des similitudes entre nos deux graphiques. En effet, le
+mode majeur prédomine tant dans les morceaux populaires de 2022 que dans
+ceux moins populaires. Cela suggère qu'il n'existe pas de schéma clair
+garantissant la popularité d'une musique basée uniquement sur le choix
+du mode. Cependant, nous pouvons recommander de préférer le mode majeur
+pour suivre la tendance majoritaire et minimiser les risques.
+
+#### La danceability a-t-elle une influence sur la faible popularité d'une musique ?
+
+Nous nous intéressons maintenant à la danceability d'une musique. En
+effet, comme mentionné précédemment, la "danceability" d'une chanson est
+une caractéristique essentielle dans l'analyse musicale. Cette mesure
+évalue à quel point une chanson est adaptée à la danse en prenant en
+compte des éléments tels que le tempo, la stabilité du rythme,
+l'intensité des battements et la régularité globale. La danceability est
+notée sur une échelle de 0 à 100, les valeurs plus élevées indiquant une
+chanson plus propice à la danse.
+
+Pour réaliser nos graphiques, nous avons utilisé les variables suivantes
+:
+
+-   danceability : qui donne la valeur du BPM pour chaque chanson
+-   track_id : qui donne l'ID de chaque chanson moins écoutée
+-   track_name : qui donne le nom de chaque musique populaire en 2022
+
+Nous avons été amenés à créer une nouvelle variable
+(interval_danceability) afin de répartir correctement chaque musique
+dans l'intervalle qui lui correspondait et de faciliter la lecture
+graphique.
+
+![graphiques danceability](image/danceability.PNG)
+
+#### Analyse :
+
+De la même manière que pour le tempo, l'analyse de la danceability des
+chansons révèle des tendances distinctes entre celles qui sont
+populaires et celles qui le sont moins en 2022. Les chansons populaires
+montrent une préférence marquée pour certaines valeurs de danceability.
+En effet, la majorité de ces chansons sont centrées autour d'une valeur
+spécifique, principalement dans l'intervalle de 70 à 80 sur l'échelle de
+mesure de la danceability. Cette concentration suggère une tendance à
+optimiser la capacité des morceaux à inciter à la danse, avec un rythme
+stable et une intensité de battement adaptée.
+
+En revanche, pour les chansons moins populaires, la danceability
+présente une distribution plus dispersée. Ces chansons montrent une
+variabilité plus large dans leurs valeurs de danceability, couvrant un
+intervalle qui va de 50 à 80. Cette diversité peut refléter une
+tentative de diversification stylistique ou une exploration de nouveaux
+terrains musicaux moins conventionnels, mais aussi une adaptation à des
+goûts et préférences plus spécifiques parmi les auditeurs.
+
+Ces observations soulignent l'importance de la danceability comme
+facteur influençant la réception et la popularité d'une musique sur des
+plateformes de diffusion comme Spotify, où la facilité avec laquelle une
+chanson invite à la danse peut jouer un rôle crucial dans son attrait
+pour un large public.
+
+#### La durée d'une musique a-t-elle une influence sur sa popularité ?
+
+Enfin, nous nous sommes intéressés à la durée d'une musique. Lorsqu'il
+s'agit d'évaluer les facteurs qui influencent la popularité d'une œuvre
+musicale, la durée représente souvent une considération cruciale. Cette
+caractéristique peut jouer un rôle significatif dans la façon dont une
+chanson est perçue et consommée par le public. En effet, une durée plus
+longue ou plus courte peut affecter l'engagement des auditeurs, leur
+rétention d'attention et même leur satisfaction globale à l'écoute.
+Ainsi, comprendre comment la durée impacte la réception d'une musique
+est essentiel pour saisir les dynamiques de son succès.
+
+Pour réaliser nos graphiques, nous avons utilisé les variables suivantes
+:
+
+-   duration : qui donne la valeur du BPM pour chaque chanson
+-   track_id : qui donne l'ID de chaque chanson moins écoutée
+-   track_name : qui donne le nom de chaque musique populaire en 2022
+
+Nous avons été amenés à convertir la durée en minute et créer une
+nouvelle variable (interval_duration) afin de répartir correctement
+chaque musique dans l'intervalle qui lui correspondait et de faciliter
+la lecture graphique.
+
+![graphiques durée](image/duree.PNG)
+
+#### Analyse : 
+
+Nous pouvons observer un schéma clair pour les musiques les plus populaires en 2022 : la grande majorité des chansons se situent dans l'intervalle de 2 à 4 minutes. Cette tendance marquée parmi les chansons les plus appréciées de l'année souligne une préférence générale pour des compositions à la fois concises et captivantes. Cette durée semble idéale pour maintenir l'attention des auditeurs tout en permettant le développement d'une structure musicale complète et mémorable.
+
+En revanche, dans les chansons moins populaires, bien que la plupart se trouvent également dans l'intervalle de 2 à 4 minutes, une proportion significative s'étend au-delà de cette plage. Cette observation révèle une différence notable par rapport aux chansons les plus populaires, suggérant une plus grande diversité dans les approches créatives ou une exploration de formats moins conventionnels par les artistes.
+
+Nous pouvons donc conclure que la durée d'une chanson joue un rôle crucial dans sa perception par le public. Il semble moins risqué de se conformer à l'intervalle de durée mis en avant par cette étude. Cependant, il est également important de noter que des stratégies alternatives peuvent trouver leur place sur le marché musical. Ainsi, la durée demeure un facteur clé à prendre en compte lors de la création et de la promotion de nouvelles musiques.
 
 ## Critiques sur notre jeu de données :
 
