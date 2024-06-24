@@ -536,15 +536,36 @@ indicating how suitable the song is for dancing - valence\_%: Positivity
 of the song's musical content - energy\_%: Perceived energy level of the
 song
 
-Nous observerons pour chaque catégorie le mode puisqu'en musique le mode
-mineur est considéré comme plus triste tandis que le mode majeur comme
-joyeux. Ensuite nous établirons des plages de pourcentages de
-dansabilité, de positivité et d’énergie pour chaque catégorie. Une fois
-que nous aurons établies ces ambiances nous pourrons trier les chansons
-et comparer les nombre de chansons dans chaque catégorie et définir si
-oui ou non une catégorie est plus représentée. Nous supposons que les
-musiques festives et joyeuses pourraient être les plus représentées dans
-le classement des musiques les plus populaires de 2023.
+
+```{r}
+# Créer des catégories d'ambiance basées sur les caractéristiques audio
+spotify_data <- spotify_data %>%
+  mutate(ambiance = case_when(
+    `energy_%` >= 70 & `valence_%` >= 70 ~ "Festive",
+    `energy_%` >= 70 & `valence_%` < 70 ~ "Énergique",
+    `energy_%` < 70 & `valence_%` >= 70 ~ "Positif",
+    `energy_%` < 70 & `valence_%` < 70 ~ "Calme",
+    TRUE ~ "Autre"
+  ))
+
+# Visualisation de la répartition des ambiances
+ggplot(spotify_data, aes(x = ambiance, fill = ambiance)) +
+  geom_bar() +
+  labs(title = "Répartition des ambiances des chansons populaires en 2023",
+       x = "Ambiance",
+       y = "Nombre de chansons") +
+  theme_minimal()
+```
+
+**Analyse :**
+Le graphique nous montre la distribution des chansons populaires selon quatre catégories d'ambiance : Calme, Énergique, Festive et Positif. Voici quelques points clés que l'on peut en conclure :
+
+Calme : La majorité des chansons populaires en 2023 sont de nature calme, avec plus de 400 chansons répertoriées dans cette catégorie. Cela indique une préférence notable du public pour des musiques apaisantes et relaxantes.
+
+Énergique : La deuxième catégorie la plus populaire est celle des chansons énergiques, avec environ 250 chansons. Cela montre une appréciation significative pour des morceaux dynamiques et entraînants.
+
+Festive et Positif : Les chansons festives et positives sont moins nombreuses, avec environ 150 chansons pour les ambiances festives et un peu plus de 100 pour les ambiances positives. Bien que moins populaires que les deux premières catégories, elles représentent tout de même une part importante du paysage musical de 2023.
+
 
 ### Le tempo d’une musique joue-t-il un rôle important dans la popularité de celle-ci ?
 
@@ -1204,36 +1225,63 @@ classement des musiques 100% acoustique, nous ne serions, au contraire,
 pas surpris de trouver de nombreuses chansons à 0%. Nous pensons qu’une
 majorité des chansons auront une part acoustique inférieure à 50%.
 
-### Quel titre de musique a eu le plus de succès selon sa date de sortie ?
+```{r}
+# Visualisation de la répartition de l'acousticness
+ggplot(spotify_data, aes(x = `acousticness_%`, fill = after_stat(count))) +
+  geom_histogram(binwidth = 10, color = "black") +
+  labs(title = "Répartition de l'acousticness des chansons populaires en 2023",
+       x = "Acousticness (%)",
+       y = "Nombre de chansons") +
+  theme_minimal()
+```
 
-Pour identifier le titre de musique ayant eu le plus de succès selon sa
-date de sortie, nous pouvons utiliser les données suivantes :
+**Analyse :**
 
--   track_name
--   artist(s)\_name
--   released_year
--   released_month
--   released_day
--   streams
+Le graphique présente la distribution des chansons populaires en fonction de leur caractère acoustique, mesuré en pourcentage. Voici les conclusions principales que l'on peut en tirer :
 
-Pour mettre en avant les titres les plus écoutés selon leur date de
-sortie, nous pouvons procéder comme suit :
+Dominance des chansons peu acoustiques : La majorité des chansons populaires ont une faible acousticness, avec un grand nombre d'entre elles situées dans la tranche de 0 à 25%. Cela indique une préférence pour des chansons qui ne reposent pas fortement sur des instruments acoustiques.
 
-<strong>1. Visualiser les meilleurs titres par année :</strong> Nous
-pouvons regrouper les titres par année de sortie et identifier celui
-ayant reçu le plus grand nombre d'écoutes chaque année.
+Répartition décroissante : À mesure que le pourcentage d'acousticness augmente, le nombre de chansons diminue. Les tranches de 25 à 50%, 50 à 75%, et 75 à 100% ont successivement moins de chansons, ce qui montre que les chansons hautement acoustiques sont moins courantes parmi les hits populaires de 2023.
 
-<strong>2. Visualiser les meilleurs titres par mois :</strong> De même,
-nous pouvons analyser les tendances mensuelles en regroupant les titres
-par mois de sortie et en identifiant les plus populaires pour chaque
-mois.
+Variabilité modérée : Bien qu'il y ait une nette préférence pour les chansons avec une faible acousticness, il y a tout de même une certaine variabilité. Il existe une représentation pour chaque tranche, ce qui montre que les chansons populaires en 2023 couvrent une gamme de caractéristiques acoustiques, même si celles-ci sont moins fréquentes.
 
-<strong>3. Visualiser les meilleurs titres par jour :</strong> Enfin,
-nous pouvons examiner les performances des titres en fonction des jours
-de sortie, en identifiant les titres les plus écoutés chaque jour. Ces
-analyses nous permettront de mettre en lumière les titres les plus
-populaires selon différents découpages temporels, offrant ainsi un
-aperçu précieux des préférences d'écoute du public au fil du temps.
+
+### À quelle mois les chansons sont-elles les plus populaires?
+
+
+```{r}
+# Filtrer les titres sortis à partir de l'année 2000
+spotify_data_filtered <- spotify_data %>%
+  filter(released_year >= 2000)
+
+# Sélectionner le titre avec le plus de succès pour chaque mois
+most_successful_by_month <- spotify_data_filtered %>%
+  group_by(released_year, released_month) %>%
+  filter(streams == max(streams)) %>%
+  ungroup()
+
+# Visualisation des titres les plus populaires par mois
+ggplot(most_successful_by_month, aes(x = factor(released_month), y = streams, fill = factor(released_year))) +
+  geom_bar(stat = "identity", position = "dodge") +
+  labs(title = "Titres les plus populaires par mois de sortie (à partir de l'année 2000)",
+       x = "Mois de sortie",
+       y = "Nombre de streams",
+       fill = "Année de sortie") +
+  theme_minimal()
+```
+
+**Analyse :**
+
+Le graphique montre la répartition des streams des titres les plus populaires en fonction du mois de sortie, depuis l'an 2000. Voici les points essentiels de cette analyse :
+
+Variabilité mensuelle : On observe une grande variabilité dans le nombre de streams en fonction des mois. Certains mois comme juin (6), juillet (7), août (8), et décembre (12) montrent des pics significatifs de streams, indiquant des périodes de sorties de titres très populaires.
+
+Années de sortie diversifiées : Les couleurs variées indiquent une distribution des années de sortie sur l'ensemble des mois. Cela signifie qu'il n'y a pas une concentration spécifique d'années pour les mois où les titres populaires sont sortis, mais plutôt une dispersion à travers les deux décennies couvertes.
+
+Périodes de haute popularité : Des pics remarquables de streams sont visibles en juin, juillet, août, et décembre, ce qui peut être associé à des périodes de vacances d'été et de fin d'année, moments où les gens écoutent probablement plus de musique.
+
+Diversité des streams : Bien que certains mois montrent des pics plus élevés, chaque mois a des titres populaires provenant de différentes années, illustrant une variété et une constance dans la sortie de titres populaires au fil des ans.
+
 
 ### Existe-t-il une influence entre le rythme et la saison ?
 
@@ -1868,6 +1916,7 @@ Cependant, il est également important de noter que des stratégies
 alternatives peuvent trouver leur place sur le marché musical. Ainsi, la
 durée demeure un facteur clé à prendre en compte lors de la création et
 de la promotion de nouvelles musiques.
+
 
 ## Conclusion :
 
